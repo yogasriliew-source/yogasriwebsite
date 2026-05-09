@@ -3,7 +3,11 @@ export default function HomePage() {
     title: "3天五大元素健康重启学习营",
     subtitle: "清理 · 平衡 · 重整 · 焕发身心能量",
     desc: "当五大元素恢复平衡，身体自然成为修习的最佳载体。这个学习营结合 Isha 经典哈他瑜伽、五大元素净化、阿育吠陀饮食、Nadi 气脉平衡检测与医生一对一咨询，帮助你重新整理身体、呼吸、饮食与生活节奏。",
-    schedule: ["5月29日（周四）6pm - 9pm", "5月30日（周五）7am - 3pm", "5月31日（周六）7am - 3pm"],
+    schedule: [
+      "5月29日（周四）6pm - 9pm",
+      "5月30日（周五）7am - 3pm",
+      "5月31日（周六）7am - 3pm",
+    ],
     location: "Smrithi Ayur Care, Petaling Jaya",
   };
 
@@ -113,6 +117,7 @@ export default function HomePage() {
       <section style={styles.hero}>
         <div style={styles.heroText}>
           <p style={styles.eyebrow}>ISHA HATHA YOGA · AYURVEDA · FIVE ELEMENTS</p>
+
           <h1 style={styles.heroTitle}>
             Yoga Sri
             <span style={styles.heroTitleSmall}>｜Isha 哈他瑜伽导师</span>
@@ -138,7 +143,7 @@ export default function HomePage() {
         </div>
 
         <div style={styles.heroImageWrap}>
-          <img src="/yoga-sri.png" alt="Yoga Sri" style={styles.heroImage} />
+          <img src="/Yoga-sri.jpg" alt="Yoga Sri" style={styles.heroImage} />
           <div style={styles.imageCaption}>清理 · 平衡 · 重整 · 焕发身心能量</div>
         </div>
       </section>
@@ -186,7 +191,15 @@ export default function HomePage() {
               <p style={styles.paragraph}>{mainProgram.desc}</p>
 
               <div style={styles.programHighlights}>
-                {["Nadi 气脉平衡检测", "医生一对一咨询", "五大元素净化", "Sadilajja 舒缓平衡瑜伽", "Shanmukhi Mudra", "阿育吠陀饮食", "Masala Tea / Herbal Tea / Butter Milk"].map((item) => (
+                {[
+                  "Nadi 气脉平衡检测",
+                  "医生一对一咨询",
+                  "五大元素净化",
+                  "舒缓平衡瑜伽",
+                  "Shanmukhi Mudra",
+                  "阿育吠陀饮食",
+                  "Masala Tea / Herbal Tea / Butter Milk",
+                ].map((item) => (
                   <span key={item} style={styles.tag}>
                     {item}
                   </span>
@@ -307,6 +320,7 @@ export default function HomePage() {
       <section style={styles.contactSection}>
         <div style={styles.containerNarrowCenter}>
           <h2 style={styles.contactTitle}>联系 Yoga Sri</h2>
+
           <p style={styles.contactText}>
             欢迎预约课程、私人咨询、企业课程、静修营与瑜伽 × 阿育吠陀合作。
           </p>
@@ -315,6 +329,7 @@ export default function HomePage() {
             <a href="https://wa.me/60126725549" target="_blank" style={styles.contactButtonPrimary}>
               WhatsApp
             </a>
+
             <a href="https://facebook.com/YogaSriNowYoga" target="_blank" style={styles.contactButtonSecondary}>
               Facebook
             </a>
@@ -332,23 +347,19 @@ const styles: Record<string, any> = {
     minHeight: "100vh",
     fontFamily: "Georgia, 'Times New Roman', serif",
   },
-
   container: {
     maxWidth: 1180,
     margin: "0 auto",
   },
-
   containerNarrow: {
     maxWidth: 960,
     margin: "0 auto",
   },
-
   containerNarrowCenter: {
     maxWidth: 900,
     margin: "0 auto",
     textAlign: "center",
   },
-
   hero: {
     padding: "70px 20px 50px",
     maxWidth: 1180,
@@ -358,67 +369,56 @@ const styles: Record<string, any> = {
     gap: 50,
     alignItems: "center",
   },
-
   heroText: {},
-
   eyebrow: {
     letterSpacing: 3,
     color: "#8b6a4d",
     fontSize: 14,
     marginBottom: 20,
   },
-
   heroTitle: {
     fontSize: 68,
     lineHeight: 1.05,
     margin: "20px 0",
     color: "#5a3d27",
   },
-
   heroTitleSmall: {
     display: "block",
     fontSize: 24,
     fontWeight: 400,
     marginTop: 14,
   },
-
   heroHeadline: {
     fontSize: 44,
     lineHeight: 1.25,
     margin: "0 0 20px",
     color: "#5a3d27",
   },
-
   heroParagraph: {
     fontSize: 20,
     lineHeight: 1.9,
     color: "#5f4a38",
   },
-
   heroButtons: {
     display: "flex",
     gap: 16,
     flexWrap: "wrap",
     marginTop: 30,
   },
-
   heroImageWrap: {
     textAlign: "center",
   },
-
   heroImage: {
     width: "100%",
     maxWidth: 430,
     borderRadius: 36,
     boxShadow: "0 25px 60px rgba(91,61,39,0.25)",
   },
-
   imageCaption: {
     marginTop: 18,
     fontSize: 18,
     color: "#7b5b42",
   },
-
   buttonDark: {
     display: "inline-block",
     padding: "16px 32px",
@@ -428,7 +428,6 @@ const styles: Record<string, any> = {
     textDecoration: "none",
     fontSize: 17,
   },
-
   buttonLight: {
     display: "inline-block",
     padding: "16px 32px",
@@ -438,22 +437,18 @@ const styles: Record<string, any> = {
     textDecoration: "none",
     fontSize: 17,
   },
-
   elementSection: {
     padding: "30px 20px 70px",
   },
-
   elementRow: {
     display: "flex",
     justifyContent: "center",
     gap: 28,
     flexWrap: "wrap",
   },
-
   elementItem: {
     textAlign: "center",
   },
-
   elementCircle: {
     width: 70,
     height: 70,
@@ -464,51 +459,42 @@ const styles: Record<string, any> = {
     justifyContent: "center",
     margin: "0 auto 8px",
   },
-
   elementSymbol: {
     fontSize: 30,
   },
-
   elementZh: {
     fontSize: 18,
     marginBottom: 4,
   },
-
   elementEn: {
     fontSize: 13,
     letterSpacing: 1,
   },
-
   aboutSection: {
     background: "#fffaf3",
     padding: "90px 20px",
   },
-
   mainProgramSection: {
     background: "#eadcc9",
     padding: "90px 20px",
   },
-
   programGrid: {
     display: "grid",
     gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))",
     gap: 40,
     alignItems: "start",
   },
-
   programSubtitle: {
     fontSize: 22,
     color: "#9a6b3f",
     marginBottom: 20,
   },
-
   programHighlights: {
     display: "flex",
     gap: 10,
     flexWrap: "wrap",
     marginTop: 26,
   },
-
   programInfoCard: {
     background: "#fffaf3",
     color: "#4a3525",
@@ -516,60 +502,50 @@ const styles: Record<string, any> = {
     borderRadius: 30,
     boxShadow: "0 14px 35px rgba(91,61,39,0.10)",
   },
-
   coursesSection: {
     padding: "100px 20px",
   },
-
   suitableSection: {
     background: "#fffaf3",
     padding: "90px 20px",
   },
-
   testimonialSection: {
     background: "#f2e6d8",
     padding: "100px 20px",
   },
-
   sadhguruSection: {
     background: "#fffaf3",
     padding: "95px 20px",
   },
-
   contactSection: {
     background: "#3f2b1d",
     color: "white",
     padding: "90px 20px",
   },
-
   sectionKicker: {
     letterSpacing: 3,
     color: "#9a6b3f",
     fontSize: 13,
     marginBottom: 16,
   },
-
   sectionTitle: {
     fontSize: 46,
     color: "#5a3d27",
     margin: "0 0 26px",
     lineHeight: 1.2,
   },
-
   paragraph: {
     fontSize: 18,
     lineHeight: 2,
     color: "#5f4a38",
     marginBottom: 18,
   },
-
   paragraphCenter: {
     fontSize: 18,
     lineHeight: 2,
     color: "#5f4a38",
     marginBottom: 32,
   },
-
   centerParagraph: {
     fontSize: 18,
     lineHeight: 2,
@@ -578,13 +554,11 @@ const styles: Record<string, any> = {
     maxWidth: 820,
     margin: "0 auto 50px",
   },
-
   courseGrid: {
     display: "grid",
     gridTemplateColumns: "repeat(auto-fit, minmax(310px, 1fr))",
     gap: 26,
   },
-
   card: {
     background: "#fffaf3",
     padding: 32,
@@ -592,20 +566,17 @@ const styles: Record<string, any> = {
     boxShadow: "0 12px 35px rgba(91,61,39,0.08)",
     border: "1px solid #eadcc9",
   },
-
   courseTop: {
     display: "flex",
     justifyContent: "space-between",
     gap: 12,
     alignItems: "flex-start",
   },
-
   courseTitle: {
     fontSize: 27,
     margin: "0 0 8px",
     color: "#5a3d27",
   },
-
   price: {
     background: "#eadcc9",
     color: "#5a3d27",
@@ -614,26 +585,22 @@ const styles: Record<string, any> = {
     fontSize: 13,
     whiteSpace: "nowrap",
   },
-
   courseSubtitle: {
     fontSize: 18,
     color: "#9a6b3f",
     marginBottom: 18,
   },
-
   courseDesc: {
     fontSize: 16,
     lineHeight: 1.9,
     color: "#5f4a38",
   },
-
   tagWrap: {
     display: "flex",
     gap: 10,
     flexWrap: "wrap",
     marginTop: 22,
   },
-
   tag: {
     background: "#eadcc9",
     color: "#5a3d27",
@@ -641,14 +608,12 @@ const styles: Record<string, any> = {
     borderRadius: "999px",
     fontSize: 14,
   },
-
   suitableGrid: {
     display: "grid",
     gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
     gap: 18,
     marginTop: 34,
   },
-
   suitableCard: {
     background: "#f6efe5",
     padding: 24,
@@ -656,13 +621,11 @@ const styles: Record<string, any> = {
     lineHeight: 1.8,
     border: "1px solid #eadcc9",
   },
-
   testimonialGrid: {
     display: "grid",
     gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
     gap: 26,
   },
-
   testimonialCard: {
     background: "#fffaf3",
     padding: 30,
@@ -670,55 +633,46 @@ const styles: Record<string, any> = {
     boxShadow: "0 10px 30px rgba(91,61,39,0.06)",
     border: "1px solid #eadcc9",
   },
-
   testimonialText: {
     fontSize: 17,
     lineHeight: 1.9,
     color: "#5f4a38",
     marginBottom: 22,
   },
-
   testimonialName: {
     color: "#5a3d27",
     fontSize: 16,
   },
-
   cardTitle: {
     fontSize: 24,
     color: "#5a3d27",
     margin: "0 0 12px",
   },
-
   infoLine: {
     fontSize: 17,
     lineHeight: 1.8,
     margin: "6px 0",
   },
-
   divider: {
     height: 1,
     background: "#d5bfa8",
     margin: "24px 0",
   },
-
   contactTitle: {
     fontSize: 46,
     marginBottom: 20,
   },
-
   contactText: {
     fontSize: 18,
     lineHeight: 2,
     marginBottom: 30,
   },
-
   contactButtons: {
     display: "flex",
     gap: 16,
     justifyContent: "center",
     flexWrap: "wrap",
   },
-
   contactButtonPrimary: {
     padding: "14px 28px",
     backgroundColor: "white",
@@ -727,7 +681,6 @@ const styles: Record<string, any> = {
     textDecoration: "none",
     fontWeight: "bold",
   },
-
   contactButtonSecondary: {
     padding: "14px 28px",
     border: "1px solid white",
