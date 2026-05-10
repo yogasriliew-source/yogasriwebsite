@@ -1,18 +1,23 @@
 import "./globals.css";
-import type { Metadata, Viewport } from "next";
-import type { ReactNode } from "react";
-
-const siteUrl = "https://yogasriwebsite.vercel.app";
+import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  metadataBase: new URL(siteUrl),
-  title: {
-    default: "Yoga Sri｜五月元素平衡重启",
-    template: "%s｜Yoga Sri",
-  },
+  title: "Yoga Sri | 五月元素平衡重启",
   description:
-    "Yoga Sri 五月元素平衡重启系列：Nadi Balance Scan、Isha Hatha Yoga、Ayurveda、五大元素净化与 Panchakarma 疗程，从检测、理解、练习、饮食、净化到养护，帮助身体回到更轻盈、稳定、清明的状态。",
-  keywords: [
+    "Nadi Balance Scan × Hatha Yoga × Ayurveda × Five Elements",
+};
+
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return (
+    <html lang="zh">
+      <body>{children}</body>
+    </html>
+  );
+}
     "Yoga Sri",
     "Isha Hatha Yoga",
     "Isha Yoga Malaysia",
