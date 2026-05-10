@@ -901,7 +901,7 @@ export default function Home() {
             <div className="photoCard">
               <img src="/yogasriprofile.jpg" alt="Yoga Sri" className="profileImg" />
               <div className="certBox">
-                <img src="/HYTLogo.png.jpg" alt="Sadhguru Gurukulam Certified Hatha Yoga Teacher" />
+                <img src="/HYTLogo.png" alt="Sadhguru Gurukulam Certified Hatha Yoga Teacher" />
                 <div>
                   <small>Certified Teacher</small>
                   <b>Sadhguru Gurukulam 认证哈他瑜伽老师</b>
