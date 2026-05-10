@@ -2,1430 +2,677 @@
 
 import { useState } from "react";
 
-type Lang = "zh" | "en";
-type PackageColor = "green" | "terracotta" | "sage" | "deepGreen" | "gold";
-
-type ProgramPackage = {
-  title: Record<Lang, string>;
-  subtitle: Record<Lang, string>;
-  date: Record<Lang, string>;
+type Program = {
+  id: string;
+  title: string;
+  subtitle: string;
+  date: string;
   price: string;
-  icon: string;
-  color: PackageColor;
+  bestFor: string;
+  recommendation: string;
+  includes: string[];
+  highlight?: boolean;
 };
 
-type DetailPackage = {
-  number: string;
-  title: Record<Lang, string>;
-  date?: Record<Lang, string>;
-  price: string;
-  suitable: Record<Lang, string>;
-  includes: Record<Lang, string[]>;
-  focus: Record<Lang, string[]>;
-  accent: PackageColor;
+type FAQ = {
+  question: string;
+  answer: string;
 };
 
-type FAQItem = {
-  q: Record<Lang, string>;
-  a: Record<Lang, string>;
-};
+const registrationUrl =
+  "https://docs.google.com/forms/d/e/1FAIpQLSci4EDJSBAJdEmNlbB6GE646IMkrdEhEvZvEZjrj6vJ31Yr7A/viewform?usp=dialog";
 
-export default function Home() {
-  const [lang, setLang] = useState<Lang>("zh");
-  const [openPackage, setOpenPackage] = useState<string | null>("01");
-  const [openFaq, setOpenFaq] = useState<number | null>(0);
+const whatsappUrl =
+  "https://wa.me/60126725549?text=Namaskaram%20Yoga%20Sri%EF%BC%8C%E6%88%91%E6%83%B3%E4%BA%86%E8%A7%A3%E4%BA%94%E6%9C%88%E5%85%83%E7%B4%A0%E5%B9%B3%E8%A1%A1%E9%87%8D%E5%90%AF%E8%AF%BE%E7%A8%8B%E3%80%82";
 
-  const formUrl =
-    "https://docs.google.com/forms/d/e/1FAIpQLSci4EDJSBAJdEmNlbB6GE646IMkrdEhEvZvEZjrj6vJ31Yr7A/viewform?usp=dialog";
-
-  const whatsappText =
-    lang === "zh"
-      ? "Namaskaram Yoga Sri，我想了解五月元素平衡重启课程。"
-      : "Namaskaram Yoga Sri, I would like to know more about the May Elemental Balance Reset program.";
-
-  const whatsappUrl = `https://wa.me/60126725549?text=${encodeURIComponent(whatsappText)}`;
-
-  const copy = {
-    zh: {
-      navProgram: "课程配套",
-      navDetails: "详细说明",
-      navFAQ: "常见问题",
-      navPayment: "报名付款",
-      heroPre: "五月",
-      heroTitle: "元素平衡重启",
-      heroSubtitle: "Nadi Balance Scan × Isha Hatha Yoga × Ayurveda × 五大元素净化",
-      heroText:
-        "从身体检测开始，重新理解你的体质、能量、呼吸与生活节奏。通过 Nadi Balance Scan、阿育吠陀医生讲解、Isha 哈他瑜伽、阿育吠陀饮食、五大元素净化与 Panchakarma 疗程，帮助身体慢慢回到更轻盈、稳定、清明的状态。",
-      chip1: "单项体验",
-      chip2: "一日体验",
-      chip3: "4天配套",
-      chip3Price: "基础 RM1880 / 深度 RM2580",
-      chip4: "8天完整系列",
-      learn: "了解课程",
-      register: "立即报名",
-      whatsapp: "WhatsApp 咨询",
-      certifiedSmall: "Certified Teacher",
-      certifiedTitle: "Sadhguru Gurukulam 认证哈他瑜伽老师",
-      journey: ["检测", "理解", "练习", "饮食", "净化", "养护"],
-      pillarsSmall: "Three Pillars",
-      pillarsTitle: "Isha 瑜伽 × 阿育吠陀 × 元素平衡",
-      pillarsText:
-        "这不是普通瑜伽课，而是一套从检测、练习、饮食、净化到养护的身心健康重启系列。",
-      elementsSmall: "Five Elements",
-      elementsTitle: "从五大元素，看见身体的平衡方式",
-      elementsText:
-        "瑜伽练习帮助身体稳定，阿育吠陀帮助你理解体质，五大元素净化则让你把平衡带回日常生活。",
-      programOptions: "Program Options",
-      chooseTitle: "选择适合你的重启方式",
-      chooseText:
-        "第一次接触，可以从 Nadi Balance Scan 开始；想完整调整身体、能量、饮食与生活节奏，最推荐 8天健康重启完整系列。",
-      detailSmall: "Program Details",
-      detailTitle: "每一个配套，都有清楚的学习路径",
-      detailText:
-        "你可以根据自己的身体状态、时间安排和学习深度，选择单项检测、一日体验、4天基础、4天深度或8天完整系列。点击每个配套可展开完整说明。",
-      includes: "包含",
-      suitable: "适合",
-      focus: "课程重点",
-      expand: "展开说明",
-      collapse: "收起说明",
-      faqSmall: "FAQ",
-      faqTitle: "常见问题",
-      faqText: "如果你不确定适合哪个配套，可以先从 Nadi Balance Scan 开始，或 WhatsApp 咨询 Yoga Sri。",
-      paymentSmall: "Registration & Payment",
-      paymentTitle: "报名与付款",
-      paymentText:
-        "请先填写报名表格，并完成银行转账或使用 TNG QR 付款。付款后请保留转账截图，方便确认名额。",
-      bank: "银行转账",
-      form: "报名表格",
-      formText: "填写资料确认名额",
-      openForm: "打开报名表格",
-      tngText: "请使用 TNG 扫描付款",
-      closingSmall: "Elemental Balance Reset",
-      closingTitle: "从听懂身体开始，",
-      closingHighlight: "重新建立稳定与清明。",
-      closingText:
-        "这是一套从检测、理解、练习、饮食、净化到养护的完整健康重启过程。",
-      finalButton: "立即填写报名表格",
-    },
-    en: {
-      navProgram: "Programs",
-      navDetails: "Details",
-      navFAQ: "FAQ",
-      navPayment: "Payment",
-      heroPre: "May",
-      heroTitle: "Elemental Balance Reset",
-      heroSubtitle:
-        "Nadi Balance Scan × Isha Hatha Yoga × Ayurveda × Five Elements Purification",
-      heroText:
-        "Begin with a body assessment and understand your constitution, energy, breath, and daily rhythm. Through Nadi Balance Scan, Ayurvedic doctor guidance, Isha Hatha Yoga, Ayurvedic food, Five Elements Purification, and Panchakarma treatment, this series supports the body to return to a lighter, steadier, and clearer state.",
-      chip1: "Single Session",
-      chip2: "One-Day Experience",
-      chip3: "4-Day Packages",
-      chip3Price: "Foundation RM1880 / Deep RM2580",
-      chip4: "8-Day Full Series",
-      learn: "View Programs",
-      register: "Register Now",
-      whatsapp: "Ask on WhatsApp",
-      certifiedSmall: "Certified Teacher",
-      certifiedTitle: "Sadhguru Gurukulam Certified Hatha Yoga Teacher",
-      journey: ["Assess", "Understand", "Practice", "Nourish", "Purify", "Support"],
-      pillarsSmall: "Three Pillars",
-      pillarsTitle: "Isha Yoga × Ayurveda × Elemental Balance",
-      pillarsText:
-        "This is not just a yoga class. It is a structured wellness reset from assessment, practice, food, purification, and ongoing daily support.",
-      elementsSmall: "Five Elements",
-      elementsTitle: "Understand balance through the five elements",
-      elementsText:
-        "Yoga practice supports stability, Ayurveda helps you understand your constitution, and Five Elements Purification brings balance into daily life.",
-      programOptions: "Program Options",
-      chooseTitle: "Choose Your Reset Journey",
-      chooseText:
-        "Start with the Nadi Balance Scan if you are new. For a complete reset of body, energy, food, and lifestyle rhythm, the 8-day full series is the most recommended option.",
-      detailSmall: "Program Details",
-      detailTitle: "Each package has a clear learning path",
-      detailText:
-        "Choose from a single assessment, one-day experience, 4-day foundation, 4-day deep reset, or the complete 8-day series according to your body condition, schedule, and learning depth. Click each package to expand the details.",
-      includes: "Includes",
-      suitable: "Suitable for",
-      focus: "Program focus",
-      expand: "View details",
-      collapse: "Hide details",
-      faqSmall: "FAQ",
-      faqTitle: "Frequently Asked Questions",
-      faqText: "If you are unsure which package is suitable, begin with the Nadi Balance Scan or contact Yoga Sri on WhatsApp.",
-      paymentSmall: "Registration & Payment",
-      paymentTitle: "Registration & Payment",
-      paymentText:
-        "Please complete the registration form first, then make payment by bank transfer or TNG QR. Keep your payment screenshot for confirmation.",
-      bank: "Bank Transfer",
-      form: "Registration Form",
-      formText: "Submit your details to reserve your place",
-      openForm: "Open Registration Form",
-      tngText: "Scan with TNG to make payment",
-      closingSmall: "Elemental Balance Reset",
-      closingTitle: "Begin by listening to the body,",
-      closingHighlight: "then rebuild steadiness and clarity.",
-      closingText:
-        "A complete reset journey from assessment, understanding, practice, food, purification, to daily support.",
-      finalButton: "Fill Registration Form",
-    },
-  }[lang];
-
-  const packages: ProgramPackage[] = [
-    {
-      title: { zh: "Nadi Balance Scan", en: "Nadi Balance Scan" },
-      subtitle: { zh: "脉诊平衡检测｜可预约", en: "Dosha Analysis & Personal Guidance" },
-      date: { zh: "可预约", en: "By Appointment" },
-      price: "RM180",
-      icon: "✦",
-      color: "green",
-    },
-    {
-      title: { zh: "一日健康重启体验", en: "One-Day Health Reset Experience" },
-      subtitle: {
-        zh: "Nadi Scan + Hatha Yoga + Brunch + Treatment",
-        en: "Nadi Scan + Hatha Yoga + Brunch + Treatment",
-      },
-      date: { zh: "5月23日", en: "May 23" },
-      price: "RM1080",
-      icon: "☀",
-      color: "terracotta",
-    },
-    {
-      title: { zh: "健康重启基础配套", en: "Foundation Reset Package" },
-      subtitle: { zh: "建立身体觉察与瑜伽基础", en: "Body awareness and yoga foundation" },
-      date: { zh: "5月21–24日", en: "May 21–24" },
-      price: "RM1880",
-      icon: "✺",
-      color: "terracotta",
-    },
-    {
-      title: { zh: "深度重启配套", en: "Deep Reset Package" },
-      subtitle: {
-        zh: "五大元素净化 · 饮食 · 居家养护 · Panchakarma",
-        en: "Five Elements · Food · Home care · Panchakarma",
-      },
-      date: { zh: "5月28–31日", en: "May 28–31" },
-      price: "RM2580",
-      icon: "☘",
-      color: "sage",
-    },
-    {
-      title: { zh: "8天健康重启完整系列", en: "8-Day Complete Health Reset" },
-      subtitle: { zh: "最完整 · 最推荐", en: "Most complete · Recommended" },
-      date: { zh: "5月21–31日", en: "May 21–31" },
-      price: "RM3580",
-      icon: "◈",
-      color: "deepGreen",
-    },
-  ];
-
-  const pillars = {
-    zh: [
-      {
-        icon: "☀",
-        title: "Isha 哈他瑜伽",
-        text: "以古典哈他瑜伽练习建立稳定、活力与身体觉察，让身体成为更好的承载器。",
-      },
-      {
-        icon: "◌",
-        title: "阿育吠陀检测与饮食",
-        text: "通过 Nadi Scan、医生讲解与阿育吠陀饮食，理解体质与失衡信号。",
-      },
-      {
-        icon: "✧",
-        title: "五大元素净化",
-        text: "从元素角度学习净化、平衡与居家养护，让练习更深入生活。",
-      },
+const programs: Program[] = [
+  {
+    id: "nadi",
+    title: "Nadi Balance Scan｜脉诊平衡检测",
+    subtitle: "先听懂身体，再选择适合自己的练习与养护",
+    date: "可预约",
+    price: "RM180",
+    bestFor:
+      "适合容易疲劳、睡不好、压力大、消化不顺、情绪波动，或想先了解身体状态的人。",
+    recommendation:
+      "第一次接触 Yoga Sri Wellness，或不确定自己适合哪一个配套，建议先从这里开始。",
+    includes: [
+      "Nadi Scan 检测",
+      "PDF 报告",
+      "阿育吠陀医生一对一讲解",
+      "Yoga Sri 瑜伽顾问咨询",
     ],
-    en: [
-      {
-        icon: "☀",
-        title: "Isha Hatha Yoga",
-        text: "Classical Hatha Yoga practices to build stability, vitality, and body awareness.",
-      },
-      {
-        icon: "◌",
-        title: "Ayurvedic Assessment & Food",
-        text: "Understand constitution and imbalance through Nadi Scan, doctor guidance, and Ayurvedic food.",
-      },
-      {
-        icon: "✧",
-        title: "Five Elements Purification",
-        text: "Learn purification, balance, and home care from an elemental perspective.",
-      },
+  },
+  {
+    id: "one-day",
+    title: "5月23日｜一日健康重启体验",
+    subtitle: "Nadi Scan + Hatha Yoga + Ayurveda Brunch + Treatment",
+    date: "5月23日",
+    price: "RM1080",
+    bestFor:
+      "适合想用一天完整体验检测、练习、饮食与阿育吠陀疗程的人。",
+    recommendation:
+      "如果你想先感受整个系统，但暂时无法参加多天课程，这会是最清楚的入口。",
+    includes: [
+      "Hatha Yoga｜Surya Shakti",
+      "Nadi Scan 医生一对一报告讲解",
+      "Ayurveda Brunch｜阿育吠陀料理 Brunch",
+      "Ayurveda Treatment｜2小时阿育吠陀疗程",
+      "平衡瑜伽与带领冥想",
     ],
-  }[lang];
-
-  const elements = {
-    zh: [
-      { icon: "▵", name: "火 Fire", text: "活力、消化、转化" },
-      { icon: "◯", name: "水 Water", text: "滋养、流动、柔软" },
-      { icon: "◇", name: "风 Air", text: "呼吸、移动、轻盈" },
-      { icon: "■", name: "土 Earth", text: "稳定、支撑、扎根" },
-      { icon: "✦", name: "空 Space", text: "开阔、觉察、清明" },
+  },
+  {
+    id: "foundation",
+    title: "5月21–24日｜健康重启基础配套",
+    subtitle: "建立身体觉察、瑜伽基础与练习节奏",
+    date: "5月21–24日",
+    price: "RM1880",
+    bestFor:
+      "适合零基础、身体僵硬、想开始瑜伽，或想重新建立稳定练习基础的人。",
+    recommendation:
+      "如果你已经学过 Inner Engineering，但身体状态还不够稳定，这个配套适合先打基础。",
+    includes: [
+      "Nadi Balance Scan 脉诊平衡检测",
+      "阿育吠陀医生一对一报告讲解",
+      "哈他瑜伽介绍与基础体式",
+      "瑜伽合十礼",
+      "Miracle of Mind",
+      "带领冥想",
+      "Surya Shakti / Surya Kriya 练习",
+      "阿育吠陀料理 Brunch",
+      "平衡瑜伽与幸福冥想",
     ],
-    en: [
-      { icon: "▵", name: "Fire", text: "Vitality, digestion, transformation" },
-      { icon: "◯", name: "Water", text: "Nourishment, flow, softness" },
-      { icon: "◇", name: "Air", text: "Breath, movement, lightness" },
-      { icon: "■", name: "Earth", text: "Stability, support, grounding" },
-      { icon: "✦", name: "Space", text: "Openness, awareness, clarity" },
+  },
+  {
+    id: "deep-reset",
+    title: "5月28–31日｜深度重启配套",
+    subtitle: "五大元素净化 · 饮食 · 居家养护 · Panchakarma",
+    date: "5月28–31日",
+    price: "RM2580",
+    bestFor:
+      "适合已有瑜伽基础，想深入学习五大元素净化、阿育吠陀饮食与身体养护的人。",
+    recommendation:
+      "如果你不只是想练习，而是想把饮食、净化、疗程与日常养护整合起来，建议选择这个配套。",
+    includes: [
+      "Nadi Balance Scan 脉诊平衡检测",
+      "阿育吠陀医生一对一报告讲解",
+      "哈他瑜伽基础体式",
+      "带领冥想",
+      "五大元素净化课程",
+      "元素净化概论",
+      "居家养护法",
+      "阿育吠陀饮食与瑜伽饮食课",
+      "阿育吠陀料理 Brunch",
+      "Panchakarma 阿育吠陀疗程",
     ],
-  }[lang];
+  },
+  {
+    id: "complete",
+    title: "5月21–31日｜8天健康重启完整系列",
+    subtitle: "最完整 · 最推荐 · 为 10 月前的系统准备",
+    date: "5月21–31日",
+    price: "RM3580",
+    bestFor:
+      "适合已经完成 Inner Engineering、期待 10 月与 Sadhguru 相遇，并想认真准备身体、能量与生活节奏的人。",
+    recommendation:
+      "如果你这次的目标是为 10 月的重要时刻做准备，这是最推荐的完整路径。",
+    includes: [
+      "Nadi Balance Scan 脉诊平衡检测",
+      "阿育吠陀医生一对一报告讲解",
+      "Yoga Sri 瑜伽顾问咨询",
+      "哈他瑜伽介绍与基础体式",
+      "瑜伽合十礼",
+      "Miracle of Mind",
+      "带领冥想",
+      "Surya Shakti / Surya Kriya 练习",
+      "平衡瑜伽与幸福冥想",
+      "五大元素净化课程",
+      "元素净化概论",
+      "居家养护法",
+      "阿育吠陀饮食与瑜伽饮食课",
+      "阿育吠陀料理 Brunch",
+      "Panchakarma 阿育吠陀疗程",
+    ],
+    highlight: true,
+  },
+];
 
-  const detailPackages: DetailPackage[] = [
-    {
-      number: "01",
-      title: { zh: "Nadi Balance Scan｜脉诊平衡检测", en: "Nadi Balance Scan" },
-      price: "RM180",
-      suitable: {
-        zh: "容易疲劳、睡不好、压力大、消化不顺、情绪波动，想知道自己身体正在发生什么的人。",
-        en: "For those who feel tired, sleep poorly, experience stress, digestive discomfort, emotional fluctuation, or want to understand what is happening in the body.",
-      },
-      includes: {
-        zh: ["Nadi Scan 检测", "PDF 报告", "阿育吠陀医生一对一讲解", "瑜伽顾问咨询"],
-        en: ["Nadi Scan assessment", "PDF report", "One-to-one explanation by Ayurvedic doctor", "Yoga consultation"],
-      },
-      focus: {
-        zh: ["先听懂身体的信号，再选择真正适合自己的练习、饮食与养护方式。"],
-        en: ["Understand the body’s signals first, then choose the practice, food, and care methods that truly suit you."],
-      },
-      accent: "green",
-    },
-    {
-      number: "02",
-      title: { zh: "5月23日｜一日健康重启体验", en: "May 23｜One-Day Health Reset Experience" },
-      date: { zh: "5月23日", en: "May 23" },
-      price: "RM1080",
-      suitable: {
-        zh: "适合想先用一天完整体验 Nadi Scan + Hatha Yoga + Ayurveda Brunch + Ayurveda Treatment 的学员。",
-        en: "For those who want a full one-day experience of Nadi Scan, Hatha Yoga, Ayurveda Brunch, and Ayurveda Treatment.",
-      },
-      includes: {
-        zh: [
-          "Hatha Yoga｜Surya Shakti：帮助身体建立活力、稳定性与内在热能。",
-          "Nadi Scan 医生一对一讲解：由阿育吠陀医生根据检测报告，帮助你了解自己的体质状态与身体失衡信号。",
-          "Ayurveda Brunch｜阿育吠陀料理 Brunch：通过温和、支持消化的阿育吠陀饮食，让身体在练习后得到更好的滋养。",
-          "Ayurveda Treatment｜2小时阿育吠陀疗程：帮助身体深度放松、舒缓紧绷，并进入更好的恢复状态。",
-        ],
-        en: [
-          "Hatha Yoga｜Surya Shakti: supports vitality, stability, and inner heat.",
-          "Nadi Scan doctor explanation: understand constitution and imbalance signals through the report.",
-          "Ayurveda Brunch: gentle, digestion-supporting Ayurvedic food after practice.",
-          "Ayurveda Treatment｜2 hours: supports deep relaxation, releases tension, and helps the body enter recovery.",
-        ],
-      },
-      focus: {
-        zh: ["用一天的时间，从检测、练习、饮食到疗程，完整体验身体被理解、被滋养、被重整的过程。"],
-        en: ["In one day, experience the full process of assessment, practice, food, and treatment—allowing the body to be understood, nourished, and reset."],
-      },
-      accent: "terracotta",
-    },
-    {
-      number: "03",
-      title: { zh: "5月21–24日｜健康重启基础配套", en: "May 21–24｜Foundation Reset Package" },
-      date: { zh: "5月21–24日", en: "May 21–24" },
-      price: "RM1880",
-      suitable: {
-        zh: "适合零基础、想开始瑜伽、想了解体质，并建立身体觉察与练习基础的学员。",
-        en: "Suitable for beginners who want to start yoga, understand their constitution, and build body awareness and practice foundation.",
-      },
-      includes: {
-        zh: [
-          "Nadi Balance Scan 脉诊平衡检测",
-          "阿育吠陀医生一对一报告讲解",
-          "哈他瑜伽介绍与基础体式",
-          "瑜伽合十礼",
-          "Miracle of Mind",
-          "带领冥想",
-          "Surya Shakti / Surya Kriya 练习",
-          "阿育吠陀料理 Brunch",
-          "平衡瑜伽与幸福冥想",
-        ],
-        en: [
-          "Nadi Balance Scan",
-          "One-to-one report explanation by Ayurvedic doctor",
-          "Introduction to Hatha Yoga and foundational postures",
-          "Yoga Namaskar / Namaste process",
-          "Miracle of Mind",
-          "Guided meditation",
-          "Surya Shakti / Surya Kriya practice",
-          "Ayurvedic Brunch",
-          "Balancing Yoga and wellbeing meditation",
-        ],
-      },
-      focus: {
-        zh: [
-          "这4天会帮助你先从身体觉察开始，了解自己的体质状态，再通过基础哈他瑜伽、呼吸与冥想，让身体慢慢打开，能量慢慢稳定。",
-          "这不是强度训练，而是一个温和、有层次的身体重启过程。",
-        ],
-        en: [
-          "These four days begin with body awareness and constitution understanding, then use foundational Hatha Yoga, breath, and meditation to gradually open the body and stabilize the system.",
-          "This is not intensity training. It is a gentle, layered body reset process.",
-        ],
-      },
-      accent: "terracotta",
-    },
-    {
-      number: "04",
-      title: { zh: "5月28–31日｜深度重启配套", en: "May 28–31｜Deep Reset Package" },
-      date: { zh: "5月28–31日", en: "May 28–31" },
-      price: "RM2580",
-      suitable: {
-        zh: "适合想深入学习五大元素净化、阿育吠陀饮食、居家养护与 Panchakarma 疗程的人。",
-        en: "For those who want to go deeper into Five Elements Purification, Ayurvedic food, home care, and Panchakarma treatment.",
-      },
-      includes: {
-        zh: [
-          "Nadi Balance Scan 脉诊平衡检测",
-          "阿育吠陀医生一对一报告讲解",
-          "哈他瑜伽基础体式",
-          "带领冥想",
-          "五大元素净化课程",
-          "元素净化概论",
-          "居家养护法",
-          "阿育吠陀饮食与瑜伽饮食课",
-          "阿育吠陀料理 Brunch",
-          "Panchakarma 阿育吠陀疗程",
-        ],
-        en: [
-          "Nadi Balance Scan",
-          "One-to-one report explanation by Ayurvedic doctor",
-          "Foundational Hatha Yoga postures",
-          "Guided meditation",
-          "Five Elements Purification class",
-          "Introduction to elemental purification",
-          "Home care methods",
-          "Ayurvedic food and yogic diet class",
-          "Ayurvedic Brunch",
-          "Panchakarma Ayurvedic treatment",
-        ],
-      },
-      focus: {
-        zh: [
-          "这4天会更深入进入五大元素净化、阿育吠陀饮食和身体养护。",
-          "通过瑜伽练习、饮食学习、居家养护法与 Panchakarma 疗程，让身体从内到外慢慢进入清理、平衡与重整。",
-        ],
-        en: [
-          "These four days go deeper into Five Elements Purification, Ayurvedic food, and body care.",
-          "Through yoga practice, food learning, home care, and Panchakarma treatment, the body is supported to enter a process of cleansing, balance, and reset from within.",
-        ],
-      },
-      accent: "sage",
-    },
-    {
-      number: "05",
-      title: { zh: "5月21–31日｜8天健康重启完整系列", en: "May 21–31｜8-Day Complete Health Reset" },
-      date: { zh: "5月21–31日", en: "May 21–31" },
-      price: "RM3580",
-      suitable: {
-        zh: "这是最完整、最推荐的学习方式。适合想系统性了解身体、建立瑜伽基础、学习五大元素净化，并结合阿育吠陀饮食与疗程进行深度养护的学员。",
-        en: "The most complete and recommended journey for those who want to understand the body systematically, build a yoga foundation, learn Five Elements Purification, and receive deeper support through Ayurvedic food and treatment.",
-      },
-      includes: {
-        zh: [
-          "Nadi Balance Scan 脉诊平衡检测",
-          "阿育吠陀医生一对一报告讲解",
-          "Yoga Sri 瑜伽顾问咨询",
-          "哈他瑜伽介绍与基础体式",
-          "瑜伽合十礼",
-          "Miracle of Mind",
-          "带领冥想",
-          "Surya Shakti / Surya Kriya 练习",
-          "平衡瑜伽与幸福冥想",
-          "五大元素净化课程",
-          "元素净化概论",
-          "居家养护法",
-          "阿育吠陀饮食与瑜伽饮食课",
-          "阿育吠陀料理 Brunch",
-          "Panchakarma 阿育吠陀疗程",
-        ],
-        en: [
-          "Nadi Balance Scan",
-          "One-to-one report explanation by Ayurvedic doctor",
-          "Yoga Sri consultation",
-          "Introduction to Hatha Yoga and foundational postures",
-          "Yoga Namaskar / Namaste process",
-          "Miracle of Mind",
-          "Guided meditation",
-          "Surya Shakti / Surya Kriya practice",
-          "Balancing Yoga and wellbeing meditation",
-          "Five Elements Purification class",
-          "Introduction to elemental purification",
-          "Home care methods",
-          "Ayurvedic food and yogic diet class",
-          "Ayurvedic Brunch",
-          "Panchakarma Ayurvedic treatment",
-        ],
-      },
-      focus: {
-        zh: [
-          "8天完整系列会从身体检测开始，帮助你先了解自己的体质与状态，再通过哈他瑜伽、呼吸、冥想、阿育吠陀饮食、五大元素净化与 Panchakarma 疗程，让身体逐步进入更稳定、更轻盈、更清明的状态。",
-          "第一阶段帮助你建立身体觉察与瑜伽基础。第二阶段带你深入五大元素净化与阿育吠陀养护。",
-          "这是一套从检测、理解、练习、饮食、净化到养护的完整健康重启过程。",
-        ],
-        en: [
-          "The 8-day series begins with body assessment, then supports you to understand your constitution and condition. Through Hatha Yoga, breath, meditation, Ayurvedic food, Five Elements Purification, and Panchakarma treatment, the body gradually enters a steadier, lighter, and clearer state.",
-          "Stage one builds body awareness and yoga foundation. Stage two deepens Five Elements Purification and Ayurvedic care.",
-          "This is a complete wellness reset from assessment, understanding, practice, food, purification, to daily support.",
-        ],
-      },
-      accent: "deepGreen",
-    },
-  ];
+const faqs: FAQ[] = [
+  {
+    question: "我已经学过 Inner Engineering，还适合参加吗？",
+    answer:
+      "适合。这个课程不是取代你的 Sadhana，而是帮助你从身体、饮食、呼吸、体质与日常节奏上，把系统调整得更稳定。很多人已经学过练习，但身体仍然容易累、紧绷、睡不好或消化不顺，这正是本课程想帮助你重新理解的部分。",
+  },
+  {
+    question: "我已经学过 Hatha Yoga，为什么还需要来？",
+    answer:
+      "已经学过的人更容易理解这个课程的价值。这里不只是重复体式，而是通过 Nadi Scan、阿育吠陀医生讲解、饮食、五大元素净化与日常养护，帮助你知道如何让练习更适合自己当前的身体状态。",
+  },
+  {
+    question: "零基础可以参加吗？",
+    answer:
+      "可以。基础配套就是为零基础、身体僵硬、久坐上班族、想开始瑜伽但不知道从哪里开始的人设计的。课程会从身体觉察与基础练习慢慢进入。",
+  },
+  {
+    question: "Panchakarma 疗程适合所有人吗？",
+    answer:
+      "疗程会根据个人体质与医生建议安排。若有怀孕、重大疾病、手术后恢复、长期服药、严重皮肤或心血管相关状况，请先咨询医生，并建议从 Nadi Balance Scan 开始。",
+  },
+  {
+    question: "付款后如何确认名额？",
+    answer:
+      "请先填写报名表格，并完成银行转账或 TNG 付款。付款后保留转账截图，Yoga Sri 团队会协助确认名额与后续上课准备事项。",
+  },
+];
 
-  const faqs: FAQItem[] = [
-    {
-      q: { zh: "零基础可以参加吗？", en: "Can beginners join?" },
-      a: {
-        zh: "可以。基础配套就是为零基础、身体僵硬、想开始瑜伽但不知道从哪里开始的人设计的。",
-        en: "Yes. The foundation package is designed for beginners and those who want to start yoga gently.",
-      },
-    },
-    {
-      q: { zh: "我应该先选哪一个配套？", en: "Which package should I choose first?" },
-      a: {
-        zh: "第一次接触建议先做 Nadi Balance Scan。如果想完整体验一天，可以选一日健康重启体验；想系统学习，建议选择8天完整系列。",
-        en: "If you are new, begin with the Nadi Balance Scan. For a one-day introduction, choose the one-day experience. For systematic learning, choose the 8-day complete series.",
-      },
-    },
-    {
-      q: { zh: "Panchakarma 疗程适合所有人吗？", en: "Is Panchakarma suitable for everyone?" },
-      a: {
-        zh: "疗程会根据个人体质与医生建议安排。若有特殊身体状况，建议先咨询医生并从 Nadi Scan 开始。",
-        en: "Treatments are arranged according to constitution and doctor guidance. If you have specific health conditions, begin with consultation and Nadi Scan.",
-      },
-    },
-    {
-      q: { zh: "付款后如何确认名额？", en: "How do I confirm my seat after payment?" },
-      a: {
-        zh: "请先填写报名表格，完成银行转账或 TNG 付款后，保留付款截图以便确认名额。",
-        en: "Please complete the registration form and keep your bank transfer or TNG payment screenshot for confirmation.",
-      },
-    },
-  ];
+const journey = [
+  {
+    step: "01",
+    title: "检测",
+    text: "通过 Nadi Balance Scan 先了解身体状态，而不是盲目开始。",
+  },
+  {
+    step: "02",
+    title: "理解",
+    text: "由阿育吠陀医生讲解报告，看见体质与失衡信号。",
+  },
+  {
+    step: "03",
+    title: "练习",
+    text: "以 Isha Hatha Yoga 建立稳定、活力与身体觉察。",
+  },
+  {
+    step: "04",
+    title: "饮食",
+    text: "用温和、支持消化的阿育吠陀饮食滋养身体。",
+  },
+  {
+    step: "05",
+    title: "净化",
+    text: "从五大元素角度学习净化、平衡与居家养护。",
+  },
+  {
+    step: "06",
+    title: "整合",
+    text: "把练习、饮食、作息与日常养护带回生活。",
+  },
+];
+
+const schedule = [
+  ["7:00am – 9:30am", "Hatha Yoga｜Surya Shakti"],
+  ["9:30am – 10:30am", "Nadi Scan + 医生一对一讲解"],
+  ["10:30am – 12:00pm", "Ayurveda Brunch"],
+  ["1:00pm – 2:30pm", "平衡瑜伽与带领冥想"],
+  ["2:30pm – 5:00pm", "Ayurveda Treatment｜2小时疗程"],
+  ["5:30pm – 8:00pm", "Hatha Yoga / Integration Practice"],
+];
+
+function SectionLabel({ children }: { children: React.ReactNode }) {
+  return (
+    <p className="mb-3 text-xs font-semibold uppercase tracking-[0.28em] text-stone-500">
+      {children}
+    </p>
+  );
+}
+
+function CTAButtons({ light = false }: { light?: boolean }) {
+  return (
+    <div className="flex flex-col gap-3 sm:flex-row">
+      <a
+        href={registrationUrl}
+        target="_blank"
+        rel="noreferrer"
+        className={`rounded-full px-6 py-3 text-center text-sm font-semibold transition hover:scale-[1.01] ${
+          light
+            ? "bg-white text-stone-950 hover:bg-stone-100"
+            : "bg-stone-950 text-white hover:bg-stone-800"
+        }`}
+      >
+        立即填写报名表格
+      </a>
+      <a
+        href={whatsappUrl}
+        target="_blank"
+        rel="noreferrer"
+        className={`rounded-full border px-6 py-3 text-center text-sm font-semibold transition hover:scale-[1.01] ${
+          light
+            ? "border-white/30 text-white hover:bg-white/10"
+            : "border-stone-300 text-stone-900 hover:bg-stone-100"
+        }`}
+      >
+        WhatsApp 咨询适合配套
+      </a>
+    </div>
+  );
+}
+
+function ProgramCard({ program }: { program: Program }) {
+  return (
+    <article
+      className={`relative flex h-full flex-col rounded-[2rem] border p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-xl ${
+        program.highlight
+          ? "border-stone-900 bg-stone-950 text-white"
+          : "border-stone-200 bg-white text-stone-900"
+      }`}
+    >
+      {program.highlight && (
+        <div className="absolute right-5 top-5 rounded-full bg-white px-3 py-1 text-xs font-semibold text-stone-950">
+          最推荐
+        </div>
+      )}
+
+      <div className="mb-6">
+        <p
+          className={`mb-2 text-xs font-medium tracking-[0.22em] ${
+            program.highlight ? "text-stone-300" : "text-stone-500"
+          }`}
+        >
+          {program.date}
+        </p>
+        <h3 className="pr-16 text-xl font-semibold leading-snug">
+          {program.title}
+        </h3>
+        <p
+          className={`mt-2 text-sm leading-6 ${
+            program.highlight ? "text-stone-300" : "text-stone-600"
+          }`}
+        >
+          {program.subtitle}
+        </p>
+      </div>
+
+      <div className="mb-6">
+        <p className="text-4xl font-semibold tracking-tight">{program.price}</p>
+        <p
+          className={`mt-3 text-sm leading-6 ${
+            program.highlight ? "text-stone-300" : "text-stone-600"
+          }`}
+        >
+          {program.recommendation}
+        </p>
+      </div>
+
+      <div
+        className={`mb-5 rounded-3xl p-4 ${
+          program.highlight ? "bg-white/10" : "bg-stone-50"
+        }`}
+      >
+        <p className="mb-2 text-sm font-semibold">适合：</p>
+        <p
+          className={`text-sm leading-6 ${
+            program.highlight ? "text-stone-200" : "text-stone-600"
+          }`}
+        >
+          {program.bestFor}
+        </p>
+      </div>
+
+      <ul className="mt-auto space-y-2 text-sm leading-6">
+        {program.includes.slice(0, 6).map((item) => (
+          <li key={item} className="flex gap-2">
+            <span className={program.highlight ? "text-stone-300" : "text-stone-500"}>✓</span>
+            <span>{item}</span>
+          </li>
+        ))}
+        {program.includes.length > 6 && (
+          <li className={program.highlight ? "text-stone-300" : "text-stone-500"}>
+            + 更多完整内容
+          </li>
+        )}
+      </ul>
+    </article>
+  );
+}
+
+function FAQItem({ item, index }: { item: FAQ; index: number }) {
+  const [open, setOpen] = useState(index === 0);
 
   return (
-    <main>
-      <style>{`
-        :root {
-          --cream: #f7efe4;
-          --ivory: #fffaf1;
-          --sage: #64745f;
-          --soft-sage: #e9eee2;
-          --deep: #3f543f;
-          --dark: #273326;
-          --terracotta: #b66b43;
-          --copper: #9f5d3d;
-          --gold: #d6b77c;
-          --line: #e4d0b5;
-          --text: #263428;
-          --muted: #5d675a;
-        }
+    <div className="border-b border-stone-200 py-5">
+      <button
+        type="button"
+        onClick={() => setOpen((value) => !value)}
+        className="flex w-full items-center justify-between gap-6 text-left"
+      >
+        <span className="text-lg font-semibold text-stone-950">{item.question}</span>
+        <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-stone-100 text-xl">
+          {open ? "−" : "+"}
+        </span>
+      </button>
+      {open && (
+        <p className="mt-4 max-w-3xl text-base leading-8 text-stone-600">
+          {item.answer}
+        </p>
+      )}
+    </div>
+  );
+}
 
-        * { box-sizing: border-box; }
-        html { scroll-behavior: smooth; }
-        body {
-          margin: 0;
-          color: var(--text);
-          background:
-            radial-gradient(circle at 6% 10%, rgba(255,255,255,.72), transparent 27%),
-            radial-gradient(circle at 90% 8%, rgba(100, 116, 95, .16), transparent 30%),
-            linear-gradient(180deg, #f7efe4 0%, #fbf6ec 48%, #f2e8d8 100%);
-          font-family: Georgia, "Times New Roman", "Noto Serif SC", "Songti SC", serif;
-        }
-        a { color: inherit; text-decoration: none; }
-        button { font-family: inherit; }
-        .page { overflow: hidden; }
-        .container { width: min(1180px, calc(100% - 40px)); margin: 0 auto; }
+export default function Page() {
+  return (
+    <main className="min-h-screen bg-[#f8f4ec] text-stone-950">
+      <nav className="sticky top-0 z-50 border-b border-stone-200/70 bg-[#f8f4ec]/90 backdrop-blur-xl">
+        <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 lg:px-8">
+          <a href="#top" className="text-sm font-semibold tracking-[0.2em]">
+            ✦ YOGA SRI WELLNESS
+          </a>
+          <div className="hidden items-center gap-7 text-sm text-stone-600 md:flex">
+            <a href="#why" className="hover:text-stone-950">为什么适合你</a>
+            <a href="#path" className="hover:text-stone-950">学习路径</a>
+            <a href="#programs" className="hover:text-stone-950">课程配套</a>
+            <a href="#faq" className="hover:text-stone-950">常见问题</a>
+          </div>
+          <a
+            href={whatsappUrl}
+            target="_blank"
+            rel="noreferrer"
+            className="rounded-full bg-stone-950 px-4 py-2 text-sm font-semibold text-white hover:bg-stone-800"
+          >
+            咨询
+          </a>
+        </div>
+      </nav>
 
-        .topNav {
-          position: sticky;
-          top: 0;
-          z-index: 100;
-          background: rgba(248, 240, 230, .84);
-          backdrop-filter: blur(18px);
-          border-bottom: 1px solid rgba(228, 208, 181, .62);
-        }
-        .navInner {
-          width: min(1180px, calc(100% - 40px));
-          min-height: 74px;
-          margin: 0 auto;
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          gap: 18px;
-        }
-        .brandMark {
-          display: inline-flex;
-          align-items: center;
-          gap: 12px;
-          color: var(--deep);
-          font-size: 12px;
-          letter-spacing: .18em;
-          text-transform: uppercase;
-          white-space: nowrap;
-        }
-        .brandDot {
-          width: 34px;
-          height: 34px;
-          display: inline-flex;
-          align-items: center;
-          justify-content: center;
-          border-radius: 50%;
-          border: 1px solid var(--line);
-          background: rgba(255,255,255,.65);
-          color: var(--terracotta);
-        }
-        .navRight { display: flex; align-items: center; gap: 14px; }
-        .navLink { color: var(--muted); font-size: 14px; padding: 9px 10px; }
-        .langSwitch {
-          display: inline-flex;
-          gap: 4px;
-          padding: 4px;
-          border-radius: 999px;
-          border: 1px solid var(--line);
-          background: rgba(255,255,255,.72);
-          box-shadow: 0 10px 26px rgba(80,62,43,.06);
-        }
-        .langSwitch button {
-          border: 0;
-          cursor: pointer;
-          border-radius: 999px;
-          background: transparent;
-          color: var(--muted);
-          padding: 9px 14px;
-          font-size: 13px;
-          transition: .22s ease;
-        }
-        .langSwitch button.active { background: var(--deep); color: #fff; }
-
-        .hero {
-          position: relative;
-          min-height: calc(100vh - 74px);
-          display: grid;
-          grid-template-columns: minmax(0, 1.04fr) minmax(390px, .96fr);
-          gap: clamp(38px, 5vw, 72px);
-          align-items: center;
-          padding: clamp(48px, 6vw, 82px) 0 70px;
-        }
-        .hero::before {
-          content: "";
-          position: absolute;
-          left: -23%;
-          top: -18%;
-          width: 770px;
-          height: 770px;
-          border-radius: 50%;
-          background: rgba(255,255,255,.54);
-          z-index: -1;
-        }
-        .hero::after {
-          content: "";
-          position: absolute;
-          right: -20%;
-          bottom: 5%;
-          width: 670px;
-          height: 670px;
-          border-radius: 50%;
-          background: rgba(214,183,124,.17);
-          filter: blur(5px);
-          z-index: -1;
-        }
-        .heroCopy { max-width: 720px; }
-        .eyebrow {
-          display: inline-flex;
-          align-items: center;
-          gap: 12px;
-          padding: 10px 16px;
-          border: 1px solid var(--line);
-          border-radius: 999px;
-          background: rgba(255,255,255,.62);
-          color: var(--sage);
-          font-size: 12px;
-          letter-spacing: .22em;
-          text-transform: uppercase;
-          box-shadow: 0 10px 30px rgba(80,62,43,.06);
-        }
-        .eyebrow span { width: 8px; height: 8px; border-radius: 50%; background: var(--terracotta); }
-        h1 {
-          margin: 30px 0 0;
-          color: var(--deep);
-          font-size: clamp(48px, 6.2vw, 84px);
-          line-height: 1.04;
-          font-weight: 400;
-          letter-spacing: .01em;
-        }
-        h1 strong { display: block; color: var(--terracotta); font-weight: 400; }
-        .subtitle {
-          margin-top: 24px;
-          color: var(--copper);
-          font-size: clamp(18px, 1.55vw, 22px);
-          line-height: 1.62;
-        }
-        .divider {
-          width: 280px;
-          height: 1px;
-          margin: 26px 0;
-          background: linear-gradient(90deg, var(--terracotta), var(--gold), transparent);
-        }
-        .heroText { color: #455045; font-size: clamp(16px, 1.15vw, 18px); line-height: 1.95; }
-        .heroChips {
-          max-width: 650px;
-          margin-top: 30px;
-          display: grid;
-          grid-template-columns: repeat(2, minmax(0, 1fr));
-          gap: 12px;
-        }
-        .chip {
-          min-height: 86px;
-          padding: 15px 17px;
-          border-radius: 20px;
-          border: 1px solid var(--line);
-          background: rgba(255,255,255,.64);
-          box-shadow: 0 12px 32px rgba(74,54,38,.06);
-        }
-        .chip small { display: block; color: var(--copper); font-size: 12px; margin-bottom: 5px; }
-        .chip b { display: block; color: var(--deep); font-size: clamp(19px, 1.7vw, 24px); line-height: 1.28; font-weight: 400; }
-        .wideChip { grid-column: span 2; }
-        .buttons { display: flex; flex-wrap: wrap; gap: 16px; margin-top: 35px; }
-        .btn {
-          display: inline-flex;
-          align-items: center;
-          justify-content: center;
-          min-width: 150px;
-          padding: 15px 29px;
-          border-radius: 999px;
-          font-size: 16px;
-          line-height: 1.2;
-          transition: .25s ease;
-          box-shadow: 0 18px 42px rgba(63,84,63,.14);
-        }
-        .btn:hover { transform: translateY(-2px); }
-        .btnGreen { background: var(--deep); color: #fff; }
-        .btnOrange { background: var(--terracotta); color: #fff; }
-        .photoWrap { position: relative; }
-        .photoGlow {
-          position: absolute;
-          inset: -28px;
-          border-radius: 58px;
-          background: linear-gradient(135deg, rgba(214,183,124,.36), rgba(255,255,255,0));
-          z-index: -1;
-        }
-        .photoCard {
-          position: relative;
-          overflow: hidden;
-          padding: 12px;
-          border-radius: 48px;
-          border: 1px solid rgba(255,255,255,.74);
-          background: rgba(255,255,255,.38);
-          box-shadow: 0 30px 80px rgba(67,49,35,.16);
-        }
-        .profileImg {
-          display: block;
-          width: 100%;
-          height: min(74vh, 720px);
-          min-height: 560px;
-          object-fit: cover;
-          object-position: center 14%;
-          border-radius: 38px;
-        }
-        .certBox {
-          position: absolute;
-          left: 26px;
-          right: 26px;
-          bottom: 26px;
-          display: grid;
-          grid-template-columns: 190px 1fr;
-          align-items: center;
-          gap: 20px;
-          padding: 20px 22px;
-          border-radius: 28px;
-          border: 1px solid rgba(255,255,255,.72);
-          background: rgba(255,250,241,.92);
-          box-shadow: 0 18px 48px rgba(70,50,34,.14);
-          backdrop-filter: blur(12px);
-        }
-        .certLogoWrap {
-          width: 190px;
-          height: 72px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          border-radius: 18px;
-          background: #fff;
-          padding: 10px 14px;
-          box-shadow: 0 8px 22px rgba(70,50,34,.08);
-        }
-        .certLogo { width: 100%; height: 100%; object-fit: contain; display: block; }
-        .certBox small { display: block; color: var(--copper); font-size: 11px; letter-spacing: .18em; text-transform: uppercase; margin-bottom: 6px; }
-        .certBox b { color: var(--deep); font-size: 18px; line-height: 1.38; font-weight: 500; }
-
-        .journey {
-          margin: 0 auto 74px;
-          padding: 30px;
-          border-radius: 38px;
-          background: linear-gradient(135deg, #3f543f, #536a50);
-          color: #fff;
-          box-shadow: 0 28px 70px rgba(49,65,49,.22);
-        }
-        .journeyGrid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 16px; text-align: center; }
-        .journeyIcon {
-          width: 52px;
-          height: 52px;
-          margin: 0 auto 10px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          border-radius: 50%;
-          border: 1px solid rgba(240,211,161,.6);
-          color: #f0d3a1;
-        }
-        .journeyGrid p { margin: 0; color: #f4dfbd; letter-spacing: .18em; font-size: 14px; }
-
-        .section { padding: 70px 0; }
-        .sectionTitle { max-width: 780px; margin-bottom: 42px; }
-        .sectionTitle small { color: var(--terracotta); letter-spacing: .28em; text-transform: uppercase; font-size: 12px; }
-        h2 { margin: 14px 0 0; color: var(--deep); font-size: clamp(36px, 4.8vw, 62px); line-height: 1.14; font-weight: 400; }
-        .sectionTitle p { margin-top: 17px; color: var(--muted); font-size: 17px; line-height: 1.85; }
-        .softDivider {
-          width: min(1180px, calc(100% - 40px));
-          height: 1px;
-          margin: 0 auto;
-          background: linear-gradient(90deg, transparent, var(--line), transparent);
-        }
-
-        .pillarGrid {
-          display: grid;
-          grid-template-columns: repeat(3, 1fr);
-          gap: 18px;
-        }
-        .pillarCard {
-          position: relative;
-          overflow: hidden;
-          min-height: 230px;
-          padding: 28px;
-          border-radius: 34px;
-          border: 1px solid var(--line);
-          background: rgba(255,255,255,.58);
-          box-shadow: 0 18px 46px rgba(72,53,38,.08);
-        }
-        .pillarCard::after {
-          content: "";
-          position: absolute;
-          right: -44px;
-          bottom: -44px;
-          width: 140px;
-          height: 140px;
-          border-radius: 50%;
-          background: rgba(214,183,124,.2);
-        }
-        .pillarIcon {
-          width: 58px;
-          height: 58px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          border-radius: 20px;
-          background: #e9eee2;
-          color: var(--terracotta);
-          font-size: 28px;
-          margin-bottom: 20px;
-        }
-        .pillarCard h3 { font-size: 28px; }
-        .pillarCard p { color: var(--muted); line-height: 1.75; }
-
-        .elementBand {
-          position: relative;
-          overflow: hidden;
-          border-radius: 42px;
-          border: 1px solid rgba(228,208,181,.75);
-          background: linear-gradient(135deg, rgba(63,84,63,.96), rgba(82,104,78,.94));
-          padding: 34px;
-          color: #fff;
-          box-shadow: 0 26px 70px rgba(49,65,49,.2);
-        }
-        .elementBand::before {
-          content: "";
-          position: absolute;
-          inset: -80px -120px auto auto;
-          width: 320px;
-          height: 320px;
-          border-radius: 50%;
-          background: rgba(214,183,124,.18);
-        }
-        .elementHeader {
-          position: relative;
-          z-index: 1;
-          max-width: 760px;
-          margin-bottom: 28px;
-        }
-        .elementHeader small { color: #f0d3a1; letter-spacing: .28em; text-transform: uppercase; }
-        .elementHeader h2 { color: #fff; }
-        .elementHeader p { color: #f7ead7; line-height: 1.8; }
-        .elementGrid {
-          position: relative;
-          z-index: 1;
-          display: grid;
-          grid-template-columns: repeat(5, 1fr);
-          gap: 14px;
-        }
-        .elementCard {
-          padding: 20px 14px;
-          border-radius: 26px;
-          border: 1px solid rgba(255,255,255,.16);
-          background: rgba(255,255,255,.09);
-          text-align: center;
-        }
-        .elementIcon { font-size: 34px; color: #f0d3a1; margin-bottom: 10px; }
-        .elementCard h3 { color: #fff; font-size: 20px; margin: 0 0 8px; }
-        .elementCard p { margin: 0; color: #f7ead7; line-height: 1.55; font-size: 14px; }
-
-        .packageList { display: grid; gap: 16px; }
-        .packageRow {
-          display: grid;
-          grid-template-columns: 78px minmax(0, 1fr) 172px 172px;
-          align-items: center;
-          gap: 18px;
-          padding: 18px;
-          border-radius: 30px;
-          border: 1px solid var(--line);
-          background: rgba(255,255,255,.6);
-          box-shadow: 0 12px 36px rgba(74,54,38,.06);
-          transition: .25s ease;
-        }
-        .packageRow:hover { transform: translateY(-3px); box-shadow: 0 26px 56px rgba(74,54,38,.12); }
-        .packageIcon {
-          width: 62px;
-          height: 62px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          border-radius: 20px;
-          background: var(--soft-sage);
-          color: var(--deep);
-          font-size: 29px;
-        }
-        .packageInfo h3 { margin: 0; color: var(--deep); font-size: clamp(21px, 2.2vw, 27px); line-height: 1.25; font-weight: 500; }
-        .packageInfo p { margin: 6px 0 0; color: #687266; line-height: 1.45; }
-        .dateBox { padding: 17px 14px; border-radius: 20px; text-align: center; background: #f4e7d6; color: var(--copper); font-size: 17px; line-height: 1.25; }
-        .priceBox { padding: 18px 14px; border-radius: 20px; text-align: center; color: #fff; font-size: 28px; line-height: 1; white-space: nowrap; }
-        .priceBox.green { background: var(--deep); }
-        .priceBox.terracotta { background: var(--terracotta); }
-        .priceBox.sage { background: var(--sage); }
-        .priceBox.deepGreen { background: #344836; }
-        .priceBox.gold { background: #b89155; }
-
-        .detailGrid { display: grid; gap: 18px; }
-        .detailCard {
-          position: relative;
-          overflow: hidden;
-          border-radius: 34px;
-          border: 1px solid var(--line);
-          background: rgba(255,255,255,.66);
-          box-shadow: 0 18px 50px rgba(72,53,38,.08);
-        }
-        .detailCard::before {
-          content: "";
-          position: absolute;
-          inset: 0 auto 0 0;
-          width: 8px;
-          background: var(--deep);
-        }
-        .detailCard.terracotta::before { background: var(--terracotta); }
-        .detailCard.sage::before { background: var(--sage); }
-        .detailCard.deepGreen::before { background: #344836; }
-        .detailTrigger {
-          width: 100%;
-          border: 0;
-          cursor: pointer;
-          display: grid;
-          grid-template-columns: 96px minmax(0, 1fr) 150px 42px;
-          gap: 18px;
-          align-items: center;
-          padding: 24px 28px 24px 34px;
-          background: transparent;
-          text-align: left;
-        }
-        .detailNumber {
-          color: var(--terracotta);
-          letter-spacing: .22em;
-          font-size: 13px;
-        }
-        .detailTitle h3 {
-          margin: 0;
-          color: var(--deep);
-          font-size: clamp(24px, 2.7vw, 34px);
-          line-height: 1.18;
-        }
-        .detailDate { margin-top: 8px; color: var(--muted); line-height: 1.5; font-size: 15px; }
-        .detailPrice {
-          color: var(--terracotta);
-          font-size: 34px;
-          line-height: 1;
-          white-space: nowrap;
-          text-align: right;
-        }
-        .accordionIcon {
-          width: 42px;
-          height: 42px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          border-radius: 50%;
-          background: #f3e5d1;
-          color: var(--deep);
-          font-size: 24px;
-          transition: .25s ease;
-        }
-        .detailCard.open .accordionIcon { transform: rotate(45deg); background: var(--deep); color: #fff; }
-        .detailBody {
-          display: none;
-          padding: 0 28px 28px 34px;
-        }
-        .detailCard.open .detailBody {
-          display: grid;
-          grid-template-columns: 1fr 1.35fr;
-          gap: 20px;
-        }
-        .miniBlock {
-          padding: 20px;
-          border-radius: 26px;
-          background: rgba(255,250,241,.78);
-          border: 1px solid rgba(228,208,181,.72);
-        }
-        .miniBlock h4 {
-          margin: 0 0 12px;
-          color: var(--deep);
-          font-size: 18px;
-          letter-spacing: .08em;
-          font-weight: 600;
-        }
-        .miniBlock p { margin: 0; color: var(--muted); line-height: 1.78; }
-        .miniBlock ul {
-          margin: 0;
-          padding: 0;
-          list-style: none;
-          display: grid;
-          gap: 10px;
-        }
-        .miniBlock li {
-          display: grid;
-          grid-template-columns: 24px 1fr;
-          gap: 9px;
-          align-items: start;
-          color: #4d584d;
-          line-height: 1.55;
-        }
-        .miniBlock li span {
-          width: 24px;
-          height: 24px;
-          border-radius: 50%;
-          display: inline-flex;
-          align-items: center;
-          justify-content: center;
-          background: #e2eadb;
-          color: var(--deep);
-          font-size: 13px;
-          margin-top: 1px;
-        }
-        .focusBlock { grid-column: span 2; background: linear-gradient(135deg, rgba(63,84,63,.96), rgba(79,102,77,.96)); }
-        .focusBlock h4 { color: #f0d3a1; }
-        .focusBlock p { color: #f7ead7; }
-        .focusText { display: grid; gap: 10px; }
-
-        .faqGrid { display: grid; gap: 14px; }
-        .faqItem {
-          border-radius: 26px;
-          border: 1px solid var(--line);
-          background: rgba(255,255,255,.64);
-          overflow: hidden;
-        }
-        .faqQuestion {
-          width: 100%;
-          border: 0;
-          cursor: pointer;
-          background: transparent;
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          gap: 16px;
-          padding: 22px 24px;
-          color: var(--deep);
-          font-size: 20px;
-          text-align: left;
-        }
-        .faqAnswer { display: none; padding: 0 24px 22px; color: var(--muted); line-height: 1.75; }
-        .faqItem.open .faqAnswer { display: block; }
-        .faqPlus {
-          width: 34px;
-          height: 34px;
-          border-radius: 50%;
-          flex: 0 0 auto;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          background: #f3e5d1;
-          color: var(--terracotta);
-          transition: .25s ease;
-        }
-        .faqItem.open .faqPlus { transform: rotate(45deg); background: var(--deep); color: #fff; }
-
-        .payment { display: grid; grid-template-columns: minmax(0, 1fr) 340px; gap: 32px; padding: 38px; border-radius: 48px; border: 1px solid var(--line); background: rgba(255,255,255,.62); box-shadow: 0 24px 64px rgba(72,53,38,.09); }
-        .paymentCards { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; margin-top: 28px; }
-        .paymentCard { padding: 24px; border-radius: 30px; background: #f5e7d4; }
-        .paymentCard:nth-child(2) { background: #edf1e5; }
-        .paymentCard small, .qrBox small { color: var(--terracotta); letter-spacing: .16em; text-transform: uppercase; font-size: 12px; }
-        .paymentCard h3 { margin-top: 14px; font-size: 24px; }
-        .account { margin-top: 8px; color: var(--terracotta); font-size: clamp(26px, 3vw, 34px); }
-        .qrBox { padding: 22px; border-radius: 30px; background: #fff8ed; border: 1px solid var(--line); text-align: center; }
-        .qrBox img { display: block; width: 100%; max-width: 280px; margin: 18px auto 0; border-radius: 20px; object-fit: contain; background: #fff; }
-
-        .closing { margin: 60px auto 90px; max-width: 960px; padding: 58px 36px; border-radius: 48px; background: linear-gradient(135deg, #3f543f, #51684f); color: #fff; text-align: center; box-shadow: 0 30px 80px rgba(49,65,49,.22); }
-        .closing small { color: #f0d3a1; letter-spacing: .26em; text-transform: uppercase; }
-        .closing h2 { color: #fff; }
-        .closing h2 span { display: block; color: #f0d3a1; }
-        .closing p { max-width: 700px; margin: 22px auto 0; color: #f8ead5; line-height: 1.85; }
-        .closing .btn { margin-top: 34px; background: var(--terracotta); color: #fff; }
-
-        .floatingWhatsapp {
-          position: fixed;
-          right: 22px;
-          bottom: 22px;
-          z-index: 120;
-          display: inline-flex;
-          align-items: center;
-          gap: 10px;
-          padding: 14px 18px;
-          border-radius: 999px;
-          background: #3f543f;
-          color: #fff;
-          box-shadow: 0 18px 42px rgba(39,51,38,.28);
-          border: 1px solid rgba(255,255,255,.18);
-          font-size: 15px;
-        }
-        .floatingWhatsapp span {
-          width: 28px;
-          height: 28px;
-          border-radius: 50%;
-          display: inline-flex;
-          align-items: center;
-          justify-content: center;
-          background: rgba(255,255,255,.15);
-        }
-
-        @media (max-width: 980px) {
-          .hero, .payment { grid-template-columns: 1fr; }
-          .hero { min-height: auto; padding-top: 44px; gap: 38px; }
-          .heroCopy { max-width: 100%; }
-          .profileImg { height: 580px; min-height: 0; object-position: center 12%; }
-          .certBox { grid-template-columns: 168px 1fr; }
-          .certLogoWrap { width: 168px; height: 66px; }
-          .journeyGrid { grid-template-columns: repeat(3, 1fr); }
-          .pillarGrid { grid-template-columns: 1fr; }
-          .elementGrid { grid-template-columns: repeat(2, 1fr); }
-          .packageRow { grid-template-columns: 70px 1fr; }
-          .dateBox, .priceBox { grid-column: span 1; }
-          .detailTrigger { grid-template-columns: 70px 1fr 130px 42px; }
-          .detailCard.open .detailBody { grid-template-columns: 1fr; }
-          .focusBlock { grid-column: span 1; }
-          .paymentCards { grid-template-columns: 1fr; }
-        }
-
-        @media (max-width: 680px) {
-          .container, .navInner { width: min(100% - 28px, 1180px); }
-          .navInner { min-height: auto; padding: 14px 0; align-items: flex-start; }
-          .brandMark { font-size: 11px; letter-spacing: .14em; }
-          .navRight { gap: 8px; align-items: flex-end; flex-direction: column; }
-          .navLink { display: none; }
-          h1 { font-size: 46px; letter-spacing: 0; }
-          h2 { font-size: 36px; }
-          h3 { font-size: 30px; }
-          .subtitle { font-size: 18px; }
-          .heroText { font-size: 16px; line-height: 1.85; }
-          .heroChips { grid-template-columns: 1fr; }
-          .wideChip { grid-column: span 1; }
-          .buttons { flex-direction: column; }
-          .btn { width: 100%; }
-          .profileImg { height: 450px; object-position: center 10%; }
-          .photoCard { border-radius: 34px; padding: 9px; }
-          .profileImg { border-radius: 28px; }
-          .certBox { left: 16px; right: 16px; bottom: 16px; grid-template-columns: 120px 1fr; gap: 12px; padding: 13px; border-radius: 22px; }
-          .certLogoWrap { width: 120px; height: 54px; border-radius: 14px; padding: 8px 10px; }
-          .certBox small { font-size: 9px; letter-spacing: .13em; }
-          .certBox b { font-size: 13px; line-height: 1.35; }
-          .journeyGrid { grid-template-columns: repeat(2, 1fr); }
-          .journeyGrid p { letter-spacing: .12em; }
-          .elementGrid { grid-template-columns: 1fr; }
-          .packageRow { grid-template-columns: 1fr; }
-          .packageIcon { width: 58px; height: 58px; }
-          .detailTrigger { grid-template-columns: 1fr 42px; padding: 24px; }
-          .detailNumber, .detailPrice { grid-column: 1; text-align: left; }
-          .detailTitle { grid-column: 1; }
-          .accordionIcon { grid-column: 2; grid-row: 1 / span 3; align-self: center; }
-          .detailBody { padding: 0 24px 24px; }
-          .payment { padding: 24px; border-radius: 32px; gap: 22px; }
-          .floatingWhatsapp { right: 14px; bottom: 14px; padding: 12px 14px; font-size: 13px; }
-          .floatingWhatsapp span { width: 24px; height: 24px; }
-        }
-      `}</style>
-
-      <div className="page">
-        <nav className="topNav">
-          <div className="navInner">
-            <a className="brandMark" href="#top" aria-label="Yoga Sri Wellness">
-              <span className="brandDot">✦</span>
-              Yoga Sri Wellness
-            </a>
-            <div className="navRight">
-              <a className="navLink" href="#packages">{copy.navProgram}</a>
-              <a className="navLink" href="#details">{copy.navDetails}</a>
-              <a className="navLink" href="#faq">{copy.navFAQ}</a>
-              <a className="navLink" href="#payment">{copy.navPayment}</a>
-              <div className="langSwitch" aria-label="Language switcher">
-                <button type="button" className={lang === "zh" ? "active" : ""} onClick={() => setLang("zh")}>中文</button>
-                <button type="button" className={lang === "en" ? "active" : ""} onClick={() => setLang("en")}>EN</button>
-              </div>
+      <section id="top" className="overflow-hidden px-5 py-14 lg:px-8 lg:py-20">
+        <div className="mx-auto grid max-w-7xl items-center gap-10 lg:grid-cols-[1.08fr_0.92fr]">
+          <div>
+            <div className="mb-6 inline-flex flex-wrap items-center gap-2 rounded-full border border-stone-300 bg-white/70 px-4 py-2 text-sm text-stone-700 shadow-sm">
+              <span>For Inner Engineering students</span>
+              <span className="text-stone-400">·</span>
+              <span>Isha Hatha Yoga</span>
+              <span className="text-stone-400">·</span>
+              <span>Ayurveda Reset</span>
             </div>
-          </div>
-        </nav>
 
-        <section id="top" className="container hero">
-          <div className="heroCopy">
-            <div className="eyebrow"><span /> Yoga Sri Wellness</div>
-            <h1>{copy.heroPre}<strong>{copy.heroTitle}</strong></h1>
-            <p className="subtitle">{copy.heroSubtitle}</p>
-            <div className="divider" />
-            <p className="heroText">{copy.heroText}</p>
-            <div className="heroChips">
-              <div className="chip"><small>{copy.chip1}</small><b>RM180</b></div>
-              <div className="chip"><small>{copy.chip2}</small><b>RM1080</b></div>
-              <div className="chip wideChip"><small>{copy.chip3}</small><b>{copy.chip3Price}</b></div>
-              <div className="chip"><small>{copy.chip4}</small><b>RM3580</b></div>
+            <h1 className="max-w-4xl text-5xl font-semibold leading-[1.08] tracking-tight text-stone-950 md:text-7xl">
+              为 10 月与 Sadhguru 相遇，先把身体准备好。
+            </h1>
+
+            <p className="mt-7 max-w-2xl text-lg leading-9 text-stone-700 md:text-xl">
+              如果你已经完成 Inner Engineering，平时也有练习，却仍然觉得身体疲劳、睡眠不稳、消化慢、情绪波动或练习不稳定，这个五月，先从身体检测开始，重新理解你的体质、呼吸、能量与生活节奏。
+            </p>
+
+            <div className="mt-8 flex flex-wrap gap-3">
+              {["Nadi Balance Scan", "Isha Hatha Yoga", "Ayurveda Brunch", "五大元素净化", "Panchakarma"].map((item) => (
+                <span
+                  key={item}
+                  className="rounded-full border border-stone-300 bg-white/80 px-4 py-2 text-sm text-stone-700"
+                >
+                  {item}
+                </span>
+              ))}
             </div>
-            <div className="buttons">
-              <a href="#packages" className="btn btnGreen">{copy.learn}</a>
-              <a href={formUrl} target="_blank" rel="noreferrer" className="btn btnOrange">{copy.register}</a>
-              <a href={whatsappUrl} target="_blank" rel="noreferrer" className="btn btnGreen">{copy.whatsapp}</a>
+
+            <div className="mt-9">
+              <CTAButtons />
             </div>
-          </div>
 
-          <div className="photoWrap">
-            <div className="photoGlow" />
-            <div className="photoCard">
-              <img src="/yogasriprofile.jpg" alt="Yoga Sri" className="profileImg" />
-              <div className="certBox">
-                <div className="certLogoWrap">
-                  <img src="/HYTLogo.png.jpg" alt="Sadhguru Gurukulam Certified Hatha Yoga Teacher" className="certLogo" />
-                </div>
-                <div>
-                  <small>{copy.certifiedSmall}</small>
-                  <b>{copy.certifiedTitle}</b>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section className="container journey">
-          <div className="journeyGrid">
-            {copy.journey.map((item, index) => (
-              <div key={item}>
-                <div className="journeyIcon">{index + 1}</div>
-                <p>{item}</p>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        <div className="softDivider" />
-
-        <section className="container section">
-          <div className="sectionTitle">
-            <small>{copy.pillarsSmall}</small>
-            <h2>{copy.pillarsTitle}</h2>
-            <p>{copy.pillarsText}</p>
-          </div>
-          <div className="pillarGrid">
-            {pillars.map((pillar) => (
-              <div className="pillarCard" key={pillar.title}>
-                <div className="pillarIcon">{pillar.icon}</div>
-                <h3>{pillar.title}</h3>
-                <p>{pillar.text}</p>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        <section className="container section">
-          <div className="elementBand">
-            <div className="elementHeader">
-              <small>{copy.elementsSmall}</small>
-              <h2>{copy.elementsTitle}</h2>
-              <p>{copy.elementsText}</p>
-            </div>
-            <div className="elementGrid">
-              {elements.map((element) => (
-                <div className="elementCard" key={element.name}>
-                  <div className="elementIcon">{element.icon}</div>
-                  <h3>{element.name}</h3>
-                  <p>{element.text}</p>
+            <div className="mt-9 grid max-w-2xl grid-cols-2 gap-4 sm:grid-cols-4">
+              {[
+                ["RM180", "单项检测"],
+                ["RM1080", "一日体验"],
+                ["RM1880+", "4天配套"],
+                ["RM3580", "8天完整系列"],
+              ].map(([number, label]) => (
+                <div key={label} className="rounded-3xl bg-white/80 p-4 shadow-sm">
+                  <p className="text-2xl font-semibold">{number}</p>
+                  <p className="mt-1 text-sm text-stone-500">{label}</p>
                 </div>
               ))}
             </div>
           </div>
-        </section>
 
-        <div className="softDivider" />
-
-        <section id="packages" className="container section">
-          <div className="sectionTitle">
-            <small>{copy.programOptions}</small>
-            <h2>{copy.chooseTitle}</h2>
-            <p>{copy.chooseText}</p>
+          <div className="relative">
+            <div className="absolute -left-10 -top-10 h-48 w-48 rounded-full bg-amber-200/40 blur-3xl" />
+            <div className="absolute -bottom-10 right-0 h-56 w-56 rounded-full bg-stone-300/40 blur-3xl" />
+            <div className="relative overflow-hidden rounded-[2.5rem] bg-stone-950 p-3 shadow-2xl">
+              <img
+                src="/yogasriprofile.jpg"
+                alt="Yoga Sri"
+                className="h-[560px] w-full rounded-[2rem] object-cover object-center"
+              />
+              <div className="absolute bottom-6 left-6 right-6 rounded-[1.7rem] bg-white/90 p-5 shadow-xl backdrop-blur">
+                <p className="text-xs font-semibold uppercase tracking-[0.24em] text-stone-500">
+                  Guided by Yoga Sri
+                </p>
+                <p className="mt-2 text-xl font-semibold text-stone-950">
+                  Certified Hatha Yoga Teacher
+                </p>
+                <p className="mt-2 text-sm leading-6 text-stone-600">
+                  以中文清楚带领古典哈他瑜伽，并结合阿育吠陀医生讲解，让练习不只停留在课堂，而是回到身体与生活。
+                </p>
+              </div>
+            </div>
           </div>
-          <div className="packageList">
-            {packages.map((item) => (
-              <div className="packageRow" key={item.title.zh}>
-                <div className="packageIcon">{item.icon}</div>
-                <div className="packageInfo">
-                  <h3>{item.title[lang]}</h3>
-                  <p>{item.subtitle[lang]}</p>
-                </div>
-                <div className="dateBox">{item.date[lang]}</div>
-                <div className={`priceBox ${item.color}`}>{item.price}</div>
+        </div>
+      </section>
+
+      <section id="why" className="px-5 py-16 lg:px-8">
+        <div className="mx-auto max-w-7xl rounded-[2.5rem] bg-white p-7 shadow-sm md:p-12">
+          <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr]">
+            <div>
+              <SectionLabel>Why this matters</SectionLabel>
+              <h2 className="text-4xl font-semibold leading-tight tracking-tight md:text-5xl">
+                你不是没有练习，你是需要更理解自己的系统。
+              </h2>
+            </div>
+            <div className="space-y-6 text-lg leading-9 text-stone-700">
+              <p>
+                很多已经学过 Inner Engineering 或 Hatha Yoga 的人，内在很向往，也很 devotive，但身体层面仍然有现实的信号：容易累、睡不好、消化不顺、肩颈紧、情绪浮动、练习断断续续。
+              </p>
+              <p>
+                Yoga Sri Wellness 五月元素平衡重启，不是让你“更用力”练习，而是帮助你先听懂身体，再通过 Nadi Scan、医生讲解、Isha Hatha Yoga、阿育吠陀饮食、五大元素净化与 Panchakarma 疗程，重新建立稳定、轻盈与清明。
+              </p>
+              <div className="rounded-[2rem] bg-[#f8f4ec] p-6">
+                <p className="text-xl font-semibold text-stone-950">
+                  这不是普通瑜伽课，而是一段为身体、练习和内在状态做准备的过程。
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="path" className="px-5 py-16 lg:px-8">
+        <div className="mx-auto max-w-7xl">
+          <div className="mb-10 max-w-3xl">
+            <SectionLabel>The complete reset path</SectionLabel>
+            <h2 className="text-4xl font-semibold leading-tight tracking-tight md:text-5xl">
+              从检测、理解、练习，到饮食、净化与整合。
+            </h2>
+            <p className="mt-5 text-lg leading-8 text-stone-700">
+              每一步都不是单独的体验，而是为了帮助你把身体这个系统慢慢准备好。
+            </p>
+          </div>
+
+          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+            {journey.map((item) => (
+              <div key={item.step} className="rounded-[2rem] border border-stone-200 bg-white p-6 shadow-sm">
+                <p className="text-sm font-semibold tracking-[0.22em] text-stone-400">{item.step}</p>
+                <h3 className="mt-6 text-2xl font-semibold">{item.title}</h3>
+                <p className="mt-3 text-base leading-7 text-stone-600">{item.text}</p>
               </div>
             ))}
           </div>
-        </section>
+        </div>
+      </section>
 
-        <section id="details" className="container section">
-          <div className="sectionTitle">
-            <small>{copy.detailSmall}</small>
-            <h2>{copy.detailTitle}</h2>
-            <p>{copy.detailText}</p>
+      <section className="px-5 py-16 lg:px-8">
+        <div className="mx-auto grid max-w-7xl gap-6 lg:grid-cols-3">
+          <div className="rounded-[2.5rem] bg-stone-950 p-8 text-white lg:col-span-1">
+            <SectionLabel>For whom</SectionLabel>
+            <h2 className="text-3xl font-semibold leading-tight">
+              这个课程特别适合这样的你
+            </h2>
+          </div>
+          <div className="grid gap-6 lg:col-span-2 md:grid-cols-2">
+            {[
+              [
+                "已经完成 Inner Engineering",
+                "你不是来找普通运动课，而是想让身体更能承接自己的 Sadhana。",
+              ],
+              [
+                "期待 10 月见 Sadhguru",
+                "你想提前把身体、饮食、睡眠与能量状态准备得更稳定。",
+              ],
+              [
+                "常去 Isha Center 或学过 Hatha Yoga",
+                "你知道练习珍贵，也希望练习能更持续、更深入生活。",
+              ],
+              [
+                "40岁左右，开始认真听身体",
+                "你不想再靠意志力硬撑，而是想用更聪明、更温和的方式照顾自己。",
+              ],
+            ].map(([title, text]) => (
+              <div key={title} className="rounded-[2rem] bg-white p-7 shadow-sm">
+                <h3 className="text-xl font-semibold">{title}</h3>
+                <p className="mt-3 text-base leading-7 text-stone-600">{text}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section id="programs" className="px-5 py-16 lg:px-8">
+        <div className="mx-auto max-w-7xl">
+          <div className="mb-10 flex flex-col justify-between gap-6 md:flex-row md:items-end">
+            <div className="max-w-3xl">
+              <SectionLabel>Program options</SectionLabel>
+              <h2 className="text-4xl font-semibold leading-tight tracking-tight md:text-5xl">
+                选择适合你的重启方式
+              </h2>
+              <p className="mt-5 text-lg leading-8 text-stone-700">
+                如果你只是想先了解身体，从 Nadi Balance Scan 开始；如果你是为了 10 月的重要时刻认真准备，最推荐 8 天完整系列。
+              </p>
+            </div>
+            <CTAButtons />
           </div>
 
-          <div className="detailGrid">
-            {detailPackages.map((item) => {
-              const isOpen = openPackage === item.number;
-              return (
-                <article className={`detailCard ${item.accent} ${isOpen ? "open" : ""}`} key={item.number}>
-                  <button
-                    type="button"
-                    className="detailTrigger"
-                    onClick={() => setOpenPackage(isOpen ? null : item.number)}
-                    aria-expanded={isOpen}
-                  >
-                    <div className="detailNumber">{item.number}</div>
-                    <div className="detailTitle">
-                      <h3>{item.title[lang]}</h3>
-                      {item.date && <p className="detailDate">{item.date[lang]}</p>}
-                    </div>
-                    <div className="detailPrice">{item.price}</div>
-                    <div className="accordionIcon">+</div>
-                  </button>
-
-                  <div className="detailBody">
-                    <div className="miniBlock">
-                      <h4>{copy.suitable}</h4>
-                      <p>{item.suitable[lang]}</p>
-                    </div>
-
-                    <div className="miniBlock">
-                      <h4>{copy.includes}</h4>
-                      <ul>
-                        {item.includes[lang].map((line) => (
-                          <li key={line}><span>✓</span>{line}</li>
-                        ))}
-                      </ul>
-                    </div>
-
-                    <div className="miniBlock focusBlock">
-                      <h4>{copy.focus}</h4>
-                      <div className="focusText">
-                        {item.focus[lang].map((line) => <p key={line}>{line}</p>)}
-                      </div>
-                    </div>
-                  </div>
-                </article>
-              );
-            })}
+          <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+            {programs.map((program) => (
+              <ProgramCard key={program.id} program={program} />
+            ))}
           </div>
-        </section>
+        </div>
+      </section>
 
-        <div className="softDivider" />
-
-        <section id="faq" className="container section">
-          <div className="sectionTitle">
-            <small>{copy.faqSmall}</small>
-            <h2>{copy.faqTitle}</h2>
-            <p>{copy.faqText}</p>
+      <section className="px-5 py-16 lg:px-8">
+        <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[0.92fr_1.08fr]">
+          <div className="rounded-[2.5rem] bg-white p-8 shadow-sm md:p-10">
+            <SectionLabel>One-day sample flow</SectionLabel>
+            <h2 className="text-4xl font-semibold leading-tight tracking-tight">
+              一天会经历什么？
+            </h2>
+            <p className="mt-5 text-lg leading-8 text-stone-700">
+              对第一次参加的人来说，清楚的流程会让身体和心理都更安心。这是 5月23日一日体验的建议流程。
+            </p>
           </div>
-          <div className="faqGrid">
-            {faqs.map((faq, index) => {
-              const isOpen = openFaq === index;
-              return (
-                <div className={`faqItem ${isOpen ? "open" : ""}`} key={faq.q.zh}>
-                  <button
-                    type="button"
-                    className="faqQuestion"
-                    onClick={() => setOpenFaq(isOpen ? null : index)}
-                    aria-expanded={isOpen}
-                  >
-                    {faq.q[lang]}
-                    <span className="faqPlus">+</span>
-                  </button>
-                  <div className="faqAnswer">{faq.a[lang]}</div>
+          <div className="rounded-[2.5rem] bg-stone-950 p-6 text-white shadow-xl md:p-8">
+            <div className="space-y-4">
+              {schedule.map(([time, activity]) => (
+                <div
+                  key={time}
+                  className="grid gap-3 rounded-[1.4rem] border border-white/10 bg-white/5 p-4 sm:grid-cols-[170px_1fr]"
+                >
+                  <p className="text-sm font-semibold text-stone-300">{time}</p>
+                  <p className="text-base font-medium">{activity}</p>
                 </div>
-              );
-            })}
+              ))}
+            </div>
           </div>
-        </section>
+        </div>
+      </section>
 
-        <section id="payment" className="container section">
-          <div className="payment">
+      <section className="px-5 py-16 lg:px-8">
+        <div className="mx-auto max-w-7xl rounded-[2.5rem] bg-white p-7 shadow-sm md:p-12">
+          <div className="grid gap-10 lg:grid-cols-2">
             <div>
-              <div className="sectionTitle" style={{ marginBottom: 0 }}>
-                <small>{copy.paymentSmall}</small>
-                <h2>{copy.paymentTitle}</h2>
-                <p>{copy.paymentText}</p>
-              </div>
-              <div className="paymentCards">
-                <div className="paymentCard">
-                  <small>{copy.bank}</small>
-                  <h3>YOGASRI ENTERPRISE</h3>
-                  <p>Public Bank</p>
-                  <div className="account">3231265424</div>
-                </div>
-                <div className="paymentCard">
-                  <small>{copy.form}</small>
-                  <h3>{copy.formText}</h3>
-                  <a href={formUrl} target="_blank" rel="noreferrer" className="btn btnGreen" style={{ marginTop: 18 }}>{copy.openForm}</a>
-                </div>
-              </div>
+              <SectionLabel>Trust & safety</SectionLabel>
+              <h2 className="text-4xl font-semibold leading-tight tracking-tight md:text-5xl">
+                有练习，也有医生讲解；有体验，也有安全边界。
+              </h2>
             </div>
-            <div className="qrBox">
-              <small>TNG QR Payment</small>
-              <img src="/TNG.jpg" alt="TNG QR Code" />
-              <p>{copy.tngText}</p>
+            <div className="space-y-6 text-base leading-8 text-stone-700">
+              <div className="rounded-[2rem] bg-[#f8f4ec] p-6">
+                <h3 className="text-xl font-semibold text-stone-950">Yoga Sri 的带领</h3>
+                <p className="mt-3">
+                  Yoga Sri 多年来教授华语学员 Isha Hatha Yoga。她发现，很多人很向往更深入的练习，但身体基础、饮食习惯、睡眠、消化与生活节奏并没有真正调整好。因此，这个系列不是为了增加更多课程，而是帮助学员先把身体这个系统准备好。
+                </p>
+              </div>
+              <div className="rounded-[2rem] bg-[#f8f4ec] p-6">
+                <h3 className="text-xl font-semibold text-stone-950">重要说明</h3>
+                <p className="mt-3">
+                  本课程不是医疗诊断或疾病治疗，也不取代专业医疗建议。课程通过 Ayurveda 体质分析、瑜伽练习、饮食与日常养护，帮助你更了解身体状态，并建立更适合自己的生活节奏。如有严重疾病、怀孕、术后恢复或长期服药，请先咨询医生。
+                </p>
+              </div>
+              <div className="rounded-[2rem] bg-[#f8f4ec] p-6">
+                <h3 className="text-xl font-semibold text-stone-950">与 Isha 练习的关系</h3>
+                <p className="mt-3">
+                  这个课程不是取代你的 Inner Engineering 或个人 Sadhana，而是帮助你在身体、饮食、能量与生活节奏上，为练习建立更好的支持。
+                </p>
+              </div>
             </div>
           </div>
-        </section>
+        </div>
+      </section>
 
-        <section className="container closing">
-          <small>{copy.closingSmall}</small>
-          <h2>{copy.closingTitle}<span>{copy.closingHighlight}</span></h2>
-          <p>{copy.closingText}</p>
-          <a href={formUrl} target="_blank" rel="noreferrer" className="btn">{copy.finalButton}</a>
-        </section>
+      <section id="faq" className="px-5 py-16 lg:px-8">
+        <div className="mx-auto max-w-5xl">
+          <div className="mb-8 text-center">
+            <SectionLabel>FAQ</SectionLabel>
+            <h2 className="text-4xl font-semibold tracking-tight md:text-5xl">
+              报名前你可能想知道
+            </h2>
+          </div>
+          <div className="rounded-[2.5rem] bg-white px-6 py-4 shadow-sm md:px-10">
+            {faqs.map((item, index) => (
+              <FAQItem key={item.question} item={item} index={index} />
+            ))}
+          </div>
+        </div>
+      </section>
 
-        <a href={whatsappUrl} target="_blank" rel="noreferrer" className="floatingWhatsapp" aria-label="WhatsApp Yoga Sri">
-          <span>☎</span>
-          {copy.whatsapp}
-        </a>
-      </div>
+      <section className="px-5 py-16 lg:px-8">
+        <div className="mx-auto grid max-w-7xl gap-6 lg:grid-cols-[1.1fr_0.9fr]">
+          <div className="rounded-[2.5rem] bg-stone-950 p-8 text-white shadow-xl md:p-12">
+            <SectionLabel>Registration & payment</SectionLabel>
+            <h2 className="max-w-3xl text-4xl font-semibold leading-tight tracking-tight md:text-5xl">
+              从听懂身体开始，重新建立稳定与清明。
+            </h2>
+            <p className="mt-5 max-w-2xl text-lg leading-8 text-stone-300">
+              请先填写报名表格。完成银行转账或 TNG 付款后，保留付款截图，Yoga Sri 团队会协助确认名额与后续准备事项。
+            </p>
+            <div className="mt-8">
+              <CTAButtons light />
+            </div>
+          </div>
+
+          <div className="rounded-[2.5rem] bg-white p-8 shadow-sm md:p-10">
+            <h3 className="text-2xl font-semibold">银行转账</h3>
+            <div className="mt-6 space-y-4 rounded-[2rem] bg-[#f8f4ec] p-6">
+              <div>
+                <p className="text-sm text-stone-500">Account Name</p>
+                <p className="text-xl font-semibold">YOGASRI ENTERPRISE</p>
+              </div>
+              <div>
+                <p className="text-sm text-stone-500">Bank</p>
+                <p className="text-xl font-semibold">Public Bank</p>
+              </div>
+              <div>
+                <p className="text-sm text-stone-500">Account No.</p>
+                <p className="text-xl font-semibold">3231265424</p>
+              </div>
+            </div>
+            <p className="mt-5 text-sm leading-6 text-stone-500">
+              名额以完成报名与付款确认为准。如不确定身体状况或配套选择，请先 WhatsApp 咨询。
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <footer className="border-t border-stone-200 px-5 py-10 text-center text-sm text-stone-500 lg:px-8">
+        <p>© Yoga Sri Wellness · Nadi Balance Scan × Isha Hatha Yoga × Ayurveda × Five Elements</p>
+      </footer>
     </main>
   );
 }
