@@ -27,9 +27,9 @@ const content = {
       badge: "YOGA SRI WELLNESS",
       eyebrow: "Nadi Scan × Classical Hatha Yoga × Ayurveda",
       kicker: "从检测、练习、饮食、净化到 Panchakarma 的完整健康重启路径",
-      title: "先了解身体，再开始真正适合你的瑜伽与养护",
+      title: "身体有信号，练习要有方向",
       subtitle:
-        "很多人不是不够努力，而是不知道自己的身体现在真正需要什么。这个系列从 Nadi Balance Scan 开始，结合阿育吠陀医生一对一讲解、Isha 古典哈他瑜伽、阿育吠陀饮食、五大元素净化与 Panchakarma 疗程，帮助你一步一步建立更稳定、清明、可持续的身心节奏。",
+        "很多人不是不够努力，而是不知道身体现在真正需要什么。这个系列从 Nadi Balance Scan 开始，结合阿育吠陀医生一对一讲解、Isha 古典哈他瑜伽、阿育吠陀饮食、五大元素净化与 Panchakarma 疗程，帮助你建立更稳定、清明、可持续的身心节奏。",
       ctaPrimary: "立即报名",
       ctaSecondary: "WhatsApp 咨询",
       stats: [
@@ -296,9 +296,9 @@ const content = {
       badge: "YOGA SRI WELLNESS",
       eyebrow: "Nadi Scan × Classical Hatha Yoga × Ayurveda",
       kicker: "A complete reset path from assessment, practice and food to purification and Panchakarma",
-      title: "Understand your body first, then begin the practice and care that truly fit you",
+      title: "Listen to your body. Practice with direction."
       subtitle:
-        "Many people do not need to push harder. They need to understand what their body actually needs now. This series begins with Nadi Balance Scan, then integrates Ayurvedic doctor guidance, Isha Classical Hatha Yoga, Ayurvedic food, Five Elements Purification and Panchakarma therapy to help you build a steadier, clearer and more sustainable rhythm.",
+        "Many people do not need to push harder. They need to understand what the body actually needs now. This series begins with Nadi Balance Scan, then integrates Ayurvedic doctor guidance, Isha Classical Hatha Yoga, Ayurvedic food, Five Elements Purification and Panchakarma therapy to help you build a steadier, clearer and more sustainable rhythm.",
       ctaPrimary: "Register Now",
       ctaSecondary: "WhatsApp Us",
       stats: [
@@ -894,10 +894,11 @@ export default function Page() {
         .hero-kicker { max-width: 680px; margin: 0 0 20px; color: var(--sage); line-height: 1.7; }
         h1, h2, h3, p { margin-top: 0; }
         h1 {
+          max-width: 720px;
           margin-bottom: 22px;
-          font-size: clamp(44px, 7vw, 88px);
-          line-height: 0.96;
-          letter-spacing: -0.065em;
+          font-size: clamp(52px, 6vw, 78px);
+          line-height: 1.02;
+          letter-spacing: -0.045em;
           color: var(--ink);
         }
         .hero-text { max-width: 700px; margin-bottom: 28px; color: var(--muted); font-size: 18px; line-height: 2; }
@@ -1045,7 +1046,7 @@ export default function Page() {
           .nav-links { display: none; }
           .hero, .section, .footer { width: min(calc(100% - 24px), var(--max)); }
           .hero { padding: 56px 0 52px; gap: 36px; }
-          h1 { font-size: clamp(42px, 14vw, 64px); }
+          h1 { font-size: clamp(42px, 13vw, 60px); }
           .hero-text { font-size: 16px; line-height: 1.9; }
           .section { padding: 48px 0; }
           .section-card { padding: 28px; border-radius: 26px; }
