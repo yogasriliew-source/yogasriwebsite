@@ -24,7 +24,7 @@ const content = {
     hero: {
       badge: "YOGA SRI WELLNESS",
       kicker: "Nadi Balance Scan × Hatha Yoga × Ayurveda × 五大元素净化",
-      title: "五月元素平衡重启系列",
+      title: "生命元素平衡重启",
       subtitle:
         "从身体检测开始，重新理解你的体质、能量、呼吸与生活节奏。通过 Nadi Balance Scan、阿育吠陀医生讲解、Isha 哈他瑜伽、阿育吠陀饮食、五大元素净化与 Panchakarma 疗程，帮助身体慢慢回到更轻盈、稳定、清明的状态。",
       ctaPrimary: "立即报名",
@@ -32,7 +32,8 @@ const content = {
       stats: [
         { label: "单项体验", value: "RM180 起" },
         { label: "一日体验", value: "RM1080" },
-        { label: "4天配套", value: "RM1880 / RM2580" },
+        { label: "健康重启", value: "RM1880 / RM2580" },
+        { label: "深度重启", value: "RM1880 / RM2580" },
         { label: "完整系列", value: "RM3580" },
       ],
       noteTitle: "Certified Teacher",
@@ -42,9 +43,8 @@ const content = {
     why: {
       label: "WHY THIS MATTERS",
       title: "这不是普通瑜伽课，而是一段完整的健康重启过程。",
-      text1:
-        "适合第一次接触瑜伽、长期疲劳、睡眠不稳、压力大、消化不顺的人；也适合已经学过 Inner Engineering 或 Hatha Yoga，想让身体、呼吸、饮食与能量状态更稳定的人。",
-      text2:
+      text:
+        "适合第一次接触瑜伽、长期疲劳、睡眠不稳、压力大、消化不顺的人；也适合已经学过 Inner Engineering 或 Isha Hatha Yoga，想让身体、呼吸、饮食与能量状态更稳定的人。",
         "你不一定需要更用力，而是需要更理解身体的信号。这个系列通过检测、理解、练习、饮食、净化与疗程，帮助你建立更适合自己的节奏。",
     },
     pillars: {
@@ -67,7 +67,7 @@ const content = {
     },
     elements: {
       label: "FIVE ELEMENTS",
-      title: "五大元素视觉区块",
+      title: "什么是五大元素",
       subtitle: "从地、水、火、风、空的角度，重新看待身体、能量与生活平衡。",
       items: [
         {
