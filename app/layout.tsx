@@ -1,4 +1,5 @@
-import type { Metadata, Viewport } from "next";
+import "./globals.css";
+import type { Metadata } from "next";
 import type { ReactNode } from "react";
 
 const siteUrl = "https://yogasriwebsite.vercel.app";
