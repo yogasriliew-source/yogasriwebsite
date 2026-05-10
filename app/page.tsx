@@ -113,9 +113,9 @@ const programs: Program[] = [
     date: "5月21–31日",
     price: "RM3580",
     bestFor:
-      "适合已经完成 Inner Engineering、期待 10 月与 Sadhguru 相遇，并想认真准备身体、能量与生活节奏的人。",
+      "适合想完整调整身体、饮食、练习节奏与日常养护的人；也特别适合已经完成 Inner Engineering、期待 10 月与 Sadhguru 相遇的学员。",
     recommendation:
-      "如果你这次的目标是为 10 月的重要时刻做准备，这是最推荐的完整路径。",
+      "如果你想从检测、瑜伽、饮食、五大元素净化到疗程完整体验，这是最推荐的完整路径。",
     includes: [
       "Nadi Balance Scan 脉诊平衡检测",
       "阿育吠陀医生一对一报告讲解",
@@ -139,14 +139,14 @@ const programs: Program[] = [
 
 const faqs: FAQ[] = [
   {
-    question: "我已经学过 Inner Engineering，还适合参加吗？",
+    question: "没有学过 Isha 或 Inner Engineering，可以参加吗？",
     answer:
-      "适合。这个课程不是取代你的 Sadhana，而是帮助你从身体、饮食、呼吸、体质与日常节奏上，把系统调整得更稳定。很多人已经学过练习，但身体仍然容易累、紧绷、睡不好或消化不顺，这正是本课程想帮助你重新理解的部分。",
+      "可以。这个课程适合普通初学者、长期疲劳、睡眠不稳、压力大、消化不顺、想开始照顾身体的人。课程会从 Nadi Scan、医生讲解与基础练习开始，不需要你有 Isha 背景。",
   },
   {
     question: "我已经学过 Hatha Yoga，为什么还需要来？",
     answer:
-      "已经学过的人更容易理解这个课程的价值。这里不只是重复体式，而是通过 Nadi Scan、阿育吠陀医生讲解、饮食、五大元素净化与日常养护，帮助你知道如何让练习更适合自己当前的身体状态。",
+      "已经学过的人也很适合。这里不只是重复体式，而是通过 Nadi Scan、阿育吠陀医生讲解、饮食、五大元素净化与日常养护，帮助你知道如何让练习更适合自己当前的身体状态。",
   },
   {
     question: "零基础可以参加吗？",
@@ -377,23 +377,23 @@ export default function Page() {
         <div className="mx-auto grid max-w-7xl items-center gap-10 lg:grid-cols-[1.08fr_0.92fr]">
           <div>
             <div className="mb-6 inline-flex flex-wrap items-center gap-2 rounded-full border border-stone-300 bg-white/70 px-4 py-2 text-sm text-stone-700 shadow-sm">
-              <span>For Inner Engineering students</span>
+              <span>For beginners & Isha students</span>
               <span className="text-stone-400">·</span>
-              <span>Isha Hatha Yoga</span>
+              <span>Hatha Yoga</span>
               <span className="text-stone-400">·</span>
               <span>Ayurveda Reset</span>
             </div>
 
             <h1 className="max-w-4xl text-5xl font-semibold leading-[1.08] tracking-tight text-stone-950 md:text-7xl">
-              为 10 月与 Sadhguru 相遇，先把身体准备好。
+              五月元素平衡重启｜从身体检测开始，找回稳定与清明。
             </h1>
 
             <p className="mt-7 max-w-2xl text-lg leading-9 text-stone-700 md:text-xl">
-              如果你已经完成 Inner Engineering，平时也有练习，却仍然觉得身体疲劳、睡眠不稳、消化慢、情绪波动或练习不稳定，这个五月，先从身体检测开始，重新理解你的体质、呼吸、能量与生活节奏。
+              适合第一次接触瑜伽、长期疲劳、睡眠不稳、压力大、消化不顺的人；也适合已经学过 Inner Engineering 或 Hatha Yoga，想在 10 月与 Sadhguru 相遇前，把身体、呼吸、饮食与能量状态准备得更稳定的人。
             </p>
 
             <div className="mt-8 flex flex-wrap gap-3">
-              {["Nadi Balance Scan", "Isha Hatha Yoga", "Ayurveda Brunch", "五大元素净化", "Panchakarma"].map((item) => (
+              {["Nadi Balance Scan", "Classical Hatha Yoga", "Ayurveda Brunch", "五大元素净化", "Panchakarma"].map((item) => (
                 <span
                   key={item}
                   className="rounded-full border border-stone-300 bg-white/80 px-4 py-2 text-sm text-stone-700"
@@ -453,19 +453,19 @@ export default function Page() {
             <div>
               <SectionLabel>Why this matters</SectionLabel>
               <h2 className="text-4xl font-semibold leading-tight tracking-tight md:text-5xl">
-                你不是没有练习，你是需要更理解自己的系统。
+                你不是需要更用力，而是需要更理解身体的信号。
               </h2>
             </div>
             <div className="space-y-6 text-lg leading-9 text-stone-700">
               <p>
-                很多已经学过 Inner Engineering 或 Hatha Yoga 的人，内在很向往，也很 devotive，但身体层面仍然有现实的信号：容易累、睡不好、消化不顺、肩颈紧、情绪浮动、练习断断续续。
+                很多人并不是不够努力，而是身体已经长期处在消耗状态：工作忙、家庭责任重、睡眠不稳、消化变慢、肩颈紧绷、情绪容易浮动。也有不少已经学过 Inner Engineering 或 Hatha Yoga 的学员，内在很向往，却发现身体层面仍然需要被重新照顾。
               </p>
               <p>
-                Yoga Sri Wellness 五月元素平衡重启，不是让你“更用力”练习，而是帮助你先听懂身体，再通过 Nadi Scan、医生讲解、Isha Hatha Yoga、阿育吠陀饮食、五大元素净化与 Panchakarma 疗程，重新建立稳定、轻盈与清明。
+                Yoga Sri Wellness 五月元素平衡重启，不是让你“更用力”练习，而是帮助你先听懂身体，再通过 Nadi Scan、医生讲解、古典哈他瑜伽、阿育吠陀饮食、五大元素净化与 Panchakarma 疗程，重新建立稳定、轻盈与清明。
               </p>
               <div className="rounded-[2rem] bg-[#f8f4ec] p-6">
                 <p className="text-xl font-semibold text-stone-950">
-                  这不是普通瑜伽课，而是一段为身体、练习和内在状态做准备的过程。
+                  这不是普通瑜伽课，而是一段从身体检测、练习、饮食、净化到日常养护的完整重启过程。
                 </p>
               </div>
             </div>
@@ -508,20 +508,20 @@ export default function Page() {
           <div className="grid gap-6 lg:col-span-2 md:grid-cols-2">
             {[
               [
-                "已经完成 Inner Engineering",
-                "你不是来找普通运动课，而是想让身体更能承接自己的 Sadhana。",
+                "长期疲劳、压力大、睡不好",
+                "你想先知道身体为什么一直紧绷，再选择真正适合自己的练习与养护方式。",
+              ],
+              [
+                "身体僵硬、零基础、想开始瑜伽",
+                "你不需要先变柔软才来上课，课程会从身体觉察与基础练习慢慢开始。",
+              ],
+              [
+                "已经学过 Inner Engineering 或 Hatha Yoga",
+                "你不是来找普通运动课，而是想让身体更能支持自己的 Sadhana 与日常生活。",
               ],
               [
                 "期待 10 月见 Sadhguru",
-                "你想提前把身体、饮食、睡眠与能量状态准备得更稳定。",
-              ],
-              [
-                "常去 Isha Center 或学过 Hatha Yoga",
-                "你知道练习珍贵，也希望练习能更持续、更深入生活。",
-              ],
-              [
-                "40岁左右，开始认真听身体",
-                "你不想再靠意志力硬撑，而是想用更聪明、更温和的方式照顾自己。",
+                "你想提前把身体、饮食、睡眠与能量状态准备得更稳定、更清明。",
               ],
             ].map(([title, text]) => (
               <div key={title} className="rounded-[2rem] bg-white p-7 shadow-sm">
@@ -542,7 +542,7 @@ export default function Page() {
                 选择适合你的重启方式
               </h2>
               <p className="mt-5 text-lg leading-8 text-stone-700">
-                如果你只是想先了解身体，从 Nadi Balance Scan 开始；如果你是为了 10 月的重要时刻认真准备，最推荐 8 天完整系列。
+                如果你只是想先了解身体，从 Nadi Balance Scan 开始；如果你想用一天体验完整流程，选择一日体验；如果你想从身体、饮食、练习、净化与疗程完整重启，最推荐 8 天完整系列。
               </p>
             </div>
             <CTAButtons />
@@ -596,7 +596,7 @@ export default function Page() {
               <div className="rounded-[2rem] bg-[#f8f4ec] p-6">
                 <h3 className="text-xl font-semibold text-stone-950">Yoga Sri 的带领</h3>
                 <p className="mt-3">
-                  Yoga Sri 多年来教授华语学员 Isha Hatha Yoga。她发现，很多人很向往更深入的练习，但身体基础、饮食习惯、睡眠、消化与生活节奏并没有真正调整好。因此，这个系列不是为了增加更多课程，而是帮助学员先把身体这个系统准备好。
+                  Yoga Sri 多年来教授华语学员古典哈他瑜伽。她发现，很多人想开始瑜伽，却不知道自己的身体适合什么；也有很多已经学过练习的人，身体基础、饮食习惯、睡眠、消化与生活节奏并没有真正调整好。因此，这个系列不是为了增加更多课程，而是帮助学员先把身体这个系统准备好。
                 </p>
               </div>
               <div className="rounded-[2rem] bg-[#f8f4ec] p-6">
@@ -608,7 +608,7 @@ export default function Page() {
               <div className="rounded-[2rem] bg-[#f8f4ec] p-6">
                 <h3 className="text-xl font-semibold text-stone-950">与 Isha 练习的关系</h3>
                 <p className="mt-3">
-                  这个课程不是取代你的 Inner Engineering 或个人 Sadhana，而是帮助你在身体、饮食、能量与生活节奏上，为练习建立更好的支持。
+                  这个课程不取代任何个人练习或专业医疗建议。对于 Isha 学员，它可以作为身体、饮食、能量与生活节奏上的支持；对于初学者，它是一个温和、清楚、系统化认识身体的入口。
                 </p>
               </div>
             </div>
@@ -671,7 +671,7 @@ export default function Page() {
       </section>
 
       <footer className="border-t border-stone-200 px-5 py-10 text-center text-sm text-stone-500 lg:px-8">
-        <p>© Yoga Sri Wellness · Nadi Balance Scan × Isha Hatha Yoga × Ayurveda × Five Elements</p>
+        <p>© Yoga Sri Wellness · Nadi Balance Scan × Hatha Yoga × Ayurveda × Five Elements</p>
       </footer>
     </main>
   );
