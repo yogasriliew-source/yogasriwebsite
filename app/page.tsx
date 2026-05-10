@@ -299,35 +299,46 @@ export default function Home() {
         .profileImg {
           display: block;
           width: 100%;
-          height: min(70vh, 680px);
+          height: min(76vh, 720px);
           object-fit: cover;
-          object-position: center;
+          object-position: center 16%;
           border-radius: 36px;
         }
 
         .certBox {
           position: absolute;
-          left: 28px;
-          right: 28px;
-          bottom: 28px;
+          left: 26px;
+          right: 26px;
+          bottom: 26px;
           display: flex;
           align-items: center;
-          gap: 16px;
-          padding: 18px;
+          gap: 20px;
+          padding: 20px 22px;
           border-radius: 28px;
-          border: 1px solid rgba(255,255,255,0.68);
-          background: rgba(255, 250, 241, 0.88);
+          border: 1px solid rgba(255,255,255,0.72);
+          background: rgba(255, 250, 241, 0.92);
           box-shadow: 0 18px 48px rgba(70, 50, 34, 0.14);
+          backdrop-filter: blur(12px);
         }
 
-        .certBox img {
-          width: 68px;
-          height: 68px;
-          border-radius: 999px;
-          object-fit: contain;
+        .certLogoWrap {
+          width: 188px;
+          height: 72px;
+          border-radius: 18px;
           background: white;
-          padding: 8px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 10px 14px;
+          box-shadow: 0 8px 22px rgba(70, 50, 34, 0.08);
           flex: 0 0 auto;
+        }
+
+        .certLogo {
+          display: block;
+          width: 100%;
+          height: 100%;
+          object-fit: contain;
         }
 
         .certBox small {
@@ -759,7 +770,17 @@ export default function Home() {
           }
 
           .profileImg {
-            height: 520px;
+            height: 560px;
+            object-position: center 14%;
+          }
+
+          .certBox {
+            align-items: center;
+          }
+
+          .certLogoWrap {
+            width: 166px;
+            height: 66px;
           }
 
           .journeyGrid {
@@ -803,22 +824,32 @@ export default function Home() {
 
           .profileImg {
             height: 430px;
+            object-position: center 12%;
           }
 
           .certBox {
             left: 18px;
             right: 18px;
             bottom: 18px;
+            gap: 12px;
             padding: 14px;
           }
 
-          .certBox img {
-            width: 56px;
+          .certLogoWrap {
+            width: 120px;
             height: 56px;
+            border-radius: 14px;
+            padding: 8px 10px;
+          }
+
+          .certBox small {
+            font-size: 9px;
+            letter-spacing: 0.16em;
           }
 
           .certBox b {
-            font-size: 15px;
+            font-size: 14px;
+            line-height: 1.35;
           }
 
           .journeyGrid {
@@ -901,7 +932,13 @@ export default function Home() {
             <div className="photoCard">
               <img src="/yogasriprofile.jpg" alt="Yoga Sri" className="profileImg" />
               <div className="certBox">
-                <img src="/HYTLogo.png.jpg" alt="Sadhguru Gurukulam Certified Hatha Yoga Teacher" />
+                <div className="certLogoWrap">
+                  <img
+                    src="/HYTLogo.png"
+                    alt="Sadhguru Gurukulam Certified Hatha Yoga Teacher"
+                    className="certLogo"
+                  />
+                </div>
                 <div>
                   <small>Certified Teacher</small>
                   <b>Sadhguru Gurukulam 认证哈他瑜伽老师</b>
@@ -913,7 +950,7 @@ export default function Home() {
 
         <section className="container journey">
           <div className="journeyGrid">
-            {['检测', '理解', '练习', '饮食', '净化', '养护'].map((item, index) => (
+            {["检测", "理解", "练习", "饮食", "净化", "养护"].map((item, index) => (
               <div key={item}>
                 <div className="journeyIcon">{index + 1}</div>
                 <p>{item}</p>
