@@ -2,154 +2,88 @@
 
 import { useState } from "react";
 
-type Program = {
-  id: string;
-  title: string;
-  subtitle: string;
-  date: string;
-  price: string;
-  bestFor: string;
-  recommendation: string;
-  includes: string[];
-  highlight?: boolean;
-};
-
-type FAQ = {
-  question: string;
-  answer: string;
-};
-
 const registrationUrl =
   "https://docs.google.com/forms/d/e/1FAIpQLSci4EDJSBAJdEmNlbB6GE646IMkrdEhEvZvEZjrj6vJ31Yr7A/viewform?usp=dialog";
 
 const whatsappUrl =
   "https://wa.me/60126725549?text=Namaskaram%20Yoga%20Sri%EF%BC%8C%E6%88%91%E6%83%B3%E4%BA%86%E8%A7%A3%E4%BA%94%E6%9C%88%E5%85%83%E7%B4%A0%E5%B9%B3%E8%A1%A1%E9%87%8D%E5%90%AF%E8%AF%BE%E7%A8%8B%E3%80%82";
 
-const programs: Program[] = [
+const programs = [
   {
-    id: "nadi",
     title: "Nadi Balance Scan｜脉诊平衡检测",
     subtitle: "先听懂身体，再选择适合自己的练习与养护",
     date: "可预约",
     price: "RM180",
+    tag: "入门首选",
     bestFor:
       "适合容易疲劳、睡不好、压力大、消化不顺、情绪波动，或想先了解身体状态的人。",
-    recommendation:
-      "第一次接触 Yoga Sri Wellness，或不确定自己适合哪一个配套，建议先从这里开始。",
-    includes: [
-      "Nadi Scan 检测",
-      "PDF 报告",
-      "阿育吠陀医生一对一讲解",
-      "Yoga Sri 瑜伽顾问咨询",
-    ],
+    includes: ["Nadi Scan 检测", "PDF 报告", "阿育吠陀医生一对一讲解", "Yoga Sri 瑜伽顾问咨询"],
   },
   {
-    id: "one-day",
     title: "5月23日｜一日健康重启体验",
     subtitle: "Nadi Scan + Hatha Yoga + Ayurveda Brunch + Treatment",
     date: "5月23日",
     price: "RM1080",
+    tag: "完整体验一天",
     bestFor:
       "适合想用一天完整体验检测、练习、饮食与阿育吠陀疗程的人。",
-    recommendation:
-      "如果你想先感受整个系统，但暂时无法参加多天课程，这会是最清楚的入口。",
-    includes: [
-      "Hatha Yoga｜Surya Shakti",
-      "Nadi Scan 医生一对一报告讲解",
-      "Ayurveda Brunch｜阿育吠陀料理 Brunch",
-      "Ayurveda Treatment｜2小时阿育吠陀疗程",
-      "平衡瑜伽与带领冥想",
-    ],
+    includes: ["Hatha Yoga｜Surya Shakti", "Nadi Scan 医生一对一报告讲解", "Ayurveda Brunch", "Ayurveda Treatment｜2小时疗程", "平衡瑜伽与带领冥想"],
   },
   {
-    id: "foundation",
     title: "5月21–24日｜健康重启基础配套",
     subtitle: "建立身体觉察、瑜伽基础与练习节奏",
     date: "5月21–24日",
     price: "RM1880",
+    tag: "基础建立",
     bestFor:
       "适合零基础、身体僵硬、想开始瑜伽，或想重新建立稳定练习基础的人。",
-    recommendation:
-      "如果你已经学过 Inner Engineering，但身体状态还不够稳定，这个配套适合先打基础。",
-    includes: [
-      "Nadi Balance Scan 脉诊平衡检测",
-      "阿育吠陀医生一对一报告讲解",
-      "哈他瑜伽介绍与基础体式",
-      "瑜伽合十礼",
-      "Miracle of Mind",
-      "带领冥想",
-      "Surya Shakti / Surya Kriya 练习",
-      "阿育吠陀料理 Brunch",
-      "平衡瑜伽与幸福冥想",
-    ],
+    includes: ["Nadi Balance Scan", "医生一对一报告讲解", "哈他瑜伽介绍与基础体式", "瑜伽合十礼", "Miracle of Mind", "Surya Shakti / Surya Kriya"],
   },
   {
-    id: "deep-reset",
     title: "5月28–31日｜深度重启配套",
     subtitle: "五大元素净化 · 饮食 · 居家养护 · Panchakarma",
     date: "5月28–31日",
     price: "RM2580",
+    tag: "深度调理",
     bestFor:
       "适合已有瑜伽基础，想深入学习五大元素净化、阿育吠陀饮食与身体养护的人。",
-    recommendation:
-      "如果你不只是想练习，而是想把饮食、净化、疗程与日常养护整合起来，建议选择这个配套。",
-    includes: [
-      "Nadi Balance Scan 脉诊平衡检测",
-      "阿育吠陀医生一对一报告讲解",
-      "哈他瑜伽基础体式",
-      "带领冥想",
-      "五大元素净化课程",
-      "元素净化概论",
-      "居家养护法",
-      "阿育吠陀饮食与瑜伽饮食课",
-      "阿育吠陀料理 Brunch",
-      "Panchakarma 阿育吠陀疗程",
-    ],
+    includes: ["Nadi Balance Scan", "医生一对一报告讲解", "五大元素净化课程", "居家养护法", "阿育吠陀饮食课", "Panchakarma 疗程"],
   },
   {
-    id: "complete",
     title: "5月21–31日｜8天健康重启完整系列",
-    subtitle: "最完整 · 最推荐 · 为 10 月前的系统准备",
+    subtitle: "最完整 · 最推荐 · 从检测到净化的完整路径",
     date: "5月21–31日",
     price: "RM3580",
-    bestFor:
-      "适合想完整调整身体、饮食、练习节奏与日常养护的人；也特别适合已经完成 Inner Engineering、期待 10 月与 Sadhguru 相遇的学员。",
-    recommendation:
-      "如果你想从检测、瑜伽、饮食、五大元素净化到疗程完整体验，这是最推荐的完整路径。",
-    includes: [
-      "Nadi Balance Scan 脉诊平衡检测",
-      "阿育吠陀医生一对一报告讲解",
-      "Yoga Sri 瑜伽顾问咨询",
-      "哈他瑜伽介绍与基础体式",
-      "瑜伽合十礼",
-      "Miracle of Mind",
-      "带领冥想",
-      "Surya Shakti / Surya Kriya 练习",
-      "平衡瑜伽与幸福冥想",
-      "五大元素净化课程",
-      "元素净化概论",
-      "居家养护法",
-      "阿育吠陀饮食与瑜伽饮食课",
-      "阿育吠陀料理 Brunch",
-      "Panchakarma 阿育吠陀疗程",
-    ],
+    tag: "最推荐",
     highlight: true,
+    bestFor:
+      "适合想完整调整身体、饮食、练习节奏与日常养护的人；也特别适合期待 10 月与 Sadhguru 相遇的学员。",
+    includes: ["Nadi Balance Scan", "医生一对一报告讲解", "Yoga Sri 咨询", "古典哈他瑜伽", "五大元素净化", "阿育吠陀饮食", "Panchakarma 疗程", "居家养护整合"],
   },
 ];
 
-const faqs: FAQ[] = [
+const journey = [
+  ["01", "检测", "通过 Nadi Balance Scan 先了解身体状态，而不是盲目开始。"],
+  ["02", "理解", "由阿育吠陀医生讲解报告，看见体质与失衡信号。"],
+  ["03", "练习", "以古典哈他瑜伽建立稳定、活力与身体觉察。"],
+  ["04", "饮食", "用温和、支持消化的阿育吠陀饮食滋养身体。"],
+  ["05", "净化", "从五大元素角度学习净化、平衡与居家养护。"],
+  ["06", "整合", "把练习、饮食、作息与日常养护带回生活。"],
+];
+
+const faqs = [
   {
     question: "没有学过 Isha 或 Inner Engineering，可以参加吗？",
     answer:
       "可以。这个课程适合普通初学者、长期疲劳、睡眠不稳、压力大、消化不顺、想开始照顾身体的人。课程会从 Nadi Scan、医生讲解与基础练习开始，不需要你有 Isha 背景。",
   },
   {
-    question: "我已经学过 Hatha Yoga，为什么还需要来？",
+    question: "已经学过 Hatha Yoga，还适合参加吗？",
     answer:
       "已经学过的人也很适合。这里不只是重复体式，而是通过 Nadi Scan、阿育吠陀医生讲解、饮食、五大元素净化与日常养护，帮助你知道如何让练习更适合自己当前的身体状态。",
   },
   {
-    question: "零基础可以参加吗？",
+    question: "零基础、身体僵硬可以参加吗？",
     answer:
       "可以。基础配套就是为零基础、身体僵硬、久坐上班族、想开始瑜伽但不知道从哪里开始的人设计的。课程会从身体觉察与基础练习慢慢进入。",
   },
@@ -158,521 +92,194 @@ const faqs: FAQ[] = [
     answer:
       "疗程会根据个人体质与医生建议安排。若有怀孕、重大疾病、手术后恢复、长期服药、严重皮肤或心血管相关状况，请先咨询医生，并建议从 Nadi Balance Scan 开始。",
   },
-  {
-    question: "付款后如何确认名额？",
-    answer:
-      "请先填写报名表格，并完成银行转账或 TNG 付款。付款后保留转账截图，Yoga Sri 团队会协助确认名额与后续上课准备事项。",
-  },
 ];
 
-const journey = [
-  {
-    step: "01",
-    title: "检测",
-    text: "通过 Nadi Balance Scan 先了解身体状态，而不是盲目开始。",
-  },
-  {
-    step: "02",
-    title: "理解",
-    text: "由阿育吠陀医生讲解报告，看见体质与失衡信号。",
-  },
-  {
-    step: "03",
-    title: "练习",
-    text: "以 Isha Hatha Yoga 建立稳定、活力与身体觉察。",
-  },
-  {
-    step: "04",
-    title: "饮食",
-    text: "用温和、支持消化的阿育吠陀饮食滋养身体。",
-  },
-  {
-    step: "05",
-    title: "净化",
-    text: "从五大元素角度学习净化、平衡与居家养护。",
-  },
-  {
-    step: "06",
-    title: "整合",
-    text: "把练习、饮食、作息与日常养护带回生活。",
-  },
-];
-
-const schedule = [
-  ["7:00am – 9:30am", "Hatha Yoga｜Surya Shakti"],
-  ["9:30am – 10:30am", "Nadi Scan + 医生一对一讲解"],
-  ["10:30am – 12:00pm", "Ayurveda Brunch"],
-  ["1:00pm – 2:30pm", "平衡瑜伽与带领冥想"],
-  ["2:30pm – 5:00pm", "Ayurveda Treatment｜2小时疗程"],
-  ["5:30pm – 8:00pm", "Hatha Yoga / Integration Practice"],
-];
-
-function SectionLabel({ children }: { children: React.ReactNode }) {
+function CTAButtons() {
   return (
-    <p className="mb-3 text-xs font-semibold uppercase tracking-[0.28em] text-stone-500">
-      {children}
-    </p>
-  );
-}
-
-function CTAButtons({ light = false }: { light?: boolean }) {
-  return (
-    <div className="flex flex-col gap-3 sm:flex-row">
-      <a
-        href={registrationUrl}
-        target="_blank"
-        rel="noreferrer"
-        className={`rounded-full px-6 py-3 text-center text-sm font-semibold transition hover:scale-[1.01] ${
-          light
-            ? "bg-white text-stone-950 hover:bg-stone-100"
-            : "bg-stone-950 text-white hover:bg-stone-800"
-        }`}
-      >
+    <div className="cta-row">
+      <a className="btn btn-dark" href={registrationUrl} target="_blank" rel="noreferrer">
         立即填写报名表格
       </a>
-      <a
-        href={whatsappUrl}
-        target="_blank"
-        rel="noreferrer"
-        className={`rounded-full border px-6 py-3 text-center text-sm font-semibold transition hover:scale-[1.01] ${
-          light
-            ? "border-white/30 text-white hover:bg-white/10"
-            : "border-stone-300 text-stone-900 hover:bg-stone-100"
-        }`}
-      >
+      <a className="btn btn-light" href={whatsappUrl} target="_blank" rel="noreferrer">
         WhatsApp 咨询适合配套
       </a>
     </div>
   );
 }
 
-function ProgramCard({ program }: { program: Program }) {
+function ProgramCard({ program }: { program: (typeof programs)[number] }) {
   return (
-    <article
-      className={`relative flex h-full flex-col rounded-[2rem] border p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-xl ${
-        program.highlight
-          ? "border-stone-900 bg-stone-950 text-white"
-          : "border-stone-200 bg-white text-stone-900"
-      }`}
-    >
-      {program.highlight && (
-        <div className="absolute right-5 top-5 rounded-full bg-white px-3 py-1 text-xs font-semibold text-stone-950">
-          最推荐
-        </div>
-      )}
-
-      <div className="mb-6">
-        <p
-          className={`mb-2 text-xs font-medium tracking-[0.22em] ${
-            program.highlight ? "text-stone-300" : "text-stone-500"
-          }`}
-        >
-          {program.date}
-        </p>
-        <h3 className="pr-16 text-xl font-semibold leading-snug">
-          {program.title}
-        </h3>
-        <p
-          className={`mt-2 text-sm leading-6 ${
-            program.highlight ? "text-stone-300" : "text-stone-600"
-          }`}
-        >
-          {program.subtitle}
-        </p>
+    <article className={program.highlight ? "program-card highlight" : "program-card"}>
+      <div className="program-top">
+        <span className="program-date">{program.date}</span>
+        <span className="program-tag">{program.tag}</span>
       </div>
-
-      <div className="mb-6">
-        <p className="text-4xl font-semibold tracking-tight">{program.price}</p>
-        <p
-          className={`mt-3 text-sm leading-6 ${
-            program.highlight ? "text-stone-300" : "text-stone-600"
-          }`}
-        >
-          {program.recommendation}
-        </p>
+      <h3>{program.title}</h3>
+      <p className="muted">{program.subtitle}</p>
+      <p className="price">{program.price}</p>
+      <div className="best-for">
+        <strong>适合：</strong>
+        <p>{program.bestFor}</p>
       </div>
-
-      <div
-        className={`mb-5 rounded-3xl p-4 ${
-          program.highlight ? "bg-white/10" : "bg-stone-50"
-        }`}
-      >
-        <p className="mb-2 text-sm font-semibold">适合：</p>
-        <p
-          className={`text-sm leading-6 ${
-            program.highlight ? "text-stone-200" : "text-stone-600"
-          }`}
-        >
-          {program.bestFor}
-        </p>
-      </div>
-
-      <ul className="mt-auto space-y-2 text-sm leading-6">
-        {program.includes.slice(0, 6).map((item) => (
-          <li key={item} className="flex gap-2">
-            <span className={program.highlight ? "text-stone-300" : "text-stone-500"}>✓</span>
-            <span>{item}</span>
-          </li>
+      <ul>
+        {program.includes.map((item) => (
+          <li key={item}>✓ {item}</li>
         ))}
-        {program.includes.length > 6 && (
-          <li className={program.highlight ? "text-stone-300" : "text-stone-500"}>
-            + 更多完整内容
-          </li>
-        )}
       </ul>
     </article>
   );
 }
 
-function FAQItem({ item, index }: { item: FAQ; index: number }) {
+function FAQItem({ item, index }: { item: (typeof faqs)[number]; index: number }) {
   const [open, setOpen] = useState(index === 0);
-
   return (
-    <div className="border-b border-stone-200 py-5">
-      <button
-        type="button"
-        onClick={() => setOpen((value) => !value)}
-        className="flex w-full items-center justify-between gap-6 text-left"
-      >
-        <span className="text-lg font-semibold text-stone-950">{item.question}</span>
-        <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-stone-100 text-xl">
-          {open ? "−" : "+"}
-        </span>
+    <div className="faq-item">
+      <button onClick={() => setOpen(!open)}>
+        <span>{item.question}</span>
+        <b>{open ? "−" : "+"}</b>
       </button>
-      {open && (
-        <p className="mt-4 max-w-3xl text-base leading-8 text-stone-600">
-          {item.answer}
-        </p>
-      )}
+      {open && <p>{item.answer}</p>}
     </div>
   );
 }
 
 export default function Page() {
   return (
-    <main className="min-h-screen bg-[#f8f4ec] text-stone-950">
-      <nav className="sticky top-0 z-50 border-b border-stone-200/70 bg-[#f8f4ec]/90 backdrop-blur-xl">
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 lg:px-8">
-          <a href="#top" className="text-sm font-semibold tracking-[0.2em]">
-            ✦ YOGA SRI WELLNESS
-          </a>
-          <div className="hidden items-center gap-7 text-sm text-stone-600 md:flex">
-            <a href="#why" className="hover:text-stone-950">为什么适合你</a>
-            <a href="#path" className="hover:text-stone-950">学习路径</a>
-            <a href="#programs" className="hover:text-stone-950">课程配套</a>
-            <a href="#faq" className="hover:text-stone-950">常见问题</a>
-          </div>
-          <a
-            href={whatsappUrl}
-            target="_blank"
-            rel="noreferrer"
-            className="rounded-full bg-stone-950 px-4 py-2 text-sm font-semibold text-white hover:bg-stone-800"
-          >
-            咨询
-          </a>
+    <main>
+      <nav className="nav">
+        <a href="#top" className="logo">✦ YOGA SRI WELLNESS</a>
+        <div className="nav-links">
+          <a href="#why">为什么适合你</a>
+          <a href="#path">学习路径</a>
+          <a href="#programs">课程配套</a>
+          <a href="#faq">常见问题</a>
         </div>
+        <a className="nav-btn" href={whatsappUrl} target="_blank" rel="noreferrer">咨询</a>
       </nav>
 
-      <section id="top" className="overflow-hidden px-5 py-14 lg:px-8 lg:py-20">
-        <div className="mx-auto grid max-w-7xl items-center gap-10 lg:grid-cols-[1.08fr_0.92fr]">
-          <div>
-            <div className="mb-6 inline-flex flex-wrap items-center gap-2 rounded-full border border-stone-300 bg-white/70 px-4 py-2 text-sm text-stone-700 shadow-sm">
-              <span>For beginners & Isha students</span>
-              <span className="text-stone-400">·</span>
-              <span>Hatha Yoga</span>
-              <span className="text-stone-400">·</span>
-              <span>Ayurveda Reset</span>
-            </div>
-
-            <h1 className="max-w-4xl text-5xl font-semibold leading-[1.08] tracking-tight text-stone-950 md:text-7xl">
-              五月元素平衡重启｜从身体检测开始，找回稳定与清明。
-            </h1>
-
-            <p className="mt-7 max-w-2xl text-lg leading-9 text-stone-700 md:text-xl">
-              适合第一次接触瑜伽、长期疲劳、睡眠不稳、压力大、消化不顺的人；也适合已经学过 Inner Engineering 或 Hatha Yoga，想在 10 月与 Sadhguru 相遇前，把身体、呼吸、饮食与能量状态准备得更稳定的人。
-            </p>
-
-            <div className="mt-8 flex flex-wrap gap-3">
-              {["Nadi Balance Scan", "Classical Hatha Yoga", "Ayurveda Brunch", "五大元素净化", "Panchakarma"].map((item) => (
-                <span
-                  key={item}
-                  className="rounded-full border border-stone-300 bg-white/80 px-4 py-2 text-sm text-stone-700"
-                >
-                  {item}
-                </span>
-              ))}
-            </div>
-
-            <div className="mt-9">
-              <CTAButtons />
-            </div>
-
-            <div className="mt-9 grid max-w-2xl grid-cols-2 gap-4 sm:grid-cols-4">
-              {[
-                ["RM180", "单项检测"],
-                ["RM1080", "一日体验"],
-                ["RM1880+", "4天配套"],
-                ["RM3580", "8天完整系列"],
-              ].map(([number, label]) => (
-                <div key={label} className="rounded-3xl bg-white/80 p-4 shadow-sm">
-                  <p className="text-2xl font-semibold">{number}</p>
-                  <p className="mt-1 text-sm text-stone-500">{label}</p>
-                </div>
-              ))}
-            </div>
+      <section id="top" className="hero section">
+        <div className="hero-text">
+          <p className="eyebrow">For beginners & Isha students · Hatha Yoga · Ayurveda Reset</p>
+          <h1>五月元素平衡重启｜从身体检测开始，找回稳定与清明。</h1>
+          <p className="hero-subtitle">
+            适合第一次接触瑜伽、长期疲劳、睡眠不稳、压力大、消化不顺的人；也适合已经学过 Inner Engineering 或 Hatha Yoga，想在 10 月与 Sadhguru 相遇前，把身体、呼吸、饮食与能量状态准备得更稳定的人。
+          </p>
+          <div className="pill-row">
+            <span>Nadi Balance Scan</span>
+            <span>Classical Hatha Yoga</span>
+            <span>Ayurveda Brunch</span>
+            <span>五大元素净化</span>
+            <span>Panchakarma</span>
           </div>
-
-          <div className="relative">
-            <div className="absolute -left-10 -top-10 h-48 w-48 rounded-full bg-amber-200/40 blur-3xl" />
-            <div className="absolute -bottom-10 right-0 h-56 w-56 rounded-full bg-stone-300/40 blur-3xl" />
-            <div className="relative overflow-hidden rounded-[2.5rem] bg-stone-950 p-3 shadow-2xl">
-              <img
-                src="/yogasriprofile.jpg"
-                alt="Yoga Sri"
-                className="h-[560px] w-full rounded-[2rem] object-cover object-center"
-              />
-              <div className="absolute bottom-6 left-6 right-6 rounded-[1.7rem] bg-white/90 p-5 shadow-xl backdrop-blur">
-                <p className="text-xs font-semibold uppercase tracking-[0.24em] text-stone-500">
-                  Guided by Yoga Sri
-                </p>
-                <p className="mt-2 text-xl font-semibold text-stone-950">
-                  Certified Hatha Yoga Teacher
-                </p>
-                <p className="mt-2 text-sm leading-6 text-stone-600">
-                  以中文清楚带领古典哈他瑜伽，并结合阿育吠陀医生讲解，让练习不只停留在课堂，而是回到身体与生活。
-                </p>
-              </div>
-            </div>
+          <CTAButtons />
+          <div className="stats">
+            <div><strong>RM180</strong><span>单项检测</span></div>
+            <div><strong>RM1080</strong><span>一日体验</span></div>
+            <div><strong>RM1880+</strong><span>4天配套</span></div>
+            <div><strong>RM3580</strong><span>8天完整系列</span></div>
+          </div>
+        </div>
+        <div className="hero-image-card">
+          <img src="/yogasriprofile.jpg" alt="Yoga Sri" />
+          <div className="profile-note">
+            <small>Guided by Yoga Sri</small>
+            <h3>Certified Hatha Yoga Teacher</h3>
+            <p>以中文清楚带领古典哈他瑜伽，并结合阿育吠陀医生讲解，让练习回到身体与生活。</p>
           </div>
         </div>
       </section>
 
-      <section id="why" className="px-5 py-16 lg:px-8">
-        <div className="mx-auto max-w-7xl rounded-[2.5rem] bg-white p-7 shadow-sm md:p-12">
-          <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr]">
-            <div>
-              <SectionLabel>Why this matters</SectionLabel>
-              <h2 className="text-4xl font-semibold leading-tight tracking-tight md:text-5xl">
-                你不是需要更用力，而是需要更理解身体的信号。
-              </h2>
-            </div>
-            <div className="space-y-6 text-lg leading-9 text-stone-700">
-              <p>
-                很多人并不是不够努力，而是身体已经长期处在消耗状态：工作忙、家庭责任重、睡眠不稳、消化变慢、肩颈紧绷、情绪容易浮动。也有不少已经学过 Inner Engineering 或 Hatha Yoga 的学员，内在很向往，却发现身体层面仍然需要被重新照顾。
-              </p>
-              <p>
-                Yoga Sri Wellness 五月元素平衡重启，不是让你“更用力”练习，而是帮助你先听懂身体，再通过 Nadi Scan、医生讲解、古典哈他瑜伽、阿育吠陀饮食、五大元素净化与 Panchakarma 疗程，重新建立稳定、轻盈与清明。
-              </p>
-              <div className="rounded-[2rem] bg-[#f8f4ec] p-6">
-                <p className="text-xl font-semibold text-stone-950">
-                  这不是普通瑜伽课，而是一段从身体检测、练习、饮食、净化到日常养护的完整重启过程。
-                </p>
-              </div>
-            </div>
-          </div>
+      <section id="why" className="section white-box two-col">
+        <div>
+          <p className="label">WHY THIS MATTERS</p>
+          <h2>你不是需要更用力，而是需要更理解身体的信号。</h2>
+        </div>
+        <div className="text-block">
+          <p>很多人并不是不够努力，而是身体已经长期处在消耗状态：工作忙、家庭责任重、睡眠不稳、消化变慢、肩颈紧绷、情绪容易浮动。</p>
+          <p>五月元素平衡重启，不是让你更用力练习，而是帮助你先听懂身体，再通过 Nadi Scan、医生讲解、古典哈他瑜伽、阿育吠陀饮食、五大元素净化与 Panchakarma 疗程，重新建立稳定、轻盈与清明。</p>
+          <div className="quote">这是一段从身体检测、练习、饮食、净化到日常养护的完整重启过程。</div>
         </div>
       </section>
 
-      <section id="path" className="px-5 py-16 lg:px-8">
-        <div className="mx-auto max-w-7xl">
-          <div className="mb-10 max-w-3xl">
-            <SectionLabel>The complete reset path</SectionLabel>
-            <h2 className="text-4xl font-semibold leading-tight tracking-tight md:text-5xl">
-              从检测、理解、练习，到饮食、净化与整合。
-            </h2>
-            <p className="mt-5 text-lg leading-8 text-stone-700">
-              每一步都不是单独的体验，而是为了帮助你把身体这个系统慢慢准备好。
-            </p>
-          </div>
-
-          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-            {journey.map((item) => (
-              <div key={item.step} className="rounded-[2rem] border border-stone-200 bg-white p-6 shadow-sm">
-                <p className="text-sm font-semibold tracking-[0.22em] text-stone-400">{item.step}</p>
-                <h3 className="mt-6 text-2xl font-semibold">{item.title}</h3>
-                <p className="mt-3 text-base leading-7 text-stone-600">{item.text}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="px-5 py-16 lg:px-8">
-        <div className="mx-auto grid max-w-7xl gap-6 lg:grid-cols-3">
-          <div className="rounded-[2.5rem] bg-stone-950 p-8 text-white lg:col-span-1">
-            <SectionLabel>For whom</SectionLabel>
-            <h2 className="text-3xl font-semibold leading-tight">
-              这个课程特别适合这样的你
-            </h2>
-          </div>
-          <div className="grid gap-6 lg:col-span-2 md:grid-cols-2">
-            {[
-              [
-                "长期疲劳、压力大、睡不好",
-                "你想先知道身体为什么一直紧绷，再选择真正适合自己的练习与养护方式。",
-              ],
-              [
-                "身体僵硬、零基础、想开始瑜伽",
-                "你不需要先变柔软才来上课，课程会从身体觉察与基础练习慢慢开始。",
-              ],
-              [
-                "已经学过 Inner Engineering 或 Hatha Yoga",
-                "你不是来找普通运动课，而是想让身体更能支持自己的 Sadhana 与日常生活。",
-              ],
-              [
-                "期待 10 月见 Sadhguru",
-                "你想提前把身体、饮食、睡眠与能量状态准备得更稳定、更清明。",
-              ],
-            ].map(([title, text]) => (
-              <div key={title} className="rounded-[2rem] bg-white p-7 shadow-sm">
-                <h3 className="text-xl font-semibold">{title}</h3>
-                <p className="mt-3 text-base leading-7 text-stone-600">{text}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section id="programs" className="px-5 py-16 lg:px-8">
-        <div className="mx-auto max-w-7xl">
-          <div className="mb-10 flex flex-col justify-between gap-6 md:flex-row md:items-end">
-            <div className="max-w-3xl">
-              <SectionLabel>Program options</SectionLabel>
-              <h2 className="text-4xl font-semibold leading-tight tracking-tight md:text-5xl">
-                选择适合你的重启方式
-              </h2>
-              <p className="mt-5 text-lg leading-8 text-stone-700">
-                如果你只是想先了解身体，从 Nadi Balance Scan 开始；如果你想用一天体验完整流程，选择一日体验；如果你想从身体、饮食、练习、净化与疗程完整重启，最推荐 8 天完整系列。
-              </p>
+      <section id="path" className="section">
+        <p className="label">THE COMPLETE RESET PATH</p>
+        <h2>从检测、理解、练习，到饮食、净化与整合。</h2>
+        <p className="section-subtitle">每一步都不是单独的体验，而是为了帮助你把身体这个系统慢慢准备好。</p>
+        <div className="journey-grid">
+          {journey.map(([step, title, text]) => (
+            <div className="journey-card" key={step}>
+              <span>{step}</span>
+              <h3>{title}</h3>
+              <p>{text}</p>
             </div>
-            <CTAButtons />
-          </div>
-
-          <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-            {programs.map((program) => (
-              <ProgramCard key={program.id} program={program} />
-            ))}
-          </div>
+          ))}
         </div>
       </section>
 
-      <section className="px-5 py-16 lg:px-8">
-        <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[0.92fr_1.08fr]">
-          <div className="rounded-[2.5rem] bg-white p-8 shadow-sm md:p-10">
-            <SectionLabel>One-day sample flow</SectionLabel>
-            <h2 className="text-4xl font-semibold leading-tight tracking-tight">
-              一天会经历什么？
-            </h2>
-            <p className="mt-5 text-lg leading-8 text-stone-700">
-              对第一次参加的人来说，清楚的流程会让身体和心理都更安心。这是 5月23日一日体验的建议流程。
-            </p>
-          </div>
-          <div className="rounded-[2.5rem] bg-stone-950 p-6 text-white shadow-xl md:p-8">
-            <div className="space-y-4">
-              {schedule.map(([time, activity]) => (
-                <div
-                  key={time}
-                  className="grid gap-3 rounded-[1.4rem] border border-white/10 bg-white/5 p-4 sm:grid-cols-[170px_1fr]"
-                >
-                  <p className="text-sm font-semibold text-stone-300">{time}</p>
-                  <p className="text-base font-medium">{activity}</p>
-                </div>
-              ))}
+      <section className="section audience-grid">
+        <div className="dark-box">
+          <p className="label">FOR WHOM</p>
+          <h2>这个课程特别适合这样的你</h2>
+        </div>
+        <div className="audience-cards">
+          {[
+            ["长期疲劳、压力大、睡不好", "你想先知道身体为什么一直紧绷，再选择真正适合自己的练习与养护方式。"],
+            ["身体僵硬、零基础、想开始瑜伽", "你不需要先变柔软才来上课，课程会从身体觉察与基础练习慢慢开始。"],
+            ["已经学过 Inner Engineering 或 Hatha Yoga", "你想让身体更能支持自己的 Sadhana 与日常生活。"],
+            ["期待 10 月见 Sadhguru", "你想提前把身体、饮食、睡眠与能量状态准备得更稳定、更清明。"],
+          ].map(([title, text]) => (
+            <div className="mini-card" key={title}>
+              <h3>{title}</h3>
+              <p>{text}</p>
             </div>
-          </div>
+          ))}
         </div>
       </section>
 
-      <section className="px-5 py-16 lg:px-8">
-        <div className="mx-auto max-w-7xl rounded-[2.5rem] bg-white p-7 shadow-sm md:p-12">
-          <div className="grid gap-10 lg:grid-cols-2">
-            <div>
-              <SectionLabel>Trust & safety</SectionLabel>
-              <h2 className="text-4xl font-semibold leading-tight tracking-tight md:text-5xl">
-                有练习，也有医生讲解；有体验，也有安全边界。
-              </h2>
-            </div>
-            <div className="space-y-6 text-base leading-8 text-stone-700">
-              <div className="rounded-[2rem] bg-[#f8f4ec] p-6">
-                <h3 className="text-xl font-semibold text-stone-950">Yoga Sri 的带领</h3>
-                <p className="mt-3">
-                  Yoga Sri 多年来教授华语学员古典哈他瑜伽。她发现，很多人想开始瑜伽，却不知道自己的身体适合什么；也有很多已经学过练习的人，身体基础、饮食习惯、睡眠、消化与生活节奏并没有真正调整好。因此，这个系列不是为了增加更多课程，而是帮助学员先把身体这个系统准备好。
-                </p>
-              </div>
-              <div className="rounded-[2rem] bg-[#f8f4ec] p-6">
-                <h3 className="text-xl font-semibold text-stone-950">重要说明</h3>
-                <p className="mt-3">
-                  本课程不是医疗诊断或疾病治疗，也不取代专业医疗建议。课程通过 Ayurveda 体质分析、瑜伽练习、饮食与日常养护，帮助你更了解身体状态，并建立更适合自己的生活节奏。如有严重疾病、怀孕、术后恢复或长期服药，请先咨询医生。
-                </p>
-              </div>
-              <div className="rounded-[2rem] bg-[#f8f4ec] p-6">
-                <h3 className="text-xl font-semibold text-stone-950">与 Isha 练习的关系</h3>
-                <p className="mt-3">
-                  这个课程不取代任何个人练习或专业医疗建议。对于 Isha 学员，它可以作为身体、饮食、能量与生活节奏上的支持；对于初学者，它是一个温和、清楚、系统化认识身体的入口。
-                </p>
-              </div>
-            </div>
-          </div>
+      <section id="programs" className="section">
+        <p className="label">PROGRAM OPTIONS</p>
+        <h2>选择适合你的重启方式</h2>
+        <p className="section-subtitle">如果你只是想先了解身体，从 Nadi Balance Scan 开始；如果你想从身体、饮食、练习、净化与疗程完整重启，最推荐 8 天完整系列。</p>
+        <div className="program-grid">
+          {programs.map((program) => <ProgramCard key={program.title} program={program} />)}
         </div>
       </section>
 
-      <section id="faq" className="px-5 py-16 lg:px-8">
-        <div className="mx-auto max-w-5xl">
-          <div className="mb-8 text-center">
-            <SectionLabel>FAQ</SectionLabel>
-            <h2 className="text-4xl font-semibold tracking-tight md:text-5xl">
-              报名前你可能想知道
-            </h2>
-          </div>
-          <div className="rounded-[2.5rem] bg-white px-6 py-4 shadow-sm md:px-10">
-            {faqs.map((item, index) => (
-              <FAQItem key={item.question} item={item} index={index} />
-            ))}
-          </div>
+      <section className="section white-box two-col">
+        <div>
+          <p className="label">TRUST & SAFETY</p>
+          <h2>有练习，也有医生讲解；有体验，也有安全边界。</h2>
+        </div>
+        <div className="text-block">
+          <p><strong>Yoga Sri 的带领：</strong>Yoga Sri 多年来教授华语学员古典哈他瑜伽。她发现，很多人想开始瑜伽，却不知道自己的身体适合什么；也有很多已经学过练习的人，身体基础、饮食习惯、睡眠、消化与生活节奏并没有真正调整好。</p>
+          <p><strong>重要说明：</strong>本课程不是医疗诊断或疾病治疗，也不取代专业医疗建议。如有严重疾病、怀孕、术后恢复或长期服药，请先咨询医生。</p>
         </div>
       </section>
 
-      <section className="px-5 py-16 lg:px-8">
-        <div className="mx-auto grid max-w-7xl gap-6 lg:grid-cols-[1.1fr_0.9fr]">
-          <div className="rounded-[2.5rem] bg-stone-950 p-8 text-white shadow-xl md:p-12">
-            <SectionLabel>Registration & payment</SectionLabel>
-            <h2 className="max-w-3xl text-4xl font-semibold leading-tight tracking-tight md:text-5xl">
-              从听懂身体开始，重新建立稳定与清明。
-            </h2>
-            <p className="mt-5 max-w-2xl text-lg leading-8 text-stone-300">
-              请先填写报名表格。完成银行转账或 TNG 付款后，保留付款截图，Yoga Sri 团队会协助确认名额与后续准备事项。
-            </p>
-            <div className="mt-8">
-              <CTAButtons light />
-            </div>
-          </div>
-
-          <div className="rounded-[2.5rem] bg-white p-8 shadow-sm md:p-10">
-            <h3 className="text-2xl font-semibold">银行转账</h3>
-            <div className="mt-6 space-y-4 rounded-[2rem] bg-[#f8f4ec] p-6">
-              <div>
-                <p className="text-sm text-stone-500">Account Name</p>
-                <p className="text-xl font-semibold">YOGASRI ENTERPRISE</p>
-              </div>
-              <div>
-                <p className="text-sm text-stone-500">Bank</p>
-                <p className="text-xl font-semibold">Public Bank</p>
-              </div>
-              <div>
-                <p className="text-sm text-stone-500">Account No.</p>
-                <p className="text-xl font-semibold">3231265424</p>
-              </div>
-            </div>
-            <p className="mt-5 text-sm leading-6 text-stone-500">
-              名额以完成报名与付款确认为准。如不确定身体状况或配套选择，请先 WhatsApp 咨询。
-            </p>
-          </div>
+      <section id="faq" className="section faq-section">
+        <p className="label">FAQ</p>
+        <h2>报名前你可能想知道</h2>
+        <div className="faq-box">
+          {faqs.map((item, index) => <FAQItem key={item.question} item={item} index={index} />)}
         </div>
       </section>
 
-      <footer className="border-t border-stone-200 px-5 py-10 text-center text-sm text-stone-500 lg:px-8">
-        <p>© Yoga Sri Wellness · Nadi Balance Scan × Hatha Yoga × Ayurveda × Five Elements</p>
-      </footer>
+      <section className="section final-cta">
+        <div>
+          <p className="label">REGISTRATION</p>
+          <h2>从听懂身体开始，重新建立稳定与清明。</h2>
+          <p>请先填写报名表格。完成银行转账或 TNG 付款后，保留付款截图，Yoga Sri 团队会协助确认名额与后续准备事项。</p>
+          <CTAButtons />
+        </div>
+        <div className="payment-box">
+          <h3>银行转账</h3>
+          <p><small>Account Name</small><br /><strong>YOGASRI ENTERPRISE</strong></p>
+          <p><small>Bank</small><br /><strong>Public Bank</strong></p>
+          <p><small>Account No.</small><br /><strong>3231265424</strong></p>
+        </div>
+      </section>
+
+      <footer>© Yoga Sri Wellness · Nadi Balance Scan × Hatha Yoga × Ayurveda × Five Elements</footer>
     </main>
   );
 }
