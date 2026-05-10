@@ -13,9 +13,10 @@ const whatsappUrl =
 const content = {
   zh: {
     nav: {
-      why: "为什么适合你",
+      why: "适合谁",
       pillars: "三大支柱",
       elements: "五大元素",
+      journey: "重启路径",
       programs: "课程配套",
       faq: "常见问题",
       consult: "咨询",
@@ -23,6 +24,7 @@ const content = {
     },
     hero: {
       badge: "YOGA SRI WELLNESS",
+      eyebrow: "May Wellness Reset Series",
       kicker: "Nadi Balance Scan × Hatha Yoga × Ayurveda × 五大元素净化",
       title: "生命元素平衡重启",
       subtitle:
@@ -32,24 +34,31 @@ const content = {
       stats: [
         { label: "单项体验", value: "RM180 起" },
         { label: "一日体验", value: "RM1080" },
-        { label: "健康重启", value: "RM1880 / RM2580" },
-        { label: "深度重启", value: "RM1880 / RM2580" },
+        { label: "4天重启", value: "RM1880 / RM2580" },
         { label: "完整系列", value: "RM3580" },
       ],
-      noteTitle: "Certified Teacher",
+      noteTitle: "Certified Isha Hatha Yoga Teacher",
       noteText:
-        "由 Yoga Sri 带领，以中文清楚引导古典哈他瑜伽，并结合阿育吠陀医生讲解，让练习真正回到身体与生活。",
+        "由 Yoga Sri 以中文清楚引导古典哈他瑜伽，并结合阿育吠陀医生讲解，让练习真正回到身体、饮食与生活节奏。",
     },
     why: {
       label: "WHY THIS MATTERS",
       title: "这不是普通瑜伽课，而是一段完整的健康重启过程。",
-      text:
+      text1:
         "适合第一次接触瑜伽、长期疲劳、睡眠不稳、压力大、消化不顺的人；也适合已经学过 Inner Engineering 或 Isha Hatha Yoga，想让身体、呼吸、饮食与能量状态更稳定的人。",
+      text2:
         "你不一定需要更用力，而是需要更理解身体的信号。这个系列通过检测、理解、练习、饮食、净化与疗程，帮助你建立更适合自己的节奏。",
+      cards: [
+        "长期疲劳、睡不好、压力大",
+        "身体僵硬，想开始瑜伽但不知道从哪里开始",
+        "想了解体质、饮食与生活节奏",
+        "想为 10 月更深度的练习与体验做准备",
+      ],
     },
     pillars: {
       label: "THREE PILLARS",
       title: "Isha Yoga × Ayurveda × 五大元素",
+      subtitle: "不是单一课程，而是从练习、体质、元素三个层面重新整理身体。",
       items: [
         {
           title: "Isha Yoga",
@@ -67,11 +76,11 @@ const content = {
     },
     elements: {
       label: "FIVE ELEMENTS",
-      title: "什么是五大元素",
-      subtitle: "从地、水、火、风、空的角度，重新看待身体、能量与生活平衡。",
+      title: "从五大元素理解身体与生活",
+      subtitle: "地、水、火、风、空，不只是概念，而是身体稳定、情绪流动、消化力、呼吸与内在空间的基础。",
       items: [
         {
-          icon: "◼",
+          icon: "▰",
           title: "地｜Earth",
           text: "稳定、承载、扎根。帮助建立身体的支撑感与安全感。",
         },
@@ -97,7 +106,7 @@ const content = {
         },
       ],
     },
-    path: {
+    journey: {
       label: "RESET JOURNEY",
       title: "从检测、理解、练习，到饮食、净化与整合",
       items: [
@@ -112,11 +121,14 @@ const content = {
     programs: {
       label: "PROGRAMS",
       title: "课程配套",
-      subtitle: "点击展开查看每个配套内容",
+      subtitle: "点击展开查看每个配套内容。",
+      bestFor: "适合",
+      includes: "包含内容",
       data: [
         {
           title: "Nadi Balance Scan｜脉诊平衡检测",
           price: "RM180",
+          tag: "入门推荐",
           summary: "先听懂身体，再选择适合自己的练习与养护。",
           bestFor:
             "适合容易疲劳、睡不好、压力大、消化不顺、情绪波动，或想先了解身体状态的人。",
@@ -130,13 +142,14 @@ const content = {
         {
           title: "5月23日｜一日健康重启体验",
           price: "RM1080",
-          summary: "Nadi Scan + Hatha Yoga + Ayurveda Brunch + Treatment",
+          tag: "一天完整体验",
+          summary: "Nadi Scan + Hatha Yoga + Ayurveda Brunch + Treatment。",
           bestFor:
             "适合想用一天完整体验检测、练习、饮食与阿育吠陀疗程的人。",
           includes: [
             "Hatha Yoga｜Surya Shakti",
             "Nadi Scan 医生一对一讲解",
-            "Ayurveda Brunch",
+            "Ayurveda Brunch｜阿育吠陀料理",
             "平衡瑜伽与带领冥想",
             "Ayurveda Treatment｜2小时疗程",
           ],
@@ -144,7 +157,8 @@ const content = {
         {
           title: "5月21–24日｜健康重启基础配套",
           price: "RM1880",
-          summary: "建立身体觉察、瑜伽基础与练习节奏",
+          tag: "初学者友好",
+          summary: "建立身体觉察、瑜伽基础与练习节奏。",
           bestFor:
             "适合零基础、身体僵硬、想开始瑜伽，或想重新建立稳定练习基础的人。",
           includes: [
@@ -159,7 +173,8 @@ const content = {
         {
           title: "5月28–31日｜深度重启配套",
           price: "RM2580",
-          summary: "五大元素净化 · 饮食 · 居家养护 · Panchakarma",
+          tag: "五大元素重点",
+          summary: "五大元素净化 · 饮食 · 居家养护 · Panchakarma。",
           bestFor:
             "适合已有瑜伽基础，想深入学习五大元素净化、阿育吠陀饮食与身体养护的人。",
           includes: [
@@ -174,7 +189,8 @@ const content = {
         {
           title: "5月21–31日｜8天健康重启完整系列",
           price: "RM3580",
-          summary: "最完整 · 最推荐 · 从检测到净化的完整路径",
+          tag: "最完整推荐",
+          summary: "从检测到净化的完整路径，适合想系统重启的人。",
           bestFor:
             "适合想完整调整身体、饮食、练习节奏与日常养护的人；也特别适合期待 10 月与 Sadhguru 相遇的学员。",
           includes: [
@@ -231,9 +247,10 @@ const content = {
 
   en: {
     nav: {
-      why: "Why This Fits You",
+      why: "Who It Is For",
       pillars: "3 Pillars",
       elements: "5 Elements",
+      journey: "Journey",
       programs: "Programs",
       faq: "FAQ",
       consult: "Consult",
@@ -241,6 +258,7 @@ const content = {
     },
     hero: {
       badge: "YOGA SRI WELLNESS",
+      eyebrow: "May Wellness Reset Series",
       kicker: "Nadi Balance Scan × Hatha Yoga × Ayurveda × Five Elements Purification",
       title: "May Elements Balance Reset Series",
       subtitle:
@@ -253,9 +271,9 @@ const content = {
         { label: "4-Day Packages", value: "RM1880 / RM2580" },
         { label: "Complete Series", value: "RM3580" },
       ],
-      noteTitle: "Certified Teacher",
+      noteTitle: "Certified Isha Hatha Yoga Teacher",
       noteText:
-        "Guided by Yoga Sri in clear Chinese instruction, integrating classical Hatha Yoga with Ayurvedic doctor consultation so practice can truly return to the body and daily life.",
+        "Guided by Yoga Sri in clear Chinese instruction, integrating classical Hatha Yoga with Ayurvedic doctor consultation so practice can truly return to the body, food and daily rhythm.",
     },
     why: {
       label: "WHY THIS MATTERS",
@@ -263,11 +281,18 @@ const content = {
       text1:
         "Suitable for beginners, those with fatigue, poor sleep, stress or digestive discomfort; and also for those who have learned Inner Engineering or Hatha Yoga and want more stability in body, breath, food habits and energy.",
       text2:
-        "You may not need to push harder — you may need to understand your body's signals more clearly. This series supports you through assessment, understanding, practice, food, purification and therapy.",
+        "You may not need to push harder — you may need to understand your body’s signals more clearly. This series supports you through assessment, understanding, practice, food, purification and therapy.",
+      cards: [
+        "Fatigue, poor sleep or stress",
+        "Stiff body and unsure where to begin",
+        "Want to understand constitution and food rhythm",
+        "Preparing for a deeper practice journey in October",
+      ],
     },
     pillars: {
       label: "THREE PILLARS",
       title: "Isha Yoga × Ayurveda × Five Elements",
+      subtitle: "A complete approach through practice, constitution and elemental balance.",
       items: [
         {
           title: "Isha Yoga",
@@ -285,38 +310,18 @@ const content = {
     },
     elements: {
       label: "FIVE ELEMENTS",
-      title: "Five Elements Visual Block",
+      title: "Understanding the body through the five elements",
       subtitle:
-        "Revisit the body, energy and life balance through Earth, Water, Fire, Air and Space.",
+        "Earth, Water, Fire, Air and Space are not just concepts. They point to stability, flow, digestion, breath and inner spaciousness.",
       items: [
-        {
-          icon: "◼",
-          title: "Earth",
-          text: "Stability, grounding and support.",
-        },
-        {
-          icon: "◌",
-          title: "Water",
-          text: "Flow, nourishment and softness.",
-        },
-        {
-          icon: "✦",
-          title: "Fire",
-          text: "Transformation, vitality and inner heat.",
-        },
-        {
-          icon: "〰",
-          title: "Air",
-          text: "Movement, lightness and breath.",
-        },
-        {
-          icon: "◎",
-          title: "Space",
-          text: "Openness, clarity and expansion.",
-        },
+        { icon: "▰", title: "Earth", text: "Stability, grounding and support." },
+        { icon: "◌", title: "Water", text: "Flow, nourishment and softness." },
+        { icon: "✦", title: "Fire", text: "Transformation, vitality and inner heat." },
+        { icon: "〰", title: "Air", text: "Movement, lightness and breath." },
+        { icon: "◎", title: "Space", text: "Openness, clarity and expansion." },
       ],
     },
-    path: {
+    journey: {
       label: "RESET JOURNEY",
       title: "From assessment and understanding to practice, nourishment and integration",
       items: [
@@ -331,11 +336,14 @@ const content = {
     programs: {
       label: "PROGRAMS",
       title: "Programs & Packages",
-      subtitle: "Click to expand each package",
+      subtitle: "Click to expand each package.",
+      bestFor: "Best for",
+      includes: "Includes",
       data: [
         {
           title: "Nadi Balance Scan",
           price: "RM180",
+          tag: "Entry point",
           summary: "Understand your body first, then choose the right practice and care.",
           bestFor:
             "For those with fatigue, poor sleep, stress, digestive discomfort or those who want clarity before starting.",
@@ -349,7 +357,8 @@ const content = {
         {
           title: "23 May | One-Day Reset Experience",
           price: "RM1080",
-          summary: "Nadi Scan + Hatha Yoga + Ayurveda Brunch + Treatment",
+          tag: "Full-day experience",
+          summary: "Nadi Scan + Hatha Yoga + Ayurveda Brunch + Treatment.",
           bestFor:
             "For those who want a complete one-day experience of assessment, practice, food and therapy.",
           includes: [
@@ -363,7 +372,8 @@ const content = {
         {
           title: "21–24 May | Foundation Reset Package",
           price: "RM1880",
-          summary: "Build body awareness, yoga foundation and practice rhythm",
+          tag: "Beginner friendly",
+          summary: "Build body awareness, yoga foundation and practice rhythm.",
           bestFor:
             "For beginners, stiff bodies, and those who want to establish a stable foundation.",
           includes: [
@@ -378,7 +388,8 @@ const content = {
         {
           title: "28–31 May | Deep Reset Package",
           price: "RM2580",
-          summary: "Five Elements Purification · Food · Home Care · Panchakarma",
+          tag: "Five elements focus",
+          summary: "Five Elements Purification · Food · Home Care · Panchakarma.",
           bestFor:
             "For those with some yoga background who want to go deeper into five elements purification, Ayurvedic food and body care.",
           includes: [
@@ -393,7 +404,8 @@ const content = {
         {
           title: "21–31 May | 8-Day Complete Reset Series",
           price: "RM3580",
-          summary: "Most complete and recommended path",
+          tag: "Most complete",
+          summary: "The most complete path from assessment to purification.",
           bestFor:
             "For those who want a full reset of body, food habits, practice rhythm and daily care; especially suitable for those preparing more seriously.",
           includes: [
@@ -469,36 +481,39 @@ function SectionHeader({
 
 export default function Page() {
   const [lang, setLang] = useState<Lang>("zh");
-  const [openProgram, setOpenProgram] = useState(0);
-  const [openFaq, setOpenFaq] = useState(0);
+  const [openProgram, setOpenProgram] = useState<number | null>(0);
+  const [openFaq, setOpenFaq] = useState<number | null>(0);
 
   const copy = useMemo(() => content[lang], [lang]);
 
   return (
     <main className="site-shell">
-      <nav className="nav">
-        <a href="#top" className="brand">
-          <span className="brand-dot" />
-          {copy.hero.badge}
+      <nav className="nav" aria-label="Main navigation">
+        <a href="#top" className="brand" aria-label="Yoga Sri Wellness home">
+          <span className="brand-mark" />
+          <span>{copy.hero.badge}</span>
         </a>
 
-        <div className="nav-links">
+        <div className="nav-links" aria-label="Page sections">
           <a href="#why">{copy.nav.why}</a>
           <a href="#pillars">{copy.nav.pillars}</a>
           <a href="#elements">{copy.nav.elements}</a>
+          <a href="#journey">{copy.nav.journey}</a>
           <a href="#programs">{copy.nav.programs}</a>
           <a href="#faq">{copy.nav.faq}</a>
         </div>
 
         <div className="nav-right">
-          <div className="lang-switch">
+          <div className="lang-switch" aria-label="Language switch">
             <button
+              type="button"
               className={lang === "zh" ? "active" : ""}
               onClick={() => setLang("zh")}
             >
               中
             </button>
             <button
+              type="button"
               className={lang === "en" ? "active" : ""}
               onClick={() => setLang("en")}
             >
@@ -511,9 +526,12 @@ export default function Page() {
         </div>
       </nav>
 
-      <section id="top" className="hero">
+      <section id="top" className="hero section-band">
+        <div className="hero-bg-orb one" />
+        <div className="hero-bg-orb two" />
+
         <div className="hero-copy">
-          <p className="hero-badge">{copy.hero.badge}</p>
+          <p className="hero-eyebrow">{copy.hero.eyebrow}</p>
           <p className="hero-kicker">{copy.hero.kicker}</p>
           <h1>{copy.hero.title}</h1>
           <p className="hero-text">{copy.hero.subtitle}</p>
@@ -527,7 +545,7 @@ export default function Page() {
             </a>
           </div>
 
-          <div className="stats-grid">
+          <div className="stats-grid" aria-label="Program prices">
             {copy.hero.stats.map((item) => (
               <div className="stat-card" key={item.label}>
                 <strong>{item.value}</strong>
@@ -537,8 +555,9 @@ export default function Page() {
           </div>
         </div>
 
-        <div className="hero-visual">
-          <div className="hero-frame">
+        <div className="hero-visual" aria-label="Yoga Sri profile">
+          <div className="portrait-card">
+            <div className="portrait-ring" />
             <img src="/yogasriprofile.jpg" alt="Yoga Sri" />
             <div className="hero-note">
               <p className="mini-label">{copy.hero.noteTitle}</p>
@@ -549,32 +568,38 @@ export default function Page() {
         </div>
       </section>
 
-      <div className="divider" />
-
       <section id="why" className="section section-card soft-card">
         <SectionHeader label={copy.why.label} title={copy.why.title} />
         <div className="two-col-text">
           <p>{copy.why.text1}</p>
           <p>{copy.why.text2}</p>
         </div>
-      </section>
-
-      <div className="divider" />
-
-      <section id="pillars" className="section">
-        <SectionHeader label={copy.pillars.label} title={copy.pillars.title} />
-        <div className="pillar-grid">
-          {copy.pillars.items.map((item) => (
-            <div className="pillar-card" key={item.title}>
-              <div className="pillar-icon">{item.title.slice(0, 1)}</div>
-              <h3>{item.title}</h3>
-              <p>{item.text}</p>
+        <div className="reason-strip">
+          {copy.why.cards.map((item) => (
+            <div className="reason-pill" key={item}>
+              <span />
+              {item}
             </div>
           ))}
         </div>
       </section>
 
-      <div className="divider" />
+      <section id="pillars" className="section">
+        <SectionHeader
+          label={copy.pillars.label}
+          title={copy.pillars.title}
+          subtitle={copy.pillars.subtitle}
+        />
+        <div className="pillar-grid">
+          {copy.pillars.items.map((item, index) => (
+            <article className="pillar-card" key={item.title}>
+              <div className="pillar-icon">0{index + 1}</div>
+              <h3>{item.title}</h3>
+              <p>{item.text}</p>
+            </article>
+          ))}
+        </div>
+      </section>
 
       <section id="elements" className="section section-card warm-card">
         <SectionHeader
@@ -584,31 +609,27 @@ export default function Page() {
         />
         <div className="elements-grid">
           {copy.elements.items.map((item) => (
-            <div className="element-card" key={item.title}>
+            <article className="element-card" key={item.title}>
               <div className="element-icon">{item.icon}</div>
               <h3>{item.title}</h3>
               <p>{item.text}</p>
-            </div>
+            </article>
           ))}
         </div>
       </section>
 
-      <div className="divider" />
-
-      <section className="section">
-        <SectionHeader label={copy.path.label} title={copy.path.title} />
+      <section id="journey" className="section">
+        <SectionHeader label={copy.journey.label} title={copy.journey.title} />
         <div className="journey-grid">
-          {copy.path.items.map(([no, title, text]) => (
-            <div className="journey-card" key={no}>
+          {copy.journey.items.map(([no, title, text]) => (
+            <article className="journey-card" key={no}>
               <span>{no}</span>
               <h3>{title}</h3>
               <p>{text}</p>
-            </div>
+            </article>
           ))}
         </div>
       </section>
-
-      <div className="divider" />
 
       <section id="programs" className="section section-card soft-card">
         <SectionHeader
@@ -621,18 +642,21 @@ export default function Page() {
           {copy.programs.data.map((item, index) => {
             const isOpen = openProgram === index;
             return (
-              <div className={`accordion-card ${isOpen ? "open" : ""}`} key={item.title}>
+              <article className={`accordion-card ${isOpen ? "open" : ""}`} key={item.title}>
                 <button
+                  type="button"
                   className="accordion-trigger"
-                  onClick={() => setOpenProgram(isOpen ? -1 : index)}
+                  onClick={() => setOpenProgram(isOpen ? null : index)}
+                  aria-expanded={isOpen}
                 >
                   <div className="accordion-title-wrap">
+                    <span className="program-tag">{item.tag}</span>
                     <h3>{item.title}</h3>
                     <p>{item.summary}</p>
                   </div>
                   <div className="accordion-side">
                     <strong>{item.price}</strong>
-                    <span>{isOpen ? "−" : "+"}</span>
+                    <span aria-hidden="true">{isOpen ? "−" : "+"}</span>
                   </div>
                 </button>
 
@@ -640,9 +664,11 @@ export default function Page() {
                   <div className="accordion-content">
                     <div className="program-meta">
                       <p>
-                        <strong>{lang === "zh" ? "适合：" : "Best for:"}</strong> {item.bestFor}
+                        <strong>{copy.programs.bestFor}：</strong>
+                        {item.bestFor}
                       </p>
                     </div>
+                    <h4>{copy.programs.includes}</h4>
                     <ul>
                       {item.includes.map((x) => (
                         <li key={x}>{x}</li>
@@ -650,13 +676,11 @@ export default function Page() {
                     </ul>
                   </div>
                 )}
-              </div>
+              </article>
             );
           })}
         </div>
       </section>
-
-      <div className="divider" />
 
       <section id="faq" className="section">
         <SectionHeader label={copy.faq.label} title={copy.faq.title} />
@@ -664,26 +688,29 @@ export default function Page() {
           {copy.faq.data.map((item, index) => {
             const isOpen = openFaq === index;
             return (
-              <div className={`faq-card ${isOpen ? "open" : ""}`} key={item.q}>
-                <button className="faq-trigger" onClick={() => setOpenFaq(isOpen ? -1 : index)}>
+              <article className={`faq-card ${isOpen ? "open" : ""}`} key={item.q}>
+                <button
+                  type="button"
+                  className="faq-trigger"
+                  onClick={() => setOpenFaq(isOpen ? null : index)}
+                  aria-expanded={isOpen}
+                >
                   <span>{item.q}</span>
-                  <b>{isOpen ? "−" : "+"}</b>
+                  <b aria-hidden="true">{isOpen ? "−" : "+"}</b>
                 </button>
                 {isOpen && <p className="faq-answer">{item.a}</p>}
-              </div>
+              </article>
             );
           })}
         </div>
       </section>
-
-      <div className="divider" />
 
       <section className="section section-card payment-section">
         <SectionHeader label={copy.payment.label} title={copy.payment.title} />
         <p className="payment-text">{copy.payment.text}</p>
 
         <div className="payment-grid">
-          <div className="payment-box">
+          <article className="payment-box bank-box">
             <h3>{copy.payment.bankTitle}</h3>
             <p>
               <small>{copy.payment.bankNameLabel}</small>
@@ -697,14 +724,14 @@ export default function Page() {
               <small>{copy.payment.accountLabel}</small>
               <strong>{copy.payment.account}</strong>
             </p>
-          </div>
+          </article>
 
-          <div className="payment-box">
+          <article className="payment-box">
             <h3>{copy.payment.tngTitle}</h3>
             <div className="tng-wrap">
-              <img src="/TNG.jpg" alt="TNG QR" />
+              <img src="/TNG.jpg" alt="TNG eWallet QR code" />
             </div>
-          </div>
+          </article>
         </div>
 
         <div className="cta-row payment-cta">
@@ -727,10 +754,1069 @@ export default function Page() {
         target="_blank"
         rel="noreferrer"
         className="floating-whatsapp"
-        aria-label="WhatsApp"
+        aria-label="Chat with Yoga Sri on WhatsApp"
       >
         WhatsApp
       </a>
+
+      <style jsx global>{`
+        :root {
+          --bg: #f8f1e6;
+          --bg-soft: #fffaf2;
+          --card: rgba(255, 252, 245, 0.86);
+          --card-strong: #fff8ec;
+          --ink: #312417;
+          --muted: #786755;
+          --line: rgba(103, 75, 48, 0.16);
+          --gold: #b8843b;
+          --gold-dark: #7a4f20;
+          --clay: #bb7456;
+          --sage: #6f8061;
+          --cream: #fff7e8;
+          --shadow: 0 24px 80px rgba(74, 48, 27, 0.12);
+          --radius: 28px;
+          --max: 1160px;
+        }
+
+        * {
+          box-sizing: border-box;
+        }
+
+        html {
+          scroll-behavior: smooth;
+        }
+
+        body {
+          margin: 0;
+          background:
+            radial-gradient(circle at top left, rgba(206, 153, 92, 0.26), transparent 34rem),
+            radial-gradient(circle at 90% 10%, rgba(128, 148, 100, 0.18), transparent 26rem),
+            linear-gradient(180deg, #faf0e1 0%, #f6ead8 42%, #fbf4ea 100%);
+          color: var(--ink);
+          font-family:
+            ui-serif,
+            Georgia,
+            "Times New Roman",
+            "Noto Serif SC",
+            "Songti SC",
+            serif;
+        }
+
+        a {
+          color: inherit;
+          text-decoration: none;
+        }
+
+        button,
+        input,
+        textarea {
+          font: inherit;
+        }
+
+        .site-shell {
+          min-height: 100vh;
+          overflow: hidden;
+          position: relative;
+        }
+
+        .site-shell::before {
+          content: "";
+          position: fixed;
+          inset: 0;
+          pointer-events: none;
+          background-image:
+            linear-gradient(rgba(78, 54, 32, 0.03) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(78, 54, 32, 0.03) 1px, transparent 1px);
+          background-size: 46px 46px;
+          mask-image: linear-gradient(to bottom, black, transparent 72%);
+        }
+
+        .nav {
+          position: sticky;
+          top: 0;
+          z-index: 50;
+          width: min(calc(100% - 32px), var(--max));
+          margin: 18px auto 0;
+          padding: 12px 14px;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 18px;
+          border: 1px solid rgba(120, 91, 55, 0.16);
+          border-radius: 999px;
+          background: rgba(255, 250, 242, 0.78);
+          backdrop-filter: blur(18px);
+          box-shadow: 0 12px 44px rgba(81, 53, 29, 0.1);
+        }
+
+        .brand,
+        .nav-right,
+        .nav-links,
+        .lang-switch {
+          display: flex;
+          align-items: center;
+        }
+
+        .brand {
+          gap: 10px;
+          font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+          font-size: 12px;
+          letter-spacing: 0.16em;
+          font-weight: 800;
+          white-space: nowrap;
+        }
+
+        .brand-mark {
+          width: 26px;
+          height: 26px;
+          border-radius: 50%;
+          display: inline-block;
+          background:
+            radial-gradient(circle, #fff4dc 0 25%, transparent 26%),
+            conic-gradient(from 30deg, #b8843b, #6f8061, #bb7456, #b8843b);
+          box-shadow: 0 0 0 6px rgba(184, 132, 59, 0.1);
+        }
+
+        .nav-links {
+          gap: 18px;
+          color: var(--muted);
+          font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+          font-size: 13px;
+        }
+
+        .nav-links a {
+          transition: color 0.2s ease;
+        }
+
+        .nav-links a:hover {
+          color: var(--gold-dark);
+        }
+
+        .nav-right {
+          gap: 10px;
+        }
+
+        .lang-switch {
+          padding: 4px;
+          border-radius: 999px;
+          background: rgba(72, 49, 27, 0.07);
+        }
+
+        .lang-switch button {
+          border: 0;
+          cursor: pointer;
+          padding: 7px 10px;
+          border-radius: 999px;
+          background: transparent;
+          color: var(--muted);
+          font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+          font-size: 12px;
+          font-weight: 700;
+        }
+
+        .lang-switch button.active {
+          color: white;
+          background: var(--ink);
+        }
+
+        .nav-btn {
+          padding: 10px 15px;
+          border-radius: 999px;
+          background: var(--ink);
+          color: #fff8ea;
+          font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+          font-size: 13px;
+          font-weight: 700;
+          box-shadow: 0 12px 26px rgba(49, 36, 23, 0.16);
+        }
+
+        .hero,
+        .section {
+          width: min(calc(100% - 40px), var(--max));
+          margin: 0 auto;
+        }
+
+        .hero {
+          position: relative;
+          padding: 96px 0 72px;
+          display: grid;
+          grid-template-columns: 1.02fr 0.88fr;
+          gap: 56px;
+          align-items: center;
+        }
+
+        .hero-bg-orb {
+          position: absolute;
+          border-radius: 999px;
+          filter: blur(4px);
+          opacity: 0.7;
+          pointer-events: none;
+        }
+
+        .hero-bg-orb.one {
+          width: 320px;
+          height: 320px;
+          top: 80px;
+          right: 220px;
+          background: radial-gradient(circle, rgba(184, 132, 59, 0.16), transparent 68%);
+        }
+
+        .hero-bg-orb.two {
+          width: 220px;
+          height: 220px;
+          bottom: 30px;
+          left: 8%;
+          background: radial-gradient(circle, rgba(111, 128, 97, 0.18), transparent 68%);
+        }
+
+        .hero-copy,
+        .hero-visual {
+          position: relative;
+          z-index: 2;
+        }
+
+        .hero-eyebrow,
+        .hero-kicker,
+        .section-label,
+        .mini-label,
+        .program-tag {
+          font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+          text-transform: uppercase;
+          letter-spacing: 0.16em;
+          font-size: 12px;
+          font-weight: 800;
+        }
+
+        .hero-eyebrow {
+          color: var(--gold-dark);
+          margin: 0 0 12px;
+        }
+
+        .hero-kicker {
+          max-width: 680px;
+          margin: 0 0 20px;
+          color: var(--sage);
+          line-height: 1.7;
+        }
+
+        h1,
+        h2,
+        h3,
+        p {
+          margin-top: 0;
+        }
+
+        h1 {
+          margin-bottom: 22px;
+          font-size: clamp(54px, 8vw, 104px);
+          line-height: 0.9;
+          letter-spacing: -0.065em;
+          color: var(--ink);
+        }
+
+        .hero-text {
+          max-width: 700px;
+          margin-bottom: 28px;
+          color: var(--muted);
+          font-size: 18px;
+          line-height: 2;
+        }
+
+        .cta-row {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 14px;
+          align-items: center;
+        }
+
+        .btn {
+          min-height: 48px;
+          padding: 14px 22px;
+          border-radius: 999px;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+          font-size: 14px;
+          font-weight: 800;
+          transition:
+            transform 0.2s ease,
+            box-shadow 0.2s ease,
+            background 0.2s ease;
+        }
+
+        .btn:hover {
+          transform: translateY(-2px);
+        }
+
+        .btn-primary {
+          color: #fff8ea;
+          background: linear-gradient(135deg, var(--ink), #654425);
+          box-shadow: 0 18px 42px rgba(69, 44, 22, 0.18);
+        }
+
+        .btn-secondary {
+          color: var(--ink);
+          background: rgba(255, 255, 255, 0.48);
+          border: 1px solid var(--line);
+        }
+
+        .stats-grid {
+          margin-top: 34px;
+          display: grid;
+          grid-template-columns: repeat(4, minmax(0, 1fr));
+          gap: 12px;
+        }
+
+        .stat-card {
+          padding: 18px 16px;
+          border-radius: 20px;
+          background: rgba(255, 250, 241, 0.72);
+          border: 1px solid var(--line);
+          box-shadow: 0 16px 50px rgba(92, 58, 26, 0.07);
+        }
+
+        .stat-card strong {
+          display: block;
+          margin-bottom: 6px;
+          color: var(--gold-dark);
+          font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+          font-size: 17px;
+        }
+
+        .stat-card span {
+          color: var(--muted);
+          font-size: 13px;
+          line-height: 1.5;
+        }
+
+        .hero-visual {
+          display: flex;
+          justify-content: center;
+        }
+
+        .portrait-card {
+          position: relative;
+          width: min(100%, 420px);
+          padding: 18px;
+          border-radius: 42px;
+          background: rgba(255, 248, 236, 0.74);
+          border: 1px solid rgba(120, 91, 55, 0.16);
+          box-shadow: var(--shadow);
+        }
+
+        .portrait-ring {
+          position: absolute;
+          width: 220px;
+          height: 220px;
+          top: -36px;
+          right: -36px;
+          border: 1px solid rgba(184, 132, 59, 0.28);
+          border-radius: 50%;
+          pointer-events: none;
+        }
+
+        .portrait-ring::after {
+          content: "";
+          position: absolute;
+          inset: 28px;
+          border-radius: 50%;
+          border: 1px solid rgba(111, 128, 97, 0.22);
+        }
+
+        .portrait-card img {
+          position: relative;
+          z-index: 1;
+          width: 100%;
+          height: 520px;
+          object-fit: cover;
+          object-position: center;
+          display: block;
+          border-radius: 32px;
+          filter: saturate(0.96) contrast(0.98);
+        }
+
+        .hero-note {
+          position: relative;
+          z-index: 2;
+          margin: -78px 18px 0;
+          padding: 22px;
+          border-radius: 26px;
+          background: rgba(255, 252, 245, 0.9);
+          border: 1px solid rgba(120, 91, 55, 0.15);
+          backdrop-filter: blur(16px);
+          box-shadow: 0 18px 54px rgba(63, 42, 22, 0.13);
+        }
+
+        .mini-label {
+          margin-bottom: 8px;
+          color: var(--gold-dark);
+          font-size: 10px;
+        }
+
+        .hero-note h3 {
+          margin-bottom: 8px;
+          font-size: 30px;
+          letter-spacing: -0.04em;
+        }
+
+        .hero-note p:last-child {
+          margin-bottom: 0;
+          color: var(--muted);
+          line-height: 1.8;
+          font-size: 14px;
+        }
+
+        .section {
+          padding: 74px 0;
+        }
+
+        .section-card {
+          padding: 58px;
+          border-radius: var(--radius);
+          border: 1px solid var(--line);
+          box-shadow: var(--shadow);
+        }
+
+        .soft-card {
+          background:
+            linear-gradient(135deg, rgba(255, 250, 242, 0.9), rgba(255, 244, 224, 0.7)),
+            radial-gradient(circle at 15% 20%, rgba(184, 132, 59, 0.14), transparent 24rem);
+        }
+
+        .warm-card {
+          background:
+            linear-gradient(135deg, rgba(255, 248, 236, 0.96), rgba(246, 225, 198, 0.72)),
+            radial-gradient(circle at 85% 18%, rgba(111, 128, 97, 0.18), transparent 24rem);
+        }
+
+        .section-header {
+          max-width: 780px;
+          margin-bottom: 34px;
+        }
+
+        .section-label {
+          margin-bottom: 12px;
+          color: var(--gold-dark);
+        }
+
+        .section-header h2 {
+          margin-bottom: 12px;
+          font-size: clamp(34px, 5vw, 58px);
+          line-height: 1;
+          letter-spacing: -0.055em;
+        }
+
+        .section-subtitle {
+          margin-bottom: 0;
+          color: var(--muted);
+          font-size: 17px;
+          line-height: 1.9;
+        }
+
+        .two-col-text {
+          display: grid;
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          gap: 26px;
+        }
+
+        .two-col-text p {
+          margin-bottom: 0;
+          color: var(--muted);
+          font-size: 17px;
+          line-height: 2;
+        }
+
+        .reason-strip {
+          margin-top: 30px;
+          display: grid;
+          grid-template-columns: repeat(4, minmax(0, 1fr));
+          gap: 12px;
+        }
+
+        .reason-pill {
+          padding: 16px;
+          display: flex;
+          gap: 10px;
+          align-items: flex-start;
+          border-radius: 18px;
+          background: rgba(255, 255, 255, 0.48);
+          border: 1px solid rgba(120, 91, 55, 0.12);
+          color: var(--muted);
+          font-size: 14px;
+          line-height: 1.55;
+        }
+
+        .reason-pill span {
+          width: 8px;
+          height: 8px;
+          margin-top: 6px;
+          border-radius: 50%;
+          flex: 0 0 auto;
+          background: var(--gold);
+        }
+
+        .pillar-grid {
+          display: grid;
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+          gap: 18px;
+        }
+
+        .pillar-card,
+        .element-card,
+        .journey-card,
+        .accordion-card,
+        .faq-card,
+        .payment-box {
+          border: 1px solid var(--line);
+          background: rgba(255, 250, 242, 0.72);
+          box-shadow: 0 18px 60px rgba(83, 52, 26, 0.07);
+        }
+
+        .pillar-card {
+          min-height: 260px;
+          padding: 28px;
+          border-radius: 28px;
+          position: relative;
+          overflow: hidden;
+        }
+
+        .pillar-card::after {
+          content: "";
+          position: absolute;
+          width: 160px;
+          height: 160px;
+          right: -70px;
+          bottom: -80px;
+          border-radius: 50%;
+          background: rgba(184, 132, 59, 0.12);
+        }
+
+        .pillar-icon {
+          width: 52px;
+          height: 52px;
+          margin-bottom: 34px;
+          border-radius: 50%;
+          display: grid;
+          place-items: center;
+          background: #fff2dc;
+          color: var(--gold-dark);
+          font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+          font-weight: 900;
+        }
+
+        .pillar-card h3,
+        .element-card h3,
+        .journey-card h3 {
+          margin-bottom: 12px;
+          font-size: 25px;
+          letter-spacing: -0.04em;
+        }
+
+        .pillar-card p,
+        .element-card p,
+        .journey-card p {
+          margin-bottom: 0;
+          color: var(--muted);
+          line-height: 1.85;
+        }
+
+        .elements-grid {
+          display: grid;
+          grid-template-columns: repeat(5, minmax(0, 1fr));
+          gap: 14px;
+        }
+
+        .element-card {
+          padding: 22px;
+          border-radius: 26px;
+          min-height: 250px;
+          display: flex;
+          flex-direction: column;
+        }
+
+        .element-icon {
+          width: 62px;
+          height: 62px;
+          margin-bottom: 28px;
+          border-radius: 24px;
+          display: grid;
+          place-items: center;
+          color: var(--gold-dark);
+          background: linear-gradient(135deg, #fff7e8, #f1d5ad);
+          font-size: 28px;
+        }
+
+        .element-card p {
+          font-size: 14px;
+        }
+
+        .journey-grid {
+          display: grid;
+          grid-template-columns: repeat(6, minmax(0, 1fr));
+          gap: 12px;
+        }
+
+        .journey-card {
+          min-height: 210px;
+          padding: 22px;
+          border-radius: 24px;
+          background: rgba(255, 250, 242, 0.66);
+        }
+
+        .journey-card span {
+          display: inline-flex;
+          margin-bottom: 28px;
+          color: var(--gold-dark);
+          font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+          font-weight: 900;
+          font-size: 13px;
+          letter-spacing: 0.12em;
+        }
+
+        .journey-card h3 {
+          font-size: 22px;
+        }
+
+        .journey-card p {
+          font-size: 14px;
+        }
+
+        .accordion-list,
+        .faq-list {
+          display: grid;
+          gap: 14px;
+        }
+
+        .accordion-card,
+        .faq-card {
+          border-radius: 26px;
+          overflow: hidden;
+          transition:
+            transform 0.2s ease,
+            box-shadow 0.2s ease,
+            border-color 0.2s ease;
+        }
+
+        .accordion-card.open,
+        .faq-card.open {
+          border-color: rgba(184, 132, 59, 0.42);
+          box-shadow: 0 22px 70px rgba(83, 52, 26, 0.12);
+        }
+
+        .accordion-trigger,
+        .faq-trigger {
+          width: 100%;
+          border: 0;
+          cursor: pointer;
+          text-align: left;
+          background: transparent;
+          color: var(--ink);
+        }
+
+        .accordion-trigger {
+          padding: 24px;
+          display: grid;
+          grid-template-columns: 1fr auto;
+          gap: 18px;
+          align-items: center;
+        }
+
+        .accordion-title-wrap h3 {
+          margin-bottom: 7px;
+          font-size: 25px;
+          line-height: 1.25;
+          letter-spacing: -0.035em;
+        }
+
+        .accordion-title-wrap p {
+          margin-bottom: 0;
+          color: var(--muted);
+          line-height: 1.7;
+        }
+
+        .program-tag {
+          display: inline-flex;
+          width: fit-content;
+          margin-bottom: 12px;
+          padding: 7px 10px;
+          border-radius: 999px;
+          color: var(--gold-dark);
+          background: rgba(184, 132, 59, 0.12);
+          font-size: 10px;
+        }
+
+        .accordion-side {
+          min-width: 138px;
+          display: flex;
+          align-items: center;
+          justify-content: flex-end;
+          gap: 18px;
+          color: var(--gold-dark);
+          font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        }
+
+        .accordion-side strong {
+          font-size: 19px;
+        }
+
+        .accordion-side span,
+        .faq-trigger b {
+          width: 36px;
+          height: 36px;
+          border-radius: 50%;
+          display: grid;
+          place-items: center;
+          color: white;
+          background: var(--ink);
+          font-size: 22px;
+          line-height: 1;
+        }
+
+        .accordion-content {
+          padding: 0 24px 26px;
+        }
+
+        .program-meta {
+          padding: 18px;
+          border-radius: 20px;
+          background: rgba(255, 246, 230, 0.82);
+          border: 1px solid rgba(120, 91, 55, 0.12);
+        }
+
+        .program-meta p {
+          margin-bottom: 0;
+          color: var(--muted);
+          line-height: 1.8;
+        }
+
+        .program-meta strong {
+          color: var(--ink);
+        }
+
+        .accordion-content h4 {
+          margin: 22px 0 12px;
+          font-size: 14px;
+          letter-spacing: 0.12em;
+          text-transform: uppercase;
+          color: var(--gold-dark);
+          font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        }
+
+        .accordion-content ul {
+          margin: 0;
+          padding: 0;
+          display: grid;
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          gap: 10px;
+          list-style: none;
+        }
+
+        .accordion-content li {
+          position: relative;
+          padding: 12px 14px 12px 34px;
+          border-radius: 16px;
+          background: rgba(255, 255, 255, 0.48);
+          color: var(--muted);
+          line-height: 1.55;
+        }
+
+        .accordion-content li::before {
+          content: "";
+          position: absolute;
+          width: 8px;
+          height: 8px;
+          left: 16px;
+          top: 21px;
+          border-radius: 50%;
+          background: var(--gold);
+        }
+
+        .faq-list {
+          max-width: 900px;
+          margin: 0 auto;
+        }
+
+        .faq-trigger {
+          padding: 22px 24px;
+          display: grid;
+          grid-template-columns: 1fr auto;
+          gap: 18px;
+          align-items: center;
+        }
+
+        .faq-trigger span {
+          font-size: 20px;
+          font-weight: 700;
+          letter-spacing: -0.02em;
+        }
+
+        .faq-answer {
+          margin: 0;
+          padding: 0 24px 24px;
+          color: var(--muted);
+          line-height: 1.9;
+        }
+
+        .payment-section {
+          background:
+            linear-gradient(135deg, rgba(255, 250, 242, 0.92), rgba(248, 229, 204, 0.86)),
+            radial-gradient(circle at 90% 20%, rgba(184, 132, 59, 0.15), transparent 22rem);
+        }
+
+        .payment-text {
+          max-width: 760px;
+          margin-bottom: 28px;
+          color: var(--muted);
+          font-size: 17px;
+          line-height: 1.9;
+        }
+
+        .payment-grid {
+          display: grid;
+          grid-template-columns: 1.1fr 0.9fr;
+          gap: 18px;
+        }
+
+        .payment-box {
+          padding: 28px;
+          border-radius: 28px;
+        }
+
+        .payment-box h3 {
+          margin-bottom: 22px;
+          font-size: 28px;
+          letter-spacing: -0.04em;
+        }
+
+        .payment-box p {
+          margin: 0;
+          padding: 15px 0;
+          border-top: 1px solid rgba(120, 91, 55, 0.12);
+          display: grid;
+          gap: 5px;
+        }
+
+        .payment-box small {
+          color: var(--muted);
+          font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+          font-size: 12px;
+          letter-spacing: 0.08em;
+          text-transform: uppercase;
+        }
+
+        .payment-box strong {
+          color: var(--ink);
+          font-size: 20px;
+          letter-spacing: -0.02em;
+        }
+
+        .tng-wrap {
+          width: min(100%, 260px);
+          padding: 14px;
+          border-radius: 24px;
+          background: white;
+          border: 1px solid rgba(120, 91, 55, 0.12);
+        }
+
+        .tng-wrap img {
+          width: 100%;
+          display: block;
+          border-radius: 18px;
+        }
+
+        .payment-cta {
+          margin-top: 28px;
+        }
+
+        .footer {
+          width: min(calc(100% - 40px), var(--max));
+          margin: 0 auto;
+          padding: 26px 0 92px;
+          display: flex;
+          justify-content: space-between;
+          gap: 16px;
+          color: var(--muted);
+          font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+          font-size: 13px;
+        }
+
+        .footer p {
+          margin: 0;
+        }
+
+        .floating-whatsapp {
+          position: fixed;
+          right: 22px;
+          bottom: 22px;
+          z-index: 60;
+          min-height: 54px;
+          padding: 0 20px;
+          border-radius: 999px;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          color: white;
+          background: linear-gradient(135deg, #2f6e45, #183f28);
+          box-shadow: 0 18px 46px rgba(24, 63, 40, 0.28);
+          font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+          font-weight: 900;
+          letter-spacing: 0.02em;
+        }
+
+        @media (max-width: 1080px) {
+          .nav {
+            align-items: flex-start;
+            border-radius: 28px;
+            flex-wrap: wrap;
+          }
+
+          .nav-links {
+            order: 3;
+            width: 100%;
+            justify-content: center;
+            flex-wrap: wrap;
+            row-gap: 10px;
+          }
+
+          .hero {
+            grid-template-columns: 1fr;
+            padding-top: 72px;
+          }
+
+          .hero-visual {
+            justify-content: flex-start;
+          }
+
+          .stats-grid,
+          .reason-strip {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+          }
+
+          .elements-grid {
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+          }
+
+          .journey-grid {
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+          }
+        }
+
+        @media (max-width: 780px) {
+          .nav {
+            width: min(calc(100% - 20px), var(--max));
+            margin-top: 10px;
+          }
+
+          .nav-right {
+            width: 100%;
+            justify-content: space-between;
+          }
+
+          .nav-links {
+            display: none;
+          }
+
+          .hero,
+          .section,
+          .footer {
+            width: min(calc(100% - 24px), var(--max));
+          }
+
+          .hero {
+            padding: 56px 0 52px;
+            gap: 36px;
+          }
+
+          h1 {
+            font-size: clamp(48px, 17vw, 74px);
+          }
+
+          .hero-text {
+            font-size: 16px;
+            line-height: 1.9;
+          }
+
+          .section {
+            padding: 48px 0;
+          }
+
+          .section-card {
+            padding: 28px;
+            border-radius: 26px;
+          }
+
+          .section-header h2 {
+            font-size: clamp(32px, 11vw, 46px);
+          }
+
+          .two-col-text,
+          .pillar-grid,
+          .payment-grid {
+            grid-template-columns: 1fr;
+          }
+
+          .elements-grid,
+          .journey-grid,
+          .stats-grid,
+          .reason-strip,
+          .accordion-content ul {
+            grid-template-columns: 1fr;
+          }
+
+          .portrait-card {
+            width: 100%;
+          }
+
+          .portrait-card img {
+            height: 430px;
+          }
+
+          .accordion-trigger {
+            grid-template-columns: 1fr;
+          }
+
+          .accordion-side {
+            width: 100%;
+            justify-content: space-between;
+          }
+
+          .footer {
+            flex-direction: column;
+            padding-bottom: 98px;
+          }
+        }
+
+        @media (max-width: 480px) {
+          .brand {
+            font-size: 10px;
+            letter-spacing: 0.12em;
+          }
+
+          .nav-btn {
+            padding-inline: 12px;
+          }
+
+          .btn {
+            width: 100%;
+          }
+
+          .hero-note {
+            margin-left: 8px;
+            margin-right: 8px;
+          }
+
+          .payment-box {
+            padding: 22px;
+          }
+
+          .floating-whatsapp {
+            right: 14px;
+            bottom: 14px;
+            min-height: 50px;
+          }
+        }
+      `}</style>
     </main>
   );
 }
