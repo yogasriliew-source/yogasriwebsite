@@ -26,8 +26,8 @@ const content = {
     hero: {
       badge: "YOGA SRI WELLNESS",
       eyebrow: "Nadi Scan × Classical Hatha Yoga × Ayurveda",
-      kicker: "从检测、练习、饮食、净化到 Panchakarma 的完整健康重启路径",
-      title: "身体有信号，练习要有方向",
+      kicker: "检测｜练习｜饮食｜净化｜养护"},{
+      title: "先懂身体，再练瑜伽",
       subtitle:
         "很多人不是不够努力，而是不知道身体现在真正需要什么。这个系列从 Nadi Balance Scan 开始，结合阿育吠陀医生一对一讲解、Isha 古典哈他瑜伽、阿育吠陀饮食、五大元素净化与 Panchakarma 疗程，帮助你建立更稳定、清明、可持续的身心节奏。",
       ctaPrimary: "立即报名",
